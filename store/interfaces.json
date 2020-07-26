@@ -1,0 +1,15 @@
+{
+  "comparison-context-wrapper": {
+    "component": "ProductComparisonWrapper"
+  },
+  "product-comparison": {
+    "around": ["comparison-context-wrapper"],
+    "allowed": ["product-comparison-block"]
+  },
+  "product-comparison-block": {
+    "composition": "children"
+  },
+  "product-comparison-block.grid": {
+    "component": "ProductComparisonGrid"
+  }
+}
