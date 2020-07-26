@@ -1,5 +1,6 @@
 import React from 'react'
 import GridCell from './GridCell'
+import { pathOr } from 'ramda'
 
 interface Props {
   comparisonItems: ComparisonItem[]
@@ -21,8 +22,8 @@ const GridRow = ({ comparisonItems, field, fieldType }: Props) => {
       </div>
       {comparisonItems.map(comparisonItem => {
         return (
-          // eslint-disable-next-line react/jsx-key
           <GridCell
+            key={pathOr('', ['product', 'cacheId'], comparisonItem)}
             comparisonItem={comparisonItem}
             field={field}
             fieldType={fieldType}
