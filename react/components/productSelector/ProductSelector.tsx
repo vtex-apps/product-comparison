@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import { pathOr, find, propEq, allPass, isEmpty } from 'ramda'
-import { Checkbox } from 'vtex.styleguide'
+import { Button } from 'vtex.styleguide'
 import ComparisonContext from '../../ProductComparisonContext'
 import { useProductSummary } from 'vtex.product-summary-context/ProductSummaryContext'
+import styles from './productSelector.css'
 
 const ProductSelector = () => {
-  const [isChecked, setIsChecked] = useState(false)
+  const [isAdded, setIsAdded] = useState(false)
   const valuesFromContext = useProductSummary()
   const {
     useProductComparisonState,
@@ -25,39 +26,47 @@ const ProductSelector = () => {
             allPass([propEq('productId', productId), propEq('skuId', itemId)])
           )(comparisonData.products)
         : []
-    setIsChecked(selectedProducts && !isEmpty(selectedProducts))
-  }, [comparisonData.products, itemId, productId, valuesFromContext])
+    setIsAdded(selectedProducts && !isEmpty(selectedProducts))
+  }, [comparisonData.products, itemId, productId])
 
-  const productSelectorOnChange = (e: any | unknown) => {
+  const productSelectorOnClick = (e: any | unknown) => {
+    e.preventDefault()
     e.stopPropagation()
-    e.nativeEvent.stopImmediatePropagation()
 
-    if (e.target.checked) {
-      dispatchComparison({
-        args: {
-          product: { productId: productId, skuId: itemId },
-        },
-        type: 'ADD',
-      })
-    } else {
+    if (isAdded) {
       dispatchComparison({
         args: {
           product: { productId: productId, skuId: itemId },
         },
         type: 'REMOVE',
       })
+    } else {
+      dispatchComparison({
+        args: {
+          product: { productId: productId, skuId: itemId },
+        },
+        type: 'ADD',
+      })
     }
   }
 
   return (
-    <div className="mb3">
-      <Checkbox
-        checked={isChecked}
+    <div className={`${styles.compareButtonWrapper} mb3`}>
+      <Button
+        variation="tertiary"
         id={`${productId}-${itemId}-product-comparison`}
-        label="Add to Compare"
         name={`${productId}-${itemId}-product-comparison`}
-        onChange={productSelectorOnChange}
-      />
+        onClick={productSelectorOnClick}
+      >
+        <span
+          className={`${
+            isAdded ? styles.compareSelectedIcon : styles.compareRemovedIcon
+          } ${styles.iconSize}`}
+        ></span>
+        <span className={styles.compareButtonText}>
+          {isAdded ? 'Remove from Compare' : 'Add to Compare'}
+        </span>
+      </Button>
     </div>
   )
 }

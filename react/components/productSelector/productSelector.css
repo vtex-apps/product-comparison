@@ -1,0 +1,36 @@
+.compareButtonWrapper{
+  margin-right: 1rem;
+}
+
+.iconSize {
+  background-size: contain !important;
+  background-repeat: no-repeat;
+  display: inline-block;
+  width: 30px;
+  border-radius: 5px;
+  margin-right: 10px;
+}
+
+.compareRemovedIcon::after {
+  padding-top: 100%;  /* (img-height / img-width * container-width) (512/2000 * 100) */
+  display: block;
+  content: '';
+}
+
+.compareSelectedIcon::after {
+  padding-top: 100%; 
+  display: block;
+  content: '';
+}
+
+.compareRemovedIcon{
+  background: url('./compare-removed.svg');
+}
+
+.compareSelectedIcon{
+  background: url('./compare-selected.svg');
+}
+
+.compareButtonText{
+  text-transform: none;
+}

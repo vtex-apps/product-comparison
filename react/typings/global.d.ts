@@ -20,6 +20,8 @@ interface ComparisonItem {
 }
 
 interface ComparisonThumbnail {
+  productId: string
+  skuId: string
   productName: string
   skuName: string
   imageUrl: string

@@ -4,6 +4,7 @@ declare module 'vtex.styleguide' {
 
   export const Input: ComponentType<InputProps>
   export const Checkbox: ComponentType<InputProps>
+  export const Button: ComponentType<InputProps>
 
   interface InputProps {
     [key: string]: any
