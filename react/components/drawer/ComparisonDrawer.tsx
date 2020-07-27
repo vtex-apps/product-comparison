@@ -56,9 +56,9 @@ const ComparisonDrawer = () => {
     })
   }
 
-  return loading ? (
-    <div>Loading...</div>
-  ) : error ? (
+  // eslint-disable-next-line no-console
+  console.log(loading)
+  return error ? (
     <div>{error}</div>
   ) : isEmpty(thumbnailItems) ? (
     <div />

@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Fixed
+- Fix ui switch change in comparison drawer
+
 ### Changed
 - Added style changes to comparison drawer
 
