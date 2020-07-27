@@ -1,15 +1,19 @@
 import React, { useMemo } from 'react'
-import { uniq, pathOr, find, propEq } from 'ramda'
-
+import { pathOr, uniq, find, propEq } from 'ramda'
 import ComparisonContext from '../../ProductComparisonContext'
 import productsQuery from '../../queries/productsByIdentifier.graphql'
 import { useQuery } from 'react-apollo'
-import GridRow from './GridRow'
+import styles from './drawer.css'
 
-const ProductComparisonGrid = () => {
-  const { useProductComparisonState } = ComparisonContext
+const ComparisonDrawer = () => {
+  const {
+    useProductComparisonState,
+    // useProductComparisonDispatch,
+  } = ComparisonContext
 
   const comparisonData = useProductComparisonState()
+  // const dispatchComparison = useProductComparisonDispatch()
+
   const comparisonProducts = pathOr(
     [] as ProductToCompare[],
     ['products'],
@@ -23,7 +27,7 @@ const ProductComparisonGrid = () => {
     },
   })
 
-  const productsToCompare: ComparisonItem[] = useMemo(() => {
+  const thumbnailItems: ComparisonThumbnail[] = useMemo(() => {
     const productList = pathOr([], ['productsByIdentifier'], productsResponse)
     return !(productList.length > 0)
       ? []
@@ -36,47 +40,41 @@ const ProductComparisonGrid = () => {
           )(pathOr([], ['items'], selectedProduct))
           return {
             imageUrl: pathOr('', ['images', 0, 'imageUrl'], selectedSku),
-            product: selectedProduct,
-            selectedSku: selectedSku,
+            productName: pathOr('', ['productName'], selectedProduct),
+            skuName: pathOr('', ['name'], selectedSku),
           }
         })
   }, [comparisonProducts, productsResponse])
-
-  const fieldsToCompare = ['productName', 'description', 'brand']
-  //const skuFieldsToCompare = ['name']
 
   return loading ? (
     <div>Loading...</div>
   ) : error ? (
     <div>{error}</div>
   ) : (
-    <div className="mw9 w-100 center flex flex-column mt6 pa3">
-      <GridRow
-        comparisonItems={productsToCompare}
-        field={'imageUrl'}
-        fieldType={'image'}
-      />
-      {fieldsToCompare.map(field => {
-        // eslint-disable-next-line react/jsx-key
-        return (
-          <GridRow
-            key={field}
-            comparisonItems={productsToCompare}
-            field={field}
-            fieldType={'productField'}
-          />
-        )
-      })}
+    <div className={`${styles.drawerContainer} mw9 w-100 flex justify-center`}>
+      <div className={`${styles.drawer} flex flex-row justify-center`}>
+        {thumbnailItems.map(thumbnail => {
+          return (
+            <div
+              className="ma3"
+              key={`${thumbnail.productName}-${thumbnail.skuName}`}
+            >
+              <div className={`${styles.drawerImageContainer} pa3`}>
+                <img
+                  className={`${styles.drawerImage}`}
+                  alt={thumbnail.productName}
+                  src={thumbnail.imageUrl}
+                />
+              </div>
+              <div>
+                <span>{thumbnail.skuName}</span>
+              </div>
+            </div>
+          )
+        })}
+      </div>
     </div>
   )
 }
 
-// ProductComparisonPage.schema = {
-//   title: 'editor.countdown.title',
-//   description: 'editor.countdown.description',
-//   type: 'object',
-//   properties: {
-//   },
-// }
-
-export default ProductComparisonGrid
+export default ComparisonDrawer

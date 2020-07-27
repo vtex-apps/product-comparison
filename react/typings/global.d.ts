@@ -18,3 +18,9 @@ interface ComparisonItem {
   product: Product
   selectedSku: Sku
 }
+
+interface ComparisonThumbnail {
+  productName: string
+  skuName: string
+  imageUrl: string
+}

@@ -11,5 +11,11 @@
   },
   "product-comparison-block.grid": {
     "component": "ProductComparisonGrid"
+  },
+  "product-comparison-block.selector": {
+    "component": "ProductSelector"
+  },
+  "product-comparison-block.drawer": {
+    "component": "ComparisonDrawer"
   }
 }

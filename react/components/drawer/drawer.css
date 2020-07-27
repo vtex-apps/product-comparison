@@ -1,0 +1,18 @@
+.drawerContainer {
+  position: fixed;
+  max-height: 135px;
+  bottom: 0;
+}
+.drawer {
+  background-color: yellow;
+}
+
+
+.drawerImageContainer {
+  border-radius: 6px;
+}
+
+.drawerImage {
+  max-height: 80px;
+  max-width: 80px;
+}

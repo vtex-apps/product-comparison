@@ -46,12 +46,18 @@ const listReducer = (state: State, action: ReducerActions): State => {
     }
     case 'ADD': {
       const { product } = action.args
+      const newProductList = [...state.products, product]
+      localStorage.setItem(
+        'PRODUCTS_TO_COMPARE',
+        JSON.stringify(newProductList)
+      )
       return {
         ...state,
-        products: [...state.products, product],
+        products: newProductList,
       }
     }
     case 'REMOVE_ALL': {
+      localStorage.setItem('PRODUCTS_TO_COMPARE', JSON.stringify([]))
       return {
         ...state,
         products: [],
@@ -65,6 +71,8 @@ const listReducer = (state: State, action: ReducerActions): State => {
           propEq('skuId', product.skuId),
         ])
       )(state.products)
+
+      localStorage.setItem('PRODUCTS_TO_COMPARE', JSON.stringify(remaining))
       return { ...state, products: remaining }
     }
     default: {
@@ -94,7 +102,7 @@ const ProductComparisonProvider = ({ children }: Props) => {
   const [state, dispatch] = useReducer(listReducer, initialState)
 
   useEffect(() => {
-    const initialProducts = sessionStorage.getItem('PRODUCTS_TO_COMPARE')
+    const initialProducts = localStorage.getItem('PRODUCTS_TO_COMPARE')
     const productsToCompare = (initialProducts
       ? JSON.parse(initialProducts)
       : []) as ProductToCompare[]
