@@ -1,15 +1,43 @@
-import React from 'react'
+import React, { useMemo } from 'react'
+import { pathOr, find, propEq } from 'ramda'
 import ComparisonContext from '../../ProductComparisonContext'
+import { useQuery } from 'react-apollo'
 import styles from './drawer.css'
 
+import productsQuery from '../../queries/productThumbnails.graphql'
+
 interface Props {
-  productThumbnail: ComparisonThumbnail
+  productToCompare: ProductToCompare
 }
 
-const ProductThumbnail = ({ productThumbnail }: Props) => {
+const ProductThumbnail = ({ productToCompare }: Props) => {
   const { useProductComparisonDispatch } = ComparisonContext
 
   const dispatchComparison = useProductComparisonDispatch()
+
+  const { data: productsResponse, error } = useQuery(productsQuery, {
+    skip: !(productToCompare && productToCompare.productId),
+    variables: {
+      identifier: {
+        field: 'id',
+        value: productToCompare.productId,
+      },
+    },
+  })
+
+  const productThumbnail: ComparisonThumbnail = useMemo(() => {
+    const selectedProduct = pathOr({}, ['product'], productsResponse)
+    const selectedSku = find(propEq('itemId', productToCompare.skuId))(
+      pathOr([], ['items'], selectedProduct)
+    )
+    return {
+      productId: pathOr('', ['productId'], selectedProduct),
+      skuId: pathOr('', ['itemId'], selectedSku),
+      imageUrl: pathOr('', ['images', 0, 'imageUrl'], selectedSku),
+      productName: pathOr('', ['productName'], selectedProduct),
+      skuName: pathOr('', ['name'], selectedSku),
+    }
+  }, [productToCompare, productsResponse])
 
   const removeProductFromCompare = () => {
     dispatchComparison({
@@ -23,7 +51,9 @@ const ProductThumbnail = ({ productThumbnail }: Props) => {
     })
   }
 
-  return (
+  return error ? (
+    <div>{error}</div>
+  ) : (
     <div
       className={`${styles.productThumbnail} pa3 w-100 flex br b--light-gray`}
       key={`${productThumbnail.productId}-${productThumbnail.skuId}`}

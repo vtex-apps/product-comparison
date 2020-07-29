@@ -1,0 +1,28 @@
+query Product(
+  $slug: String
+  $identifier: ProductUniqueIdentifier
+  $skipCategoryTree: Boolean = false
+) {
+  product(slug: $slug, identifier: $identifier)
+    @context(provider: "vtex.search-graphql") {
+    cacheId
+    productName
+    productId
+    categoryTree @skip(if: $skipCategoryTree) {
+      id
+      name
+      href
+    }
+    items {
+      itemId
+      name
+      nameComplete
+      images {
+        imageId
+        imageLabel
+        imageUrl
+        imageText
+      }
+    }
+  }
+}

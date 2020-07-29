@@ -29,9 +29,9 @@ const ProductSelector = () => {
     setIsChecked(selectedProducts && !isEmpty(selectedProducts))
   }, [comparisonData.products, itemId, productId])
 
-  const productSelectorOnClick = (e: any | unknown) => {
-    e.preventDefault()
-    e.stopPropagation()
+  const productSelectorChanged = (e: any | unknown) => {
+    // e.preventDefault()
+    // e.stopPropagation()
 
     if (e.target.checked) {
       dispatchComparison({
@@ -50,20 +50,20 @@ const ProductSelector = () => {
     }
   }
 
-  const productComparisonClicked = (e: any | unknown) => {
+  const productSelectionOnClicked = (e: any | unknown) => {
     e.preventDefault()
     e.stopPropagation()
   }
 
   return (
     // eslint-disable-next-line jsx-a11y/no-static-element-interactions
-    <div onClick={productComparisonClicked} className=" mb3">
+    <div onClick={productSelectionOnClicked} className=" mb3">
       <Checkbox
         checked={isChecked}
         id={`${productId}-${itemId}-product-comparison`}
         label="Compare"
         name={`${productId}-${itemId}-product-comparison`}
-        onChange={productSelectorOnClick}
+        onChange={productSelectorChanged}
         value={isChecked}
       />
     </div>
