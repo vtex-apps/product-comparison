@@ -1,12 +1,12 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { useState, useEffect } from 'react'
 import { pathOr, find, propEq, allPass, isEmpty } from 'ramda'
-import { Button } from 'vtex.styleguide'
+import { Checkbox } from 'vtex.styleguide'
 import ComparisonContext from '../../ProductComparisonContext'
 import { useProductSummary } from 'vtex.product-summary-context/ProductSummaryContext'
-import styles from './productSelector.css'
 
 const ProductSelector = () => {
-  const [isAdded, setIsAdded] = useState(false)
+  const [isChecked, setIsChecked] = useState(false)
   const valuesFromContext = useProductSummary()
   const {
     useProductComparisonState,
@@ -26,47 +26,46 @@ const ProductSelector = () => {
             allPass([propEq('productId', productId), propEq('skuId', itemId)])
           )(comparisonData.products)
         : []
-    setIsAdded(selectedProducts && !isEmpty(selectedProducts))
+    setIsChecked(selectedProducts && !isEmpty(selectedProducts))
   }, [comparisonData.products, itemId, productId])
 
   const productSelectorOnClick = (e: any | unknown) => {
     e.preventDefault()
     e.stopPropagation()
 
-    if (isAdded) {
-      dispatchComparison({
-        args: {
-          product: { productId: productId, skuId: itemId },
-        },
-        type: 'REMOVE',
-      })
-    } else {
+    if (e.target.checked) {
       dispatchComparison({
         args: {
           product: { productId: productId, skuId: itemId },
         },
         type: 'ADD',
       })
+    } else {
+      dispatchComparison({
+        args: {
+          product: { productId: productId, skuId: itemId },
+        },
+        type: 'REMOVE',
+      })
     }
   }
 
+  const productComparisonClicked = (e: any | unknown) => {
+    e.preventDefault()
+    e.stopPropagation()
+  }
+
   return (
-    <div className={`${styles.compareButtonWrapper} mb3`}>
-      <Button
-        variation="tertiary"
+    // eslint-disable-next-line jsx-a11y/no-static-element-interactions
+    <div onClick={productComparisonClicked} className=" mb3">
+      <Checkbox
+        checked={isChecked}
         id={`${productId}-${itemId}-product-comparison`}
+        label="Compare"
         name={`${productId}-${itemId}-product-comparison`}
-        onClick={productSelectorOnClick}
-      >
-        <span
-          className={`${
-            isAdded ? styles.compareSelectedIcon : styles.compareRemovedIcon
-          } ${styles.iconSize}`}
-        ></span>
-        <span className={styles.compareButtonText}>
-          {isAdded ? 'Remove from Compare' : 'Add to Compare'}
-        </span>
-      </Button>
+        onChange={productSelectorOnClick}
+        value={isChecked}
+      />
     </div>
   )
 }

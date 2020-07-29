@@ -6,9 +6,7 @@
     "around": ["comparison-context-wrapper"],
     "allowed": ["product-comparison-block"]
   },
-  "product-comparison-block": {
-    "composition": "children"
-  },
+  "product-comparison-block": {},
   "product-comparison-block.grid": {
     "component": "ProductComparisonGrid"
   },
@@ -17,5 +15,9 @@
   },
   "product-comparison-block.drawer": {
     "component": "ComparisonDrawer"
+  },
+  "product-comparison-block.list": {
+    "component": "ComparisonList",
+    "allowed": ["product-summary"]
   }
 }

@@ -26,3 +26,12 @@ interface ComparisonThumbnail {
   skuName: string
   imageUrl: string
 }
+
+interface CommercialOffer {
+  [key: string]: any | unknown
+}
+
+interface SkuImage {
+  imageUrl: string
+  imageTag: string
+}

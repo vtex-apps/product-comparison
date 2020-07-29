@@ -18,7 +18,8 @@
     "vtex.styleguide": "9.x",
     "vtex.css-handles": "0.x",
     "vtex.store-graphql": "2.x",
-    "vtex.product-summary-context": "0.x"
+    "vtex.product-summary-context": "0.x",
+    "vtex.product-summary": "2.x"
   },
   "$schema": "https://raw.githubusercontent.com/vtex/node-vtex-api/master/gen/manifest.schema"
 }

@@ -7,10 +7,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Added
+- Comparison list normalize product for product summary
+
 ### Fixed
 - Fix ui switch change in comparison drawer
 
 ### Changed
+- Change back to comparison check box
 - Added style changes to comparison drawer
 
 ### Added
