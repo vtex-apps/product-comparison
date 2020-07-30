@@ -39,3 +39,9 @@ interface SkuImage {
 interface Styles {
   [key: string]: any | unknown
 }
+
+interface ComparisonField {
+  type: string
+  name: string
+  text: string
+}

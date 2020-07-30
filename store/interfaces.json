@@ -7,9 +7,7 @@
     "allowed": ["product-comparison-block"]
   },
   "product-comparison-block": {},
-  "product-comparison-block.grid": {
-    "component": "ProductComparisonGrid"
-  },
+  
   "product-comparison-block.selector": {
     "component": "ProductSelector"
   },
@@ -18,6 +16,9 @@
   },
   "product-comparison-block.list": {
     "component": "ComparisonList",
-    "allowed": ["product-summary"]
+    "allowed": ["product-summary", "product-comparison-block"]
+  },
+  "product-comparison-block.grid": {
+    "component": "ComparisonGrid"
   }
 }

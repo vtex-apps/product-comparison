@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
 
 ### Added
+- Product comparison grid basic feature
 - Comparison list normalize product for product summary
 
 ### Fixed

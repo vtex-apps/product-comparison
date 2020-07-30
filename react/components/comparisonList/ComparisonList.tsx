@@ -2,10 +2,11 @@ import React, { useEffect, useState } from 'react'
 import { pathOr, isEmpty, find, propEq } from 'ramda'
 import { useApolloClient } from 'react-apollo'
 import productsQuery from 'vtex.store-resources/QueryProduct'
-
+import { ExtensionPoint } from 'vtex.render-runtime'
 import ComparisonContext from '../../ProductComparisonContext'
 import ComparisonSummary from './ComparisonSummary'
 import styles from './comparisonList.css'
+import ComparisonProductContext from './ComparisonProductContext'
 
 interface Props {
   maxItemCount: number
@@ -14,7 +15,9 @@ interface Props {
 const ComparisonList = ({ maxItemCount = 4 }: Props) => {
   const [products, setProducts] = useState([] as Product[])
   const client = useApolloClient()
+
   const { useProductComparisonState } = ComparisonContext
+  const { ComparisonProductProvider } = ComparisonProductContext
 
   const comparisonData = useProductComparisonState()
   const comparisonProducts = pathOr(
@@ -56,24 +59,35 @@ const ComparisonList = ({ maxItemCount = 4 }: Props) => {
   return isEmpty(comparisonProducts) ? (
     <div />
   ) : (
-    <div className="mw9 w-100 center flex flex-row mt6 pa3">
-      <div
-        className={`${styles.comparisonNameCol} flex items-center ma1 pa3`}
-        style={comparisonListStyles.columnWidth}
-      >
-        <span>Products</span>
-      </div>
-      {comparisonProducts.map(product => {
-        return (
-          // eslint-disable-next-line react/jsx-key
-          <ComparisonSummary
-            productToCompare={product}
-            product={find(propEq('productId', product.productId))(products)}
+    <ComparisonProductProvider products={products}>
+      <div className="mw9 w-100 center">
+        <div className={`${styles.productSummaryRow} flex flex-row mt6 pa3`}>
+          <div
+            className={`${styles.comparisonNameCol} flex items-center ma1 pa3`}
+            style={comparisonListStyles.columnWidth}
+          >
+            <span>Products</span>
+          </div>
+          {comparisonProducts.map(product => {
+            return (
+              // eslint-disable-next-line react/jsx-key
+              <ComparisonSummary
+                productToCompare={product}
+                product={find(propEq('productId', product.productId))(products)}
+                columnStyles={comparisonListStyles.columnWidth}
+              />
+            )
+          })}
+        </div>
+        <div className={`${styles.productComparisonGrid}`}>
+          <ExtensionPoint
+            id="product-comparison-block"
+            maxItemCount={maxItemCount}
             columnStyles={comparisonListStyles.columnWidth}
           />
-        )
-      })}
-    </div>
+        </div>
+      </div>
+    </ComparisonProductProvider>
   )
 }
 
