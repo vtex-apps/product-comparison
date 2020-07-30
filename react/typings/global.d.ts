@@ -35,3 +35,7 @@ interface SkuImage {
   imageUrl: string
   imageTag: string
 }
+
+interface Styles {
+  [key: string]: any | unknown
+}

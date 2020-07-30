@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Fix ui switch change in comparison drawer
 
 ### Changed
+- use promise all to get all products at once in product comparison page
 - use product query to get product details
 - Change back to comparison check box
 - Added style changes to comparison drawer
