@@ -51,4 +51,55 @@ const ComparisonGridRow: StorefrontFunctionComponent<Props> = ({
   )
 }
 
+// ComparisonGridRow.schema = {
+//   title: 'admin/editor.comparison-grid-row.title',
+//   description: 'admin/editor.comparison-grid-row.description',
+//   type: 'object',
+//   properties: {
+//     field: {
+//       title:
+//         'admin/editor.comparison-grid-row.product-fields-to-be-removed.title',
+//       description:
+//         'admin/editor.comparison-grid-row.product-fields-to-be-removed.description',
+//       type: 'string',
+//       fieldType: {
+//         title: 'admin/editor.custom-price-selector.formFields.fieldType',
+//         type: 'string',
+//         enum: ['text', 'textarea', 'select', 'radio', 'checkbox'],
+//         enumNames: ['Text', 'Textarea', 'Select', 'Radio', 'Checkbox'],
+//         default: 'text',
+//       },
+//     },
+//     skuFieldsToHide: {
+//       title: 'admin/editor.comparison-grid-row.sku-fields-to-be-removed.title',
+//       description:
+//         'admin/editor.comparison-grid-row.sku-fields-to-be-removed.description',
+//       type: 'string',
+//       widget: {
+//         'ui:widget': 'textarea',
+//       },
+//     },
+//     productSpecificationsToHide: {
+//       title:
+//         'admin/editor.comparison-grid-row.product-specifications-to-be-removed.title',
+//       description:
+//         'admin/editor.comparison-grid-row.product-specifications-to-be-removed.description',
+//       type: 'string',
+//       widget: {
+//         'ui:widget': 'textarea',
+//       },
+//     },
+//     skuSpecificationsToHide: {
+//       title:
+//         'admin/editor.comparison-grid-row.sku-specifications-to-be-removed.title',
+//       description:
+//         'admin/editor.comparison-grid-row.sku-specifications-to-be-removed.description',
+//       type: 'string',
+//       widget: {
+//         'ui:widget': 'textarea',
+//       },
+//     },
+//   },
+// }
+
 export default ComparisonGridRow

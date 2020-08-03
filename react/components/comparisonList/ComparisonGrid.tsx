@@ -126,24 +126,23 @@ const ComparisonGrid = ({
 }
 
 ComparisonGrid.schema = {
-  title: 'admin/editor.comparison-grid-row.title',
-  description: 'admin/editor.comparison-grid-row.description',
+  title: 'admin/editor.comparison-grid.title',
+  description: 'admin/editor.comparison-grid.description',
   type: 'object',
   properties: {
     productFieldsToHide: {
-      title:
-        'admin/editor.comparison-grid-row.product-fields-to-be-removed.title',
+      title: 'admin/editor.comparison-grid.product-fields-to-be-removed.title',
       description:
-        'admin/editor.comparison-grid-row.product-fields-to-be-removed.description',
+        'admin/editor.comparison-grid.product-fields-to-be-removed.description',
       type: 'string',
       widget: {
         'ui:widget': 'textarea',
       },
     },
     skuFieldsToHide: {
-      title: 'admin/editor.comparison-grid-row.sku-fields-to-be-removed.title',
+      title: 'admin/editor.comparison-grid.sku-fields-to-be-removed.title',
       description:
-        'admin/editor.comparison-grid-row.sku-fields-to-be-removed.description',
+        'admin/editor.comparison-grid.sku-fields-to-be-removed.description',
       type: 'string',
       widget: {
         'ui:widget': 'textarea',
@@ -151,9 +150,9 @@ ComparisonGrid.schema = {
     },
     productSpecificationsToHide: {
       title:
-        'admin/editor.comparison-grid-row.product-specifications-to-be-removed.title',
+        'admin/editor.comparison-grid.product-specifications-to-be-removed.title',
       description:
-        'admin/editor.comparison-grid-row.product-specifications-to-be-removed.description',
+        'admin/editor.comparison-grid.product-specifications-to-be-removed.description',
       type: 'string',
       widget: {
         'ui:widget': 'textarea',
@@ -161,9 +160,9 @@ ComparisonGrid.schema = {
     },
     skuSpecificationsToHide: {
       title:
-        'admin/editor.comparison-grid-row.sku-specifications-to-be-removed.title',
+        'admin/editor.comparison-grid.sku-specifications-to-be-removed.title',
       description:
-        'admin/editor.comparison-grid-row.sku-specifications-to-be-removed.description',
+        'admin/editor.comparison-grid.sku-specifications-to-be-removed.description',
       type: 'string',
       widget: {
         'ui:widget': 'textarea',

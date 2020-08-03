@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - remove unused files in product comparison grid
 
 ### Changed
+- rename translation key
 - Rename `type` to `fieldType` in comparison field
 - Product comparison hide fields
 
