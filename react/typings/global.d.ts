@@ -43,5 +43,6 @@ interface Styles {
 interface ComparisonField {
   type: string
   name: string
-  text: string
+  displayValue: string
+  showOnSite: boolean
 }

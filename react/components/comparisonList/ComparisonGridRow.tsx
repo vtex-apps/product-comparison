@@ -1,8 +1,8 @@
 import React from 'react'
-import { pathOr, find, propEq } from 'ramda'
-import ComparisonProductContext from './ComparisonProductContext'
+import { pathOr } from 'ramda'
 import ComparisonContext from '../../ProductComparisonContext'
 import styles from './comparisonList.css'
+import ComparisonGridCell from './ComparisonGridCell'
 
 interface Props {
   field: ComparisonField
@@ -11,10 +11,8 @@ interface Props {
 
 const ComparisonGridRow = ({ field, columnStyles }: Props) => {
   const { useProductComparisonState } = ComparisonContext
-  const { useComparisonProductState } = ComparisonProductContext
 
   const comparisonData = useProductComparisonState()
-  const productData = useComparisonProductState()
 
   const comparisonProducts = pathOr(
     [] as ProductToCompare[],
@@ -22,36 +20,13 @@ const ComparisonGridRow = ({ field, columnStyles }: Props) => {
     comparisonData
   )
 
-  const products = pathOr([] as ProductToCompare[], ['products'], productData)
-
-  const getFieldValue = (productId: string, skuId: string) => {
-    const selectedProduct = find(propEq('productId', productId))(products)
-    const selectedSku = find(propEq('itemId', skuId))(
-      pathOr([], ['items'], selectedProduct)
-    )
-
-    let value: string | number = ''
-
-    switch (field.type) {
-      case 'ProductField':
-        value = pathOr('', [field.name], selectedProduct)
-        break
-      case 'SkuField':
-        value = pathOr('', [field.name], selectedSku)
-        break
-      default:
-        break
-    }
-    return value
-  }
-
   return field && field.name && field.type ? (
     <div className="flex flex-row" key={`field-${field.name}`}>
       <div
         className={`${styles.comparisonNameCol} flex items-center ma1 pa3`}
         style={columnStyles}
       >
-        <span>{field.text}</span>
+        <span>{field.displayValue}</span>
       </div>
       {comparisonProducts.map(comparisonItem => {
         return (
@@ -60,9 +35,10 @@ const ComparisonGridRow = ({ field, columnStyles }: Props) => {
             className={`${styles.comparisonProductCol} ma1 pa3`}
             style={columnStyles}
           >
-            <span>
-              {getFieldValue(comparisonItem.productId, comparisonItem.skuId)}
-            </span>
+            <ComparisonGridCell
+              field={field}
+              productToCompare={comparisonItem}
+            />
           </div>
         )
       })}
