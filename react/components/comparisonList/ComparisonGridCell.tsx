@@ -51,23 +51,17 @@ const ComparisonGridCell = ({ field, productToCompare }: Props) => {
   }
 
   if (field.type === 'SkuSpecificationField') {
-    const skuSpecifications = pathOr([], ['skuSpecifications'], selectedProduct)
-    const fieldValue = skuSpecifications.map(specification => ({
-      name: pathOr('', ['field', 'name'], specification),
-      values: pathOr('', ['values'], specification),
-    }))
+    const skuSpecifications = pathOr([], ['variations'], selectedSku)
     const values = pathOr(
       [],
       ['values'],
-      find(propEq('name', field.name))(fieldValue)
+      find(propEq('name', field.name))(skuSpecifications)
     )
     return (
       <div className={`${styles.skuSpecifications} flex flex-column`}>
         {values.map(value => {
           return (
-            <span key={`${field.type}-${field.name}`}>
-              {pathOr('', ['name'], value)}
-            </span>
+            <span key={`${field.type}-${field.name}-${value}`}>{value}</span>
           )
         })}
       </div>

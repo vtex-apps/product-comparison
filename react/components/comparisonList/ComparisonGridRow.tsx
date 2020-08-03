@@ -1,8 +1,8 @@
 import React from 'react'
 import { pathOr } from 'ramda'
 import ComparisonContext from '../../ProductComparisonContext'
-import styles from './comparisonList.css'
 import ComparisonGridCell from './ComparisonGridCell'
+import styles from './comparisonList.css'
 
 interface Props {
   field: ComparisonField
