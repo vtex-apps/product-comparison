@@ -9,7 +9,10 @@ interface Props {
   columnStyles: Styles
 }
 
-const ComparisonGridRow = ({ field, columnStyles }: Props) => {
+const ComparisonGridRow: StorefrontFunctionComponent<Props> = ({
+  field,
+  columnStyles,
+}: Props) => {
   const { useProductComparisonState } = ComparisonContext
 
   const comparisonData = useProductComparisonState()

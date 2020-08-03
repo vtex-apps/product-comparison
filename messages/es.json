@@ -1,4 +1,14 @@
 {
-  "editor.countdown.title": "Cuenta regresiva",
-  "editor.countdown.description": "Cuenta regresiva component"
+  "editor.countdown.title": "Countdown",
+  "editor.countdown.description": "Countdown component",
+  "admin/editor.comparison-grid-row.title": "Product Comparison Grid Row",
+  "admin/editor.comparison-grid-row.description": "Product Comparison Grid Row Collect information",
+  "admin/editor.comparison-grid-row.product-specifications-to-be-removed.title": "Hide Product Specifications",
+  "admin/editor.comparison-grid-row.product-specifications-to-be-removed.description": "Names of product specifications which needs to be hidden in comparison page (separate them by comma `,`)",
+  "admin/editor.comparison-grid-row.sku-specifications-to-be-removed.title": "Hide SKU Specifications",
+  "admin/editor.comparison-grid-row.sku-specifications-to-be-removed.description": "Names of sku specifications which needs to be hidden in comparison page (separate them by comma `,`)",
+  "admin/editor.comparison-grid-row.product-fields-to-be-removed.title": "Hide product fields",
+  "admin/editor.comparison-grid-row.product-fields-to-be-removed.description": "Product fields which needs to be hidden in comparison page (separate them by comma `,`)",
+  "admin/editor.comparison-grid-row.sku-fields-to-be-removed.title": "Hide sku fields",
+  "admin/editor.comparison-grid-row.sku-fields-to-be-removed.description": "Sku fields which needs to be hidden in comparison page (separate them by comma `,`)"
 }

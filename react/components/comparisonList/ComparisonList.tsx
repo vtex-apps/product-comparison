@@ -70,8 +70,8 @@ const ComparisonList = ({ maxItemCount = 4 }: Props) => {
           </div>
           {comparisonProducts.map(product => {
             return (
-              // eslint-disable-next-line react/jsx-key
               <ComparisonSummary
+                key={`product-summary-${product.skuId}`}
                 productToCompare={product}
                 product={find(propEq('productId', product.productId))(products)}
                 columnStyles={comparisonListStyles.columnWidth}
