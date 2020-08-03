@@ -54,7 +54,7 @@ const ComparisonGrid = ({
 
     const productSpecificationFields = specificationsList.map(
       specificationName => ({
-        type: 'ProductSpecificationField',
+        fieldType: 'ProductSpecificationField',
         name: specificationName,
         displayValue: specificationName,
         showOnSite: true,
@@ -96,7 +96,7 @@ const ComparisonGrid = ({
 
     const skuSpecificationFieldsList = specificationsList.map(
       specificationName => ({
-        type: 'SkuSpecificationField',
+        fieldType: 'SkuSpecificationField',
         name: specificationName,
         displayValue: specificationName,
         showOnSite: true,

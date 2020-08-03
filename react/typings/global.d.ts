@@ -41,7 +41,7 @@ interface Styles {
 }
 
 interface ComparisonField {
-  type: string
+  fieldType: string
   name: string
   displayValue: string
   showOnSite: boolean

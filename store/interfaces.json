@@ -20,5 +20,8 @@
   },
   "product-comparison-block.grid": {
     "component": "ComparisonGrid"
+  },
+  "product-comparison-block.grid-row": {
+    "component": "ComparisonGridRow"
   }
 }

@@ -37,7 +37,7 @@ export const getProductFields = (fieldsToHide?: string) => {
     switch (fieldName) {
       case 'productName':
         value = {
-          type: 'ProductField',
+          fieldType: 'ProductField',
           name: 'productName',
           displayValue: 'Product Name',
           showOnSite: true,
@@ -45,7 +45,7 @@ export const getProductFields = (fieldsToHide?: string) => {
         break
       case 'brand':
         value = {
-          type: 'ProductField',
+          fieldType: 'ProductField',
           name: 'brand',
           displayValue: 'Brand',
           showOnSite: true,
@@ -53,7 +53,7 @@ export const getProductFields = (fieldsToHide?: string) => {
         break
       case 'description':
         value = {
-          type: 'ProductField',
+          fieldType: 'ProductField',
           name: 'description',
           displayValue: 'Product Description',
           showOnSite: true,
@@ -61,7 +61,7 @@ export const getProductFields = (fieldsToHide?: string) => {
         break
       case 'productReference':
         value = {
-          type: 'ProductField',
+          fieldType: 'ProductField',
           name: 'productReference',
           displayValue: 'Product Reference',
           showOnSite: true,
@@ -69,7 +69,7 @@ export const getProductFields = (fieldsToHide?: string) => {
         break
       default:
         value = {
-          type: '',
+          fieldType: '',
           name: '',
           displayValue: '',
           showOnSite: false,
@@ -92,7 +92,7 @@ export const getSkuFields = (fieldsToHide?: string) => {
     switch (fieldName) {
       case 'name':
         value = {
-          type: 'ProductField',
+          fieldType: 'ProductField',
           name: 'productName',
           displayValue: 'Product Name',
           showOnSite: true,
@@ -100,7 +100,7 @@ export const getSkuFields = (fieldsToHide?: string) => {
         break
       case 'ean':
         value = {
-          type: 'ProductField',
+          fieldType: 'ProductField',
           name: 'brand',
           displayValue: 'Brand',
           showOnSite: true,
@@ -108,7 +108,7 @@ export const getSkuFields = (fieldsToHide?: string) => {
         break
       default:
         value = {
-          type: '',
+          fieldType: '',
           name: '',
           displayValue: '',
           showOnSite: false,

@@ -23,7 +23,7 @@ const ComparisonGridRow: StorefrontFunctionComponent<Props> = ({
     comparisonData
   )
 
-  return field && field.name && field.type ? (
+  return field && field.name && field.fieldType ? (
     <div className="flex flex-row" key={`field-${field.name}`}>
       <div
         className={`${styles.comparisonNameCol} flex items-center ma1 pa3`}

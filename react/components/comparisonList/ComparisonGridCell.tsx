@@ -19,15 +19,15 @@ const ComparisonGridCell = ({ field, productToCompare }: Props) => {
     pathOr([], ['items'], selectedProduct)
   )
 
-  if (field.type === 'ProductField') {
+  if (field.fieldType === 'ProductField') {
     return <span>{pathOr('', [field.name], selectedProduct)}</span>
   }
 
-  if (field.type === 'SkuField') {
+  if (field.fieldType === 'SkuField') {
     return <span>{pathOr('', [field.name], selectedSku)}</span>
   }
 
-  if (field.type === 'ProductSpecificationField') {
+  if (field.fieldType === 'ProductSpecificationField') {
     const groups = pathOr([], ['specificationGroups'], selectedProduct)
     const allSpecifications = findLast(propEq('name', 'allSpecifications'))(
       groups
@@ -43,14 +43,16 @@ const ComparisonGridCell = ({ field, productToCompare }: Props) => {
       <div className={`${styles.productSpecifications} flex flex-column`}>
         {values.map(value => {
           return (
-            <span key={`${field.type}-${field.name}-${value}`}>{value}</span>
+            <span key={`${field.fieldType}-${field.name}-${value}`}>
+              {value}
+            </span>
           )
         })}
       </div>
     )
   }
 
-  if (field.type === 'SkuSpecificationField') {
+  if (field.fieldType === 'SkuSpecificationField') {
     const skuSpecifications = pathOr([], ['variations'], selectedSku)
     const values = pathOr(
       [],
@@ -61,7 +63,9 @@ const ComparisonGridCell = ({ field, productToCompare }: Props) => {
       <div className={`${styles.skuSpecifications} flex flex-column`}>
         {values.map(value => {
           return (
-            <span key={`${field.type}-${field.name}-${value}`}>{value}</span>
+            <span key={`${field.fieldType}-${field.name}-${value}`}>
+              {value}
+            </span>
           )
         })}
       </div>
