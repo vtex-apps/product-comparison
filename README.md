@@ -148,14 +148,30 @@ Add product comparison to search results page we need to do some configurations 
 
 These are the `props` that are allowed inside blocks for customize this feature through `site-editor` section.
 
-  * ### "product-comparison-block.grid"
+  * ### `product-comparison-block.grid`
   
     Prop | Description
     ------------ | -------------
-    productFieldsToHide | 
-    skuFieldsToHide | 
+    productFieldsToHide | Comma separated list of product fields that needs to be hidden in product comparison grid
+    skuFieldsToHide | Comma separated list of sku fields that needs to be hidden in product comparison grid
     productSpecificationsToHide | Comma separated list of product specifications that needs to be hidden in product comparison grid
     skuSpecificationsToHide | Comma separated list of sku specifications that needs to be hidden in product comparison grid
+    
+    * ###### Available product fields
+      Field Name | Display Name | Description
+      ------------ | ------------- | -------------
+      `productName` | `Pdoduct Name` | Name of the product
+      `brand` | `Brand` | Brand Name of the product
+      `description` | `Description` | Product description
+      `productReference` | `Product Reference` | Product Reference Number
+      `name` | 'Sku Name' | Name of the sku
+      `ean` | `Ean` | EAN of the Sku
+      
+    * ###### Available sku fields
+      Field Name | Display Name | Description
+      ------------ | ------------- | -------------
+      `name` | 'Sku Name' | Name of the sku
+      `ean` | `Ean` | EAN of the Sku
     
 # Customization
 In order to apply CSS customization in this and other blocks, follow the instructions given in the recipe on Using CSS Handles for store customization.
