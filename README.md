@@ -83,19 +83,96 @@ Add product comparison to search results page we need to do some configurations 
 ### 3. Add product comparison selector and comparison drawer to search result page
 
   1. Add comparison drawer
-    `product-comparison-block.drawer` block needs to be added inside extended `search-result-layout.desktop.product-comparison` to display comparison drawer
-    
-      ```diff
-        "search-result-layout.desktop.product-comparison#search": {
-          "children": [
-            "flex-layout.row#searchbread",
-            "flex-layout.row#searchtitle",
-            "flex-layout.row#result"
-      +     "product-comparison-block.drawer"
-          ],
-          ...
-        },
-      ```
-  2. Add product selector checkbox
-  3. Add product comparison page
   
+      `product-comparison-block.drawer` block needs to be added inside extended `search-result-layout.desktop.product-comparison` to display comparison drawer
+
+        ```diff
+          "search-result-layout.desktop.product-comparison#search": {
+            "children": [
+              "flex-layout.row#searchbread",
+              "flex-layout.row#searchtitle",
+              "flex-layout.row#result"
+        +     "product-comparison-block.drawer"
+            ],
+            ...
+          },
+        ```
+  2. Add product selector checkbox
+  
+      `product-comparison-block.selector` block needs to be added inside extended `product-summary.product-comparison` to product selector checkbox
+  
+        ```diff
+          "product-summary.shelf.product-comparison#search": {
+            "children": [
+              "product-summary-image",
+              "product-summary-name",
+              "product-summary-attachment-list",
+              "product-summary-space",
+              "product-summary-column#1",
+        +      "product-comparison-block.selector"
+            ]
+          }
+        ```
+
+### 3. Configure comparison detail page
+
+  1. Add product comparison page blocks
+  
+      Add this custom page blocks in appropriate location (create `<custom-page>.json` inside `/store/blocks` folder). 
+
+        ```diff
+        "store.custom#product-comparison-list": {
+          "children": [
+            "product-comparison#comparison-list"
+          ]
+        },
+        "product-comparison#comparison-list": {
+          "blocks": ["product-comparison-block.list#compare"]
+        },
+        "product-comparison-block.list#compare": {
+          "blocks": [
+            "product-summary.shelf.product-comparison#search",
+            "product-comparison-block.grid"
+          ]
+        },
+        ```
+  2. Add custom page routes in `routes.json` inside `/store/blocks`
+  
+      ```
+      "store.custom#product-comparison-list": {
+        "path": "/product-comparison"
+      }
+      ```
+
+# Custom configurations in blocks level
+
+These are the `props` that are allowed inside blocks for customize this feature through `site-editor` section.
+
+  * ### "product-comparison-block.grid"
+  
+    Prop | Description
+    ------------ | -------------
+    productFieldsToHide | 
+    skuFieldsToHide | 
+    productSpecificationsToHide | Comma separated list of product specifications that needs to be hidden in product comparison grid
+    skuSpecificationsToHide | Comma separated list of sku specifications that needs to be hidden in product comparison grid
+    
+# Customization
+In order to apply CSS customization in this and other blocks, follow the instructions given in the recipe on Using CSS Handles for store customization.
+
+CSS handles |
+------------ |
+drawerContainer |
+drawer |
+productThumbnail |
+thumbnailContentContainer |
+drawerImage |
+comparisonButtons |
+closeButton |
+compareProductsButton |
+productSummaryRow |
+comparisonNameCol |
+comparisonProductCol |
+productComparisonGrid | 
+productSpecifications |
+skuSpecifications |
