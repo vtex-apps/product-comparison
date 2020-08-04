@@ -1,7 +1,7 @@
 {
   "editor.countdown.title": "Countdown",
   "editor.countdown.description": "Countdown component",
-  "admin/editor.comparison-grid.title": "Product Comparison Grid Row",
+  "admin/editor.comparison-grid.title": "Comparison Grid",
   "admin/editor.comparison-grid.description": "Product Comparison Grid Row Collect information",
   "admin/editor.comparison-grid.product-specifications-to-be-removed.title": "Hide Product Specifications",
   "admin/editor.comparison-grid.product-specifications-to-be-removed.description": "Names of product specifications which needs to be hidden in comparison page (separate them by comma `,`)",
@@ -10,5 +10,18 @@
   "admin/editor.comparison-grid.product-fields-to-be-removed.title": "Hide product fields",
   "admin/editor.comparison-grid.product-fields-to-be-removed.description": "Product fields which needs to be hidden in comparison page (separate them by comma `,`)",
   "admin/editor.comparison-grid.sku-fields-to-be-removed.title": "Hide sku fields",
-  "admin/editor.comparison-grid.sku-fields-to-be-removed.description": "Sku fields which needs to be hidden in comparison page (separate them by comma `,`)"
+  "admin/editor.comparison-grid.sku-fields-to-be-removed.description": "Sku fields which needs to be hidden in comparison page (separate them by comma `,`)",
+  "admin/editor.comparison-grid-row.title": "Comparison Grid Row",
+  "admin/editor.comparison-grid-row.description": "Row meta data for grid",
+  "admin/editor.comparison-grid-row.field.title": "Field",
+  "admin/editor.comparison-grid-row.field.description": "This is the field we need to add to comparison detail page",
+  "admin/editor.comparison-grid-row.field.fieldType.title": "Field type",
+  "admin/editor.comparison-grid-row.field.fieldType.description": "Field type of the row",
+  "admin/editor.comparison-grid-row.field.name.title": "Field Name",
+  "admin/editor.comparison-grid-row.field.name.description": "Comparison field name (name of the product field, name of product specification or sku specification)",
+  "admin/editor.comparison-grid-row.field.display-value.title": "Display Name",
+  "admin/editor.comparison-grid-row.field.display-value.description": "Display name of the field in comparison page",
+  "admin/editor.comparison-grid-row.styles.title": "Cell styles",
+  "admin/editor.comparison-grid-row.styles.width.title": "Width",
+  "admin/editor.comparison-grid-row.styles.width.description": "Width of the cell as a percentage"
 }
