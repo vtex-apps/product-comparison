@@ -18,6 +18,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Added
 - Product comparison grid basic feature
 - Comparison list normalize product for product summary
+- Added wrapper for slider
 
 ### Fixed
 - Fix ui switch change in comparison drawer

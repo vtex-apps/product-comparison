@@ -18,8 +18,12 @@
     "component": "ComparisonList",
     "allowed": ["product-summary", "product-comparison-block"]
   },
+  "product-comparison.slider-wrapper": {
+    "component": "SliderWrapper"
+  },
   "product-comparison-block.grid": {
-    "component": "ComparisonGrid"
+    "component": "ComparisonGrid",
+    "around": ["product-comparison.slider-wrapper"]
   },
   "product-comparison-block.grid-row": {
     "component": "ComparisonGridRow"
