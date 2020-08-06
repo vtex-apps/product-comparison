@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - rename translation key
 - Rename `type` to `fieldType` in comparison field
 - Product comparison hide fields
+- Delegated product query to summary
 
 ### Added
 - Product comparison grid basic feature

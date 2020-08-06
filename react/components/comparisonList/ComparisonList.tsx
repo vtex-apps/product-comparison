@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react'
-import { pathOr, isEmpty, find, propEq } from 'ramda'
-import { useApolloClient } from 'react-apollo'
-import productsQuery from 'vtex.store-resources/QueryProduct'
+import React, { useState } from 'react'
+import { pathOr, isEmpty } from 'ramda'
 import { ExtensionPoint } from 'vtex.render-runtime'
+import { useResponsiveValue } from 'vtex.responsive-values'
+
 import ComparisonContext from '../../ProductComparisonContext'
 import ComparisonSummary from './ComparisonSummary'
 import styles from './comparisonList.css'
@@ -12,45 +12,21 @@ interface Props {
   maxItemCount: number
 }
 
-const ComparisonList = ({ maxItemCount = 4 }: Props) => {
-  const [products, setProducts] = useState([] as Product[])
-  const client = useApolloClient()
+const ComparisonList: StorefrontFunctionComponent<
+  Props & SliderLayoutProps & SliderLayoutSiteEditorProps
+> = ({ maxItemCount = 4, children, ...contextProps }) => {
+  const [products] = useState([] as Product[])
 
   const { useProductComparisonState } = ComparisonContext
   const { ComparisonProductProvider } = ComparisonProductContext
 
   const comparisonData = useProductComparisonState()
+  const responsiveArrowIconSize = useResponsiveValue(25)
   const comparisonProducts = pathOr(
     [] as ProductToCompare[],
     ['products'],
     comparisonData
   )
-
-  useEffect(() => {
-    // const results =
-    Promise.all(
-      comparisonProducts.map((productToCompare: ProductToCompare) => {
-        return client.query({
-          query: productsQuery,
-          variables: {
-            identifier: {
-              field: 'id',
-              value: productToCompare.productId,
-            },
-          },
-        })
-      })
-    ).then((productsList: { data: { product: Product } }[]) => {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const responseProducts: Product[] = productsList.map(
-        (productResponse: { data: { product: Product } }) =>
-          // eslint-disable-next-line @typescript-eslint/no-object-literal-type-assertion
-          pathOr({} as Product, ['data', 'product'], productResponse)
-      )
-
-      setProducts(responseProducts)
-    })
-  }, [client, comparisonProducts])
 
   const comparisonListStyles = {
     columnWidth: { width: `${maxItemCount > 5 ? 100 / maxItemCount : 15}%` },
