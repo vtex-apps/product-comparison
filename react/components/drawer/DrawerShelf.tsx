@@ -8,7 +8,6 @@
 
 // import { Slider, Slide, SliderContainer } from 'vtex.slider'
 // import resolveSlidesNumber from '../utils/resolveSlidesNumber'
-// import { withCssHandles } from 'vtex.css-handles'
 
 // import CustomProductSummary from '../comparisonSummary/CustomProductSummary'
 
