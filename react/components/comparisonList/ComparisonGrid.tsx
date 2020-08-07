@@ -10,7 +10,6 @@ import {
 } from '../utils/fieldUtils'
 
 interface Props {
-  columnStyles: Styles
   productFieldsToHide?: string
   skuFieldsToHide?: string
   productSpecificationsToHide?: string
@@ -18,7 +17,6 @@ interface Props {
 }
 
 const ComparisonGrid = ({
-  columnStyles,
   productFieldsToHide,
   skuFieldsToHide,
   productSpecificationsToHide,
@@ -109,19 +107,12 @@ const ComparisonGrid = ({
   const fields: ComparisonField[] = [
     ...getProductFields(productFieldsToHide),
     ...getSkuFields(skuFieldsToHide),
-
     ...productSpecificationFields,
     ...skuSpecificationFields,
   ]
 
   return fields.map((field: ComparisonField) => {
-    return (
-      <ComparisonGridRow
-        key={`field-${field.name}`}
-        columnStyles={columnStyles}
-        field={field}
-      />
-    )
+    return <ComparisonGridRow key={`field-${field.name}`} field={field} />
   })
 }
 

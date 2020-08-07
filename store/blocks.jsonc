@@ -4,15 +4,16 @@
   },
   "list-context.comparison-list#drawer": {
     "blocks": ["product-summary.shelf#drawer"],
-    "children": ["slider-layout#drawer"]
+    "children": ["slider-layout#comparison"]
   },
-  "slider-layout#drawer": {
+  "slider-layout#comparison": {
     "props": {
       "itemsPerPage": {
         "desktop": 3,
         "tablet": 3,
         "phone": 1
       },
+      "showPaginationDots": "never",
       "infinite": true,
       "fullWidth": false,
       "blockClass": "shelf"
@@ -26,5 +27,31 @@
       "product-summary-space",
       "product-summary-column#1"
     ]
+  },
+  "product-comparison-list": {
+    "blocks": [
+      "list-context.comparison-list#comparison-page",
+      "product-comparison-block.grid"
+    ]
+  },
+  "list-context.comparison-list#comparison-page": {
+    "blocks": ["product-summary.shelf#drawer"],
+    "children": ["slider-layout#comparison"]
+  },
+  "product-summary.shelf#comparison-page": {
+    "children": [
+      "product-summary-image",
+      "product-summary-name",
+      "product-summary-attachment-list",
+      "product-summary-space",
+      "product-summary-column#1"
+    ]
+  },
+  "product-comparison-block.grid": {
+    "blocks":["list-context.comparison-row-list#comparison-page-row"]
+  },
+  "list-context.comparison-row-list#comparison-page-row": {
+    "children": ["slider-layout#comparison"]
   }
+
 }

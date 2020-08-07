@@ -12,16 +12,10 @@
     "component": "ProductSelector"
   },
   
-  "product-comparison-block.list": {
-    "component": "ComparisonList",
-    "allowed": ["product-summary", "product-comparison-block"]
-  },
-  "product-comparison-block.grid": {
-    "component": "ComparisonGrid"
-  },
   "product-comparison-block.grid-row": {
     "component": "ComparisonGridRow"
   },
+
 
   "product-comparison-drawer": {
     "allowed": ["list-context.comparison-list"],
@@ -31,5 +25,20 @@
     "allowed": ["product-summary"],
     "composition": "children",
     "component": "ProductSummaryList"
+  },
+
+
+  "product-comparison-list": {
+    "component": "ComparisonList",
+    "allowed": ["product-comparison-block", "list-context.comparison-list"]
+  },
+  "product-comparison-block.grid": {
+    "allowed": ["list-context.comparison-row-list"],
+    "component": "ComparisonGrid"
+  },
+  "list-context.comparison-row-list": {
+    "composition": "children",
+    "component": "ComparisonGridRowContent"
   }
+
 }

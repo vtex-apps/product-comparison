@@ -1,42 +1,27 @@
 import React from 'react'
-import { pathOr } from 'ramda'
-import ComparisonContext from '../../ProductComparisonContext'
-import ComparisonGridCell from './ComparisonGridCell'
 import styles from './comparisonList.css'
+import { ExtensionPoint } from 'vtex.render-runtime'
 
 interface Props {
   field: ComparisonField
-  columnStyles: Styles
 }
 
 const ComparisonGridRow: StorefrontFunctionComponent<Props> = ({
   field,
-  columnStyles,
 }: Props) => {
-  const { useProductComparisonState } = ComparisonContext
-
-  const comparisonData = useProductComparisonState()
-
-  const comparisonProducts = pathOr(
-    [] as ProductToCompare[],
-    ['products'],
-    comparisonData
-  )
-
   return field && field.name && field.fieldType ? (
     <div className="flex flex-row" key={`field-${field.name}`}>
       <div
-        className={`${styles.comparisonNameCol} flex items-center ma1 pa3`}
-        style={columnStyles}
+        className={`${styles.comparisonNameCol} w-20 flex items-center ma1 pa3`}
       >
         <span>{field.displayValue}</span>
       </div>
-      {comparisonProducts.map(comparisonItem => {
+      <ExtensionPoint id="list-context.comparison-row-list" field={field} />
+      {/* {comparisonProducts.map(comparisonItem => {
         return (
           <div
             key={`${comparisonItem.productId}-col`}
-            className={`${styles.comparisonProductCol} ma1 pa3`}
-            style={columnStyles}
+            className={`${styles.comparisonProductCol} w-20 ma1 pa3`}
           >
             <ComparisonGridCell
               field={field}
@@ -44,7 +29,7 @@ const ComparisonGridRow: StorefrontFunctionComponent<Props> = ({
             />
           </div>
         )
-      })}
+      })} */}
     </div>
   ) : (
     <div />
@@ -91,16 +76,16 @@ ComparisonGridRow.schema = {
           'admin/editor.comparison-grid-row.field.display-value.description',
       },
     },
-    columnStyles: {
-      title: 'admin/editor.comparison-grid-row.styles.title',
-      type: 'object',
-      width: {
-        title: 'admin/editor.comparison-grid-row.styles.width.title',
-        type: 'string',
-        description:
-          'admin/editor.comparison-grid-row.styles.width.description',
-      },
-    },
+    // columnStyles: {
+    //   title: 'admin/editor.comparison-grid-row.styles.title',
+    //   type: 'object',
+    //   width: {
+    //     title: 'admin/editor.comparison-grid-row.styles.width.title',
+    //     type: 'string',
+    //     description:
+    //       'admin/editor.comparison-grid-row.styles.width.description',
+    //   },
+    // },
   },
 }
 
