@@ -20,6 +20,7 @@ declare module 'vtex.render-runtime' {
   }
 
   export const ExtensionPoint: ComponentType<ExtensionPointProps>
+  export const useTreePath: any
 
   interface ChildBlockProps {
     id: string

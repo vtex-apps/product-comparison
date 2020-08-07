@@ -11,9 +11,7 @@
   "product-comparison-block.selector": {
     "component": "ProductSelector"
   },
-  "product-comparison-block.drawer": {
-    "component": "ComparisonDrawer"
-  },
+  
   "product-comparison-block.list": {
     "component": "ComparisonList",
     "allowed": ["product-summary", "product-comparison-block"]
@@ -23,5 +21,15 @@
   },
   "product-comparison-block.grid-row": {
     "component": "ComparisonGridRow"
+  },
+
+  "product-comparison-drawer": {
+    "allowed": ["list-context.comparison-list"],
+    "component": "ComparisonDrawer"
+  },
+  "list-context.comparison-list": {
+    "allowed": ["product-summary"],
+    "composition": "children",
+    "component": "ProductSummaryList"
   }
 }

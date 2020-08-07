@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react'
 import { pathOr, findLast, propEq } from 'ramda'
 import ComparisonGridRow from './ComparisonGridRow'
-import ComparisonProductContext from './ComparisonProductContext'
+import ComparisonProductContext from '../../ComparisonProductContext'
 import {
   getProductFields,
   getSkuFields,

@@ -1,6 +1,6 @@
 import React from 'react'
 import { pathOr, find, propEq, findLast } from 'ramda'
-import ComparisonProductContext from './ComparisonProductContext'
+import ComparisonProductContext from '../../ComparisonProductContext'
 import styles from './comparisonList.css'
 
 interface Props {

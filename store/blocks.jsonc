@@ -1,0 +1,30 @@
+{
+  "product-comparison-drawer": {
+    "blocks": ["list-context.comparison-list#drawer"]
+  },
+  "list-context.comparison-list#drawer": {
+    "blocks": ["product-summary.shelf#drawer"],
+    "children": ["slider-layout#drawer"]
+  },
+  "slider-layout#drawer": {
+    "props": {
+      "itemsPerPage": {
+        "desktop": 3,
+        "tablet": 3,
+        "phone": 1
+      },
+      "infinite": true,
+      "fullWidth": false,
+      "blockClass": "shelf"
+    }
+  },
+  "product-summary.shelf#drawer": {
+    "children": [
+      "product-summary-image",
+      "product-summary-name",
+      "product-summary-attachment-list",
+      "product-summary-space",
+      "product-summary-column#1"
+    ]
+  }
+}

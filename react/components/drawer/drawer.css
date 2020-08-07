@@ -1,6 +1,6 @@
 .drawerContainer {
   position: fixed;
-  max-height: 100px;
+  max-height: 500px;
   bottom: 0;
 }
 .drawer {

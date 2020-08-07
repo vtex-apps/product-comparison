@@ -20,7 +20,11 @@
     "vtex.store-graphql": "2.x",
     "vtex.product-summary-context": "0.x",
     "vtex.product-summary": "2.x",
-    "vtex.store-resources": "0.x"
+    "vtex.store-resources": "0.x",
+    "vtex.store-icons": "0.x",
+    "vtex.slider-layout": "0.x",
+    "vtex.list-context": "0.x",
+    "vtex.product-list-context": "0.x"
   },
   "$schema": "https://raw.githubusercontent.com/vtex/node-vtex-api/master/gen/manifest.schema"
 }

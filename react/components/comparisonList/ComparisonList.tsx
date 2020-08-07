@@ -6,7 +6,7 @@ import { ExtensionPoint } from 'vtex.render-runtime'
 import ComparisonContext from '../../ProductComparisonContext'
 import ComparisonSummary from './ComparisonSummary'
 import styles from './comparisonList.css'
-import ComparisonProductContext from './ComparisonProductContext'
+import ComparisonProductContext from '../../ComparisonProductContext'
 
 interface Props {
   maxItemCount: number
