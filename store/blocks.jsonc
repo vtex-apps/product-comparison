@@ -21,12 +21,43 @@
   },
   "product-summary.shelf#drawer": {
     "children": [
-      "product-summary-image",
+      "product-summary-column#drawer-col1",
+      "product-summary-column#drawer-col2"
+    ],
+    "props": {
+      "blockClass": "drawer-summary"
+    }
+  },
+  "product-summary-column#drawer-col1": {
+    "children": ["product-summary-image#drawer"],
+    "props": {
+      "blockClass": "drawer-summary-col1"
+    }
+  },
+  "product-summary-image#drawer": {
+    "props": {
+      "showBadge": false,
+      "width": 75,
+      "heightProp": 75
+    }
+  },
+  "product-summary-column#drawer-col2": {
+    "children": [
       "product-summary-name",
-      "product-summary-attachment-list",
-      "product-summary-space",
-      "product-summary-column#1"
-    ]
+      "product-summary-price#drawer-summary"
+    ],
+    "props": {
+      "blockClass": "drawer-summary-col2"
+    }
+  },
+  "product-summary-price#drawer-summary": {
+    "props": {
+      "showListPrice": false,
+      "showSellingPriceRange": false,
+      "showLabels": false,
+      "showInstallments": false,
+      "showDiscountValue": false
+    }
   },
   "product-comparison-list": {
     "blocks": [
