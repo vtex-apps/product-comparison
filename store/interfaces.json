@@ -28,11 +28,15 @@
   },
 
 
+  "comparison-page": {
+    "component": "ComparisonPage",
+    "composition": "children"
+  },
   "product-comparison-list": {
     "component": "ComparisonList",
     "allowed": ["product-comparison-block", "list-context.comparison-list"]
   },
-  "product-comparison-block.grid": {
+  "product-comparison-block.product-specifications": {
     "allowed": ["list-context.comparison-row-list"],
     "component": "ComparisonGrid"
   },

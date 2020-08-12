@@ -59,14 +59,22 @@
       "showDiscountValue": false
     }
   },
+
+
+  "comparison-page": {
+    "children": ["slider-layout-group#comparison-page"]
+  },
+  "slider-layout-group#comparison-page": {
+    "children": ["product-comparison-list"]
+  },
   "product-comparison-list": {
     "blocks": [
       "list-context.comparison-list#comparison-page",
-      "product-comparison-block.grid"
+      "product-comparison-block.product-specifications"
     ]
   },
   "list-context.comparison-list#comparison-page": {
-    "blocks": ["product-summary.shelf#drawer"],
+    "blocks": ["product-summary.shelf#comparison-page"],
     "children": ["slider-layout#comparison"]
   },
   "product-summary.shelf#comparison-page": {
@@ -78,7 +86,7 @@
       "product-summary-column#1"
     ]
   },
-  "product-comparison-block.grid": {
+  "product-comparison-block.product-specifications": {
     "blocks":["list-context.comparison-row-list#comparison-page-row"]
   },
   "list-context.comparison-row-list#comparison-page-row": {

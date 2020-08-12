@@ -42,7 +42,7 @@ const ComparisonList = () => {
         </div>
         <ExtensionPoint id="list-context.comparison-list" />
       </div>
-      <div className={`${styles.productComparisonGrid}`}>
+      <div className={`${styles.productComparisonProductSpecifications}`}>
         <ExtensionPoint id="product-comparison-block" />
       </div>
     </div>
