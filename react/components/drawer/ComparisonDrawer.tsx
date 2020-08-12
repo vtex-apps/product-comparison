@@ -15,6 +15,7 @@ const CSS_HANDLES = [
 ]
 
 interface Props {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   cssHandles?: any
 }
 
@@ -98,17 +99,7 @@ const ComparisonDrawer = ({ cssHandles }: Props) => {
           <div
             className={`${cssHandles.drawer} flex flex-row justify-center pl3 pr3`}
           >
-            {/* <DrawerShelf /> */}
-            {/* {comparisonProducts.map(thumbnail => {
-            return (
-              // <ProductThumbnail
-              //   key={`${thumbnail.productId}-${thumbnail.skuId}`}
-              //   productToCompare={thumbnail}
-              // />
-              
-            )
-          })} */}
-            <ExtensionPoint id="list-context.comparison-list" />
+            <ExtensionPoint id="list-context.comparison-product-summary-slider" />
           </div>
         </Collapsible>
       </div>

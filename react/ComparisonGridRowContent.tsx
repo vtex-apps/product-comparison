@@ -1,3 +1,3 @@
-import ComparisonGridRowContent from './components/comparisonList/ComparisonGridRowContent'
+import ComparisonGridRowContent from './components/comparisonPageRow/ComparisonGridRowContent'
 
 export default ComparisonGridRowContent

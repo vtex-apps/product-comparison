@@ -1,8 +1,8 @@
 {
   "product-comparison-drawer": {
-    "blocks": ["list-context.comparison-list#drawer"]
+    "blocks": ["list-context.comparison-product-summary-slider#drawer"]
   },
-  "list-context.comparison-list#drawer": {
+  "list-context.comparison-product-summary-slider#drawer": {
     "blocks": ["product-summary.shelf#drawer"],
     "children": ["slider-layout#comparison"]
   },
@@ -59,21 +59,20 @@
       "showDiscountValue": false
     }
   },
-
-
   "comparison-page": {
     "children": ["slider-layout-group#comparison-page"]
   },
   "slider-layout-group#comparison-page": {
-    "children": ["product-comparison-list"]
-  },
-  "product-comparison-list": {
-    "blocks": [
-      "list-context.comparison-list#comparison-page",
-      "product-comparison-block.product-specifications"
+    "children": [
+      "product-comparison-block.product-summary-row",
+      "product-comparison-block.product-specifications",
+      "product-comparison-block.sku-specifications"
     ]
   },
-  "list-context.comparison-list#comparison-page": {
+  "product-comparison-block.product-summary-row": {
+    "blocks": ["list-context.comparison-product-summary-slider#comparison-page"]
+  },
+  "list-context.comparison-product-summary-slider#comparison-page": {
     "blocks": ["product-summary.shelf#comparison-page"],
     "children": ["slider-layout#comparison"]
   },
@@ -87,10 +86,26 @@
     ]
   },
   "product-comparison-block.product-specifications": {
-    "blocks":["list-context.comparison-row-list#comparison-page-row"]
+    "blocks": ["list-context.comparison-row#comparison-page-row"]
   },
-  "list-context.comparison-row-list#comparison-page-row": {
-    "children": ["slider-layout#comparison"]
+  "product-comparison-block.sku-specifications": {
+    "blocks": ["list-context.comparison-row#comparison-page-row"]
+  },
+  "list-context.comparison-row#comparison-page-row": {
+    "children": ["slider-layout#comparison-no-arrows"]
+  },
+  "slider-layout#comparison-no-arrows": {
+    "props": {
+      "itemsPerPage": {
+        "desktop": 3,
+        "tablet": 3,
+        "phone": 1
+      },
+      "showPaginationDots": "never",
+      "infinite": true,
+      "fullWidth": false,
+      "blockClass": "shelf",
+      "showNavigationArrows": "never"
+    }
   }
-
 }

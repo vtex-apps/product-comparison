@@ -2,13 +2,9 @@ import React, { useMemo, ReactChildren, ReactChild } from 'react'
 import { pathOr } from 'ramda'
 import { useListContext, ListContextProvider } from 'vtex.list-context'
 import { ProductListContext } from 'vtex.product-list-context'
-
 import ProductSummeryListEventCaller from '../productSummaryList/ProductSummeryListEventCaller'
-
 import ComparisonContext from '../../ProductComparisonContext'
-
 import ComparisonProductContext from '../../ComparisonProductContext'
-
 import ComparisonGridCell from './ComparisonGridCell'
 import styles from './comparisonList.css'
 
