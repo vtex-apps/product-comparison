@@ -1,0 +1,24 @@
+.productSummaryRowContainer
+  :global(.vtex-product-summary-2-x-nameContainer) {
+  display: flex;
+  justify-content: center;
+}
+
+.rowContainer:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.fieldNameCol {
+}
+
+.comparisonProductCol {
+}
+
+.productComparisonGrid {
+}
+
+.productSpecifications {
+}
+
+.skuSpecifications {
+}

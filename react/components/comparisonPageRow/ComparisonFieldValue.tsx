@@ -1,13 +1,24 @@
 import React from 'react'
 import { pathOr, find, propEq, findLast } from 'ramda'
 import ComparisonProductContext from '../../ComparisonProductContext'
-import styles from './comparisonList.css'
+import { useCssHandles } from 'vtex.css-handles'
+import './row.css'
+
+const CSS_HANDLES = [
+  'productFieldValue',
+  'skuFieldValue',
+  'productSpecificationValues',
+  'productSpecificationValue',
+  'skuSpecificationValues',
+  'skuSpecificationValue',
+]
 
 interface Props {
   productToCompare: ProductToCompare
   field: ComparisonField
 }
-const ComparisonGridCell = ({ field, productToCompare }: Props) => {
+const ComparisonFieldValue = ({ field, productToCompare }: Props) => {
+  const cssHandles = useCssHandles(CSS_HANDLES)
   const { useComparisonProductState } = ComparisonProductContext
   const productData = useComparisonProductState()
 
@@ -20,11 +31,19 @@ const ComparisonGridCell = ({ field, productToCompare }: Props) => {
   )
 
   if (field.fieldType === 'ProductField') {
-    return <span>{pathOr('', [field.name], selectedProduct)}</span>
+    return (
+      <span className={cssHandles.productFieldValue}>
+        {pathOr('', [field.name], selectedProduct)}
+      </span>
+    )
   }
 
   if (field.fieldType === 'SkuField') {
-    return <span>{pathOr('', [field.name], selectedSku)}</span>
+    return (
+      <span className={cssHandles.skuFieldValue}>
+        {pathOr('', [field.name], selectedSku)}
+      </span>
+    )
   }
 
   if (field.fieldType === 'ProductSpecificationField') {
@@ -40,10 +59,15 @@ const ComparisonGridCell = ({ field, productToCompare }: Props) => {
       find(propEq('name', field.name))(specifications)
     )
     return (
-      <div className={`${styles.productSpecifications} flex flex-column`}>
+      <div
+        className={`${cssHandles.productSpecificationValues} flex flex-column`}
+      >
         {values.map(value => {
           return (
-            <span key={`${field.fieldType}-${field.name}-${value}`}>
+            <span
+              className={cssHandles.productSpecificationValue}
+              key={`${field.fieldType}-${field.name}-${value}`}
+            >
               {value}
             </span>
           )
@@ -60,10 +84,13 @@ const ComparisonGridCell = ({ field, productToCompare }: Props) => {
       find(propEq('name', field.name))(skuSpecifications)
     )
     return (
-      <div className={`${styles.skuSpecifications} flex flex-column`}>
+      <div className={`${cssHandles.skuSpecificationValues} flex flex-column`}>
         {values.map(value => {
           return (
-            <span key={`${field.fieldType}-${field.name}-${value}`}>
+            <span
+              className={cssHandles.skuSpecificationValue}
+              key={`${field.fieldType}-${field.name}-${value}`}
+            >
               {value}
             </span>
           )
@@ -75,4 +102,4 @@ const ComparisonGridCell = ({ field, productToCompare }: Props) => {
   return <div></div>
 }
 
-export default ComparisonGridCell
+export default ComparisonFieldValue

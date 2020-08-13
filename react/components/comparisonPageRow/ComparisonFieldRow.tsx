@@ -1,6 +1,9 @@
 import React from 'react'
-import styles from './comparisonList.css'
 import { ExtensionPoint } from 'vtex.render-runtime'
+import { useCssHandles } from 'vtex.css-handles'
+import './row.css'
+
+const CSS_HANDLES = ['rowContainer', 'fieldNameCol']
 
 interface Props {
   field: ComparisonField
@@ -9,10 +12,15 @@ interface Props {
 const ComparisonFieldRow: StorefrontFunctionComponent<Props> = ({
   field,
 }: Props) => {
+  const cssHandles = useCssHandles(CSS_HANDLES)
+
   return field && field.name && field.fieldType ? (
-    <div className="flex flex-row" key={`field-${field.name}`}>
+    <div
+      className={`${cssHandles.rowContainer} flex flex-row`}
+      key={`field-${field.name}`}
+    >
       <div
-        className={`${styles.comparisonNameCol} w-20 flex items-center ma1 pa3`}
+        className={`${cssHandles.fieldNameCol} w-20 flex items-center ma1 pa3`}
       >
         <span>{field.displayValue}</span>
       </div>

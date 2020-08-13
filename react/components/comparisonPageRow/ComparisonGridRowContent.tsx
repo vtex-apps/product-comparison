@@ -5,8 +5,11 @@ import { ProductListContext } from 'vtex.product-list-context'
 import ProductSummeryListEventCaller from '../productSummaryList/ProductSummeryListEventCaller'
 import ComparisonContext from '../../ProductComparisonContext'
 import ComparisonProductContext from '../../ComparisonProductContext'
-import ComparisonGridCell from './ComparisonGridCell'
-import styles from './comparisonList.css'
+import ComparisonFieldValue from './ComparisonFieldValue'
+import { useCssHandles } from 'vtex.css-handles'
+import './row.css'
+
+const CSS_HANDLES = ['comparisonCol']
 
 interface Props {
   field: ComparisonField
@@ -16,6 +19,7 @@ interface Props {
 }
 
 const List = ({ children, comparisonProducts, field }: Props) => {
+  const cssHandles = useCssHandles(CSS_HANDLES)
   const { list } = useListContext()
 
   const newListContextValue = useMemo(() => {
@@ -25,9 +29,9 @@ const List = ({ children, comparisonProducts, field }: Props) => {
         return (
           <div
             key={`${comparisonProduct.productId}-col`}
-            className={`${styles.comparisonProductCol} w-20 ma1 pa3`}
+            className={`${cssHandles.comparisonCol} w-20 ma1 pa3`}
           >
-            <ComparisonGridCell
+            <ComparisonFieldValue
               field={field}
               productToCompare={comparisonProduct}
             />
@@ -36,7 +40,7 @@ const List = ({ children, comparisonProducts, field }: Props) => {
       })
 
     return list.concat(componentList)
-  }, [comparisonProducts, field, list])
+  }, [comparisonProducts, cssHandles, field, list])
 
   return (
     <ListContextProvider list={newListContextValue}>

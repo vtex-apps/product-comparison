@@ -1,6 +1,6 @@
 import React, { ReactChildren, ReactChild } from 'react'
 import { pathOr, isEmpty } from 'ramda'
-import { withCssHandles } from 'vtex.css-handles'
+import { useCssHandles } from 'vtex.css-handles'
 import { Layout, PageHeader, PageBlock, Button } from 'vtex.styleguide'
 import ComparisonContext from './ProductComparisonContext'
 import './global.css'
@@ -8,12 +8,11 @@ import './global.css'
 const CSS_HANDLES = ['pageContainer']
 
 interface Props {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  cssHandles?: any
   children: ReactChildren | ReactChild
 }
 
-const ComparisonPage = ({ children, cssHandles }: Props) => {
+const ComparisonPage = ({ children }: Props) => {
+  const cssHandles = useCssHandles(CSS_HANDLES)
   const {
     useProductComparisonState,
     useProductComparisonDispatch,
@@ -61,4 +60,4 @@ const ComparisonPage = ({ children, cssHandles }: Props) => {
   )
 }
 
-export default withCssHandles(CSS_HANDLES)(ComparisonPage)
+export default ComparisonPage

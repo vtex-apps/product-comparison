@@ -3,12 +3,9 @@ import { pathOr, propEq, find } from 'ramda'
 import { ExtensionPoint, useTreePath } from 'vtex.render-runtime'
 import { useListContext, ListContextProvider } from 'vtex.list-context'
 import { ProductListContext } from 'vtex.product-list-context'
-
 import { mapCatalogProductToProductSummary } from '../utils/normalize'
 import ProductSummeryListEventCaller from './ProductSummeryListEventCaller'
-
 import ComparisonContext from '../../ProductComparisonContext'
-
 import ComparisonProductContext from '../../ComparisonProductContext'
 
 interface Props {

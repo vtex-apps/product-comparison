@@ -1,43 +1,26 @@
+.drawer {
+}
+
+.compareProductsButton {
+}
+
 .drawerContainer {
   position: fixed;
   max-height: 500px;
   bottom: 0;
   left: 0;
 }
-.drawerContainer :global(.vtex__icon-caret-up){
+
+.drawerContainer :global(.vtex__icon-caret-up) {
   display: none;
 }
 
-.drawerContainer :global(.vtex__icon-caret-down){
+.drawerContainer :global(.vtex__icon-caret-down) {
   display: none;
 }
 
-.drawer {
-}
-
-.productThumbnail {
-  width: 200px;
-}
-
-.thumbnailContentContainer {
-}
-
-.drawerImage {
-  max-height: 60px;
-  max-width: 60px;
+.expandCollapseButton {
 }
 
 .comparisonButtons {
-}
-
-.closeButton {
-  height: 20px;
-  width: 20px;
-  padding: unset;
-  margin-left: -20px;
-  border: unset;
-  cursor: pointer;
-}
-
-.compareProductsButton {
 }

@@ -1,11 +1,15 @@
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-import React, { useState, useEffect } from 'react'
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+import React, { useState, useEffect, MouseEvent } from 'react'
 import { pathOr, find, propEq, allPass, isEmpty } from 'ramda'
 import { Checkbox } from 'vtex.styleguide'
+import { useCssHandles } from 'vtex.css-handles'
 import ComparisonContext from '../../ProductComparisonContext'
 import { useProductSummary } from 'vtex.product-summary-context/ProductSummaryContext'
 
+const CSS_HANDLES = ['productSelectorContainer']
+
 const ProductSelector = () => {
+  const cssHandles = useCssHandles(CSS_HANDLES)
   const [isChecked, setIsChecked] = useState(false)
   const valuesFromContext = useProductSummary()
   const {
@@ -29,10 +33,7 @@ const ProductSelector = () => {
     setIsChecked(selectedProducts && !isEmpty(selectedProducts))
   }, [comparisonData.products, itemId, productId])
 
-  const productSelectorChanged = (e: any | unknown) => {
-    // e.preventDefault()
-    // e.stopPropagation()
-
+  const productSelectorChanged = (e: { target: { checked: boolean } }) => {
     if (e.target.checked) {
       dispatchComparison({
         args: {
@@ -50,14 +51,18 @@ const ProductSelector = () => {
     }
   }
 
-  const productSelectionOnClicked = (e: any | unknown) => {
+  const productSelectionOnClicked = (e: MouseEvent) => {
     e.preventDefault()
     e.stopPropagation()
   }
 
   return (
     // eslint-disable-next-line jsx-a11y/no-static-element-interactions
-    <div onClick={productSelectionOnClicked} className=" mb3">
+    // eslint-disable-next-line jsx-a11y/click-events-have-key-events
+    <div
+      onClick={productSelectionOnClicked}
+      className={`${cssHandles.productSelectorContainer} mb3`}
+    >
       <Checkbox
         checked={isChecked}
         id={`${productId}-${itemId}-product-comparison`}

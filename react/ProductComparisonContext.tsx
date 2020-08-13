@@ -9,7 +9,13 @@ import React, {
 import { pathOr, reject, propEq, allPass } from 'ramda'
 
 export interface State {
+  showDifferences: boolean
   products: ProductToCompare[]
+}
+
+interface SetShowDifferences {
+  type: 'SET_SHOW_DIFFERENCES'
+  args: { showDifferences: boolean }
 }
 
 interface AddAll {
@@ -31,7 +37,7 @@ interface Remove {
   args: { product: ProductToCompare }
 }
 
-type ReducerActions = AddAll | Add | RemoveAll | Remove
+type ReducerActions = AddAll | Add | RemoveAll | Remove | SetShowDifferences
 
 export type Dispatch = (action: ReducerActions) => void
 
@@ -75,6 +81,12 @@ const listReducer = (state: State, action: ReducerActions): State => {
       localStorage.setItem('PRODUCTS_TO_COMPARE', JSON.stringify(remaining))
       return { ...state, products: remaining }
     }
+    case 'SET_SHOW_DIFFERENCES': {
+      return {
+        ...state,
+        ...{ showDifferences: action.args.showDifferences },
+      }
+    }
     default: {
       throw new Error(`Unhandled action type on product-list-context`)
     }
@@ -82,6 +94,7 @@ const listReducer = (state: State, action: ReducerActions): State => {
 }
 
 const DEFAULT_STATE: State = {
+  showDifferences: false,
   products: [] as ProductToCompare[],
 }
 
@@ -91,6 +104,7 @@ const ComparisonDispatchContext = createContext<Dispatch>(action => {
 })
 
 const initialState: State = {
+  showDifferences: false,
   products: [] as ProductToCompare[],
 }
 

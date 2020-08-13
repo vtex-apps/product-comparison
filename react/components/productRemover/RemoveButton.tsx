@@ -1,27 +1,22 @@
-import React from 'react'
+import React, { MouseEvent } from 'react'
 import { pathOr } from 'ramda'
-import { withCssHandles } from 'vtex.css-handles'
 import ComparisonContext from '../../ProductComparisonContext'
-import './removeButton.css'
 import { useProductSummary } from 'vtex.product-summary-context/ProductSummaryContext'
+import { useCssHandles } from 'vtex.css-handles'
+import './remove.css'
 
 const CSS_HANDLES = ['closeButton', 'closeButtonContainer']
 
-interface Props {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  cssHandles?: any
-}
+const RemoveButton = () => {
+  const cssHandles = useCssHandles(CSS_HANDLES)
 
-const RemoveButton = ({ cssHandles }: Props) => {
   const { useProductComparisonDispatch } = ComparisonContext
-
   const dispatchComparison = useProductComparisonDispatch()
-
   const valuesFromContext = useProductSummary()
   const productId = pathOr('', ['product', 'productId'], valuesFromContext)
   const itemId = pathOr('', ['selectedItem', 'itemId'], valuesFromContext)
 
-  const removeProductFromCompare = (e: any) => {
+  const removeProductFromCompare = (e: MouseEvent) => {
     e.preventDefault()
     e.stopPropagation()
 
@@ -48,4 +43,4 @@ const RemoveButton = ({ cssHandles }: Props) => {
   )
 }
 
-export default withCssHandles(CSS_HANDLES)(RemoveButton)
+export default RemoveButton

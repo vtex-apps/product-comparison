@@ -3,7 +3,7 @@ import { pathOr, isEmpty } from 'ramda'
 import ComparisonContext from '../../ProductComparisonContext'
 import { Button, Collapsible } from 'vtex.styleguide'
 import { ExtensionPoint } from 'vtex.render-runtime'
-import { withCssHandles } from 'vtex.css-handles'
+import { useCssHandles } from 'vtex.css-handles'
 import './drawer.css'
 
 const CSS_HANDLES = [
@@ -14,12 +14,8 @@ const CSS_HANDLES = [
   'drawer',
 ]
 
-interface Props {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  cssHandles?: any
-}
-
-const ComparisonDrawer = ({ cssHandles }: Props) => {
+const ComparisonDrawer = () => {
+  const cssHandles = useCssHandles(CSS_HANDLES)
   const [isCollapsed, setCollapsed] = useState(false)
   const {
     useProductComparisonState,
@@ -107,4 +103,4 @@ const ComparisonDrawer = ({ cssHandles }: Props) => {
   )
 }
 
-export default withCssHandles(CSS_HANDLES)(ComparisonDrawer)
+export default ComparisonDrawer

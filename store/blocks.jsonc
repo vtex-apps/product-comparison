@@ -93,12 +93,22 @@
   "product-summary.shelf.product-comparison#comparison-page": {
     "children": [
       "product-comparison-block.close-button",
-      "product-summary-image",
+      "product-summary-image#comparison-page",
       "product-summary-name",
       "product-summary-space",
       "product-summary-price#comparison",
       "product-summary-buy-button"
-    ]
+    ],
+    "props": {
+      "blockClass": "comparison-page-summary"
+    }
+  },
+  
+  "product-summary-image#comparison-page": {
+    "props": {
+      "width": 200,
+      "heightProp": 200
+    }
   },
   "product-comparison-block.product-specifications": {
     "blocks": ["list-context.comparison-row#comparison-page-row"]
