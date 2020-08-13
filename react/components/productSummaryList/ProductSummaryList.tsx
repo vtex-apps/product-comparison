@@ -32,8 +32,7 @@ const List = ({ children, products, comparisonProducts }: Props) => {
 
         const normalizedProduct = mapCatalogProductToProductSummary(
           selectedProduct,
-          comparisonProduct.skuId,
-          50
+          comparisonProduct.skuId
         )
 
         return (
@@ -71,29 +70,29 @@ const ProductSummaryList = ({ children }: Props) => {
   )
   const products = pathOr([] as ProductToCompare[], ['products'], productData)
 
-  return (
-    <ProductListProvider>
-      <List products={products} comparisonProducts={comparisonProducts}>
-        {children}
-      </List>
-      <ProductSummeryListEventCaller />
-    </ProductListProvider>
-  )
-
-  // return products &&
-  //   comparisonProducts &&
-  //   comparisonProducts.length > 0 &&
-  //   products.length > 0 &&
-  //   products.length === comparisonProducts.length ? (
+  // return (
   //   <ProductListProvider>
   //     <List products={products} comparisonProducts={comparisonProducts}>
   //       {children}
   //     </List>
   //     <ProductSummeryListEventCaller />
   //   </ProductListProvider>
-  // ) : (
-  //   <div />
   // )
+
+  return products &&
+    comparisonProducts &&
+    comparisonProducts.length > 0 &&
+    products.length > 0 &&
+    products.length === comparisonProducts.length ? (
+    <ProductListProvider>
+      <List products={products} comparisonProducts={comparisonProducts}>
+        {children}
+      </List>
+      <ProductSummeryListEventCaller />
+    </ProductListProvider>
+  ) : (
+    <div />
+  )
 }
 
 export default ProductSummaryList

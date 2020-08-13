@@ -1,9 +1,10 @@
 {
+  // START: Product comparison drawer
   "product-comparison-drawer": {
     "blocks": ["list-context.comparison-product-summary-slider#drawer"]
   },
   "list-context.comparison-product-summary-slider#drawer": {
-    "blocks": ["product-summary.shelf#drawer"],
+    "blocks": ["product-summary.shelf.product-comparison#drawer"],
     "children": ["slider-layout#comparison"]
   },
   "slider-layout#comparison": {
@@ -19,10 +20,11 @@
       "blockClass": "shelf"
     }
   },
-  "product-summary.shelf#drawer": {
+  "product-summary.shelf.product-comparison#drawer": {
     "children": [
       "product-summary-column#drawer-col1",
-      "product-summary-column#drawer-col2"
+      "product-summary-column#drawer-col2",
+      "product-comparison-block.close-button"
     ],
     "props": {
       "blockClass": "drawer-summary"
@@ -44,13 +46,13 @@
   "product-summary-column#drawer-col2": {
     "children": [
       "product-summary-name",
-      "product-summary-price#drawer-summary"
+      "product-summary-price#comparison"
     ],
     "props": {
       "blockClass": "drawer-summary-col2"
     }
   },
-  "product-summary-price#drawer-summary": {
+  "product-summary-price#comparison": {
     "props": {
       "showListPrice": false,
       "showSellingPriceRange": false,
@@ -59,9 +61,21 @@
       "showDiscountValue": false
     }
   },
+  // START: Product comparison drawer
+
+  // START: Product comparison page
   "comparison-page": {
     "children": ["slider-layout-group#comparison-page"]
   },
+
+  // "flex-layout.col#comparison-page": {
+  //   "children": ["slider-layout-group#comparison-page"],
+  //   "props": {
+  //     "blockClass": "comparison-page",
+  //     "fullWidth": true
+  //   }
+  // },
+
   "slider-layout-group#comparison-page": {
     "children": [
       "product-comparison-block.product-summary-row",
@@ -73,16 +87,17 @@
     "blocks": ["list-context.comparison-product-summary-slider#comparison-page"]
   },
   "list-context.comparison-product-summary-slider#comparison-page": {
-    "blocks": ["product-summary.shelf#comparison-page"],
+    "blocks": ["product-summary.shelf.product-comparison#comparison-page"],
     "children": ["slider-layout#comparison"]
   },
-  "product-summary.shelf#comparison-page": {
+  "product-summary.shelf.product-comparison#comparison-page": {
     "children": [
+      "product-comparison-block.close-button",
       "product-summary-image",
       "product-summary-name",
-      "product-summary-attachment-list",
       "product-summary-space",
-      "product-summary-column#1"
+      "product-summary-price#comparison",
+      "product-summary-buy-button"
     ]
   },
   "product-comparison-block.product-specifications": {
@@ -108,4 +123,6 @@
       "showNavigationArrows": "never"
     }
   }
+
+  // END: Product comparison page
 }

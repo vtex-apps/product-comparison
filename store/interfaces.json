@@ -41,8 +41,16 @@
     "component": "SkuSpecifications"
   },
 
+  "product-comparison-block.close-button": {
+    "component": "RemoveButton"
+  },
+
   "list-context.comparison-row": {
     "composition": "children",
     "component": "ComparisonGridRowContent"
+  },
+
+  "product-summary.shelf.product-comparison": {
+    "allowed": ["product-comparison-block"]
   }
 }

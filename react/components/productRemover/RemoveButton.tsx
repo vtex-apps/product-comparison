@@ -1,91 +1,51 @@
-// import React, { useMemo } from 'react'
-// import { pathOr, find, propEq } from 'ramda'
-// import ComparisonContext from '../../ProductComparisonContext'
-// import { useQuery } from 'react-apollo'
-// import styles from './drawer.css'
-// import productsQuery from '../../queries/productThumbnails.graphql'
+import React from 'react'
+import { pathOr } from 'ramda'
+import { withCssHandles } from 'vtex.css-handles'
+import ComparisonContext from '../../ProductComparisonContext'
+import './removeButton.css'
+import { useProductSummary } from 'vtex.product-summary-context/ProductSummaryContext'
 
-// interface Props {
-//   productToCompare: ProductToCompare
-// }
+const CSS_HANDLES = ['closeButton', 'closeButtonContainer']
 
-// const ProductThumbnail = ({ productToCompare }: Props) => {
-//   const { useProductComparisonDispatch } = ComparisonContext
+interface Props {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  cssHandles?: any
+}
 
-//   const dispatchComparison = useProductComparisonDispatch()
+const RemoveButton = ({ cssHandles }: Props) => {
+  const { useProductComparisonDispatch } = ComparisonContext
 
-//   const { loading, data: productsResponse, error } = useQuery(productsQuery, {
-//     skip: !(productToCompare && productToCompare.productId),
-//     variables: {
-//       identifier: {
-//         field: 'id',
-//         value: productToCompare.productId,
-//       },
-//     },
-//   })
+  const dispatchComparison = useProductComparisonDispatch()
 
-//   const productThumbnail: ComparisonThumbnail = useMemo(() => {
-//     const selectedProduct = pathOr({}, ['product'], productsResponse)
-//     const selectedSku = find(propEq('itemId', productToCompare.skuId))(
-//       pathOr([], ['items'], selectedProduct)
-//     )
-//     return {
-//       productId: pathOr('', ['productId'], selectedProduct),
-//       skuId: pathOr('', ['itemId'], selectedSku),
-//       imageUrl: pathOr('', ['images', 0, 'imageUrl'], selectedSku),
-//       productName: pathOr('', ['productName'], selectedProduct),
-//       skuName: pathOr('', ['name'], selectedSku),
-//     }
-//   }, [productToCompare, productsResponse])
+  const valuesFromContext = useProductSummary()
+  const productId = pathOr('', ['product', 'productId'], valuesFromContext)
+  const itemId = pathOr('', ['selectedItem', 'itemId'], valuesFromContext)
 
-//   const removeProductFromCompare = () => {
-//     dispatchComparison({
-//       args: {
-//         product: {
-//           productId: productThumbnail.productId,
-//           skuId: productThumbnail.skuId,
-//         },
-//       },
-//       type: 'REMOVE',
-//     })
-//   }
+  const removeProductFromCompare = (e: any) => {
+    e.preventDefault()
+    e.stopPropagation()
 
-//   return loading ? (
-//     <div key={`${productThumbnail.productId}-${productThumbnail.skuId}`}>
-//       Loading...
-//     </div>
-//   ) : error ? (
-//     <div key={`${productThumbnail.productId}-${productThumbnail.skuId}`}>
-//       {error}
-//     </div>
-//   ) : (
-//     <div
-//       className={`${styles.productThumbnail} pa3 w-100 flex br b--light-gray`}
-//       key={`${productThumbnail.productId}-${productThumbnail.skuId}`}
-//     >
-//       <div
-//         className={`${styles.thumbnailContentContainer} w-100 flex items-center-l`}
-//       >
-//         <img
-//           className={`${styles.drawerImage}`}
-//           alt={productThumbnail.productName}
-//           src={productThumbnail.imageUrl}
-//         />
-//         <div className="flex flex-column pl3 mw4 w-100">
-//           <span className="f6 i small b dark-gray">Item #</span>
-//           <span className="f6 small b truncate">
-//             {productThumbnail.skuName}
-//           </span>
-//         </div>
-//       </div>
-//       <button
-//         className={`${styles.closeButton}`}
-//         onClick={removeProductFromCompare}
-//       >
-//         X
-//       </button>
-//     </div>
-//   )
-// }
+    dispatchComparison({
+      args: {
+        product: {
+          productId: productId,
+          skuId: itemId,
+        },
+      },
+      type: 'REMOVE',
+    })
+  }
 
-// export default ProductThumbnail
+  return (
+    <div className={`${cssHandles.closeButtonContainer} flex justify-end`}>
+      <button
+        className={`${cssHandles.closeButton} bg-transparent button-reset t-small pointer b--none-ns outline-0`}
+        onClick={removeProductFromCompare}
+      >
+        x
+      </button>
+    </div>
+  )
+}
+
+export default withCssHandles(CSS_HANDLES)(RemoveButton)

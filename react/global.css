@@ -1,0 +1,11 @@
+.pageContainer {
+}
+
+.styleguide__layout {
+  background-color: unset;
+}
+
+.styleguide__box {
+  padding: unset;
+  border: unset;
+}
