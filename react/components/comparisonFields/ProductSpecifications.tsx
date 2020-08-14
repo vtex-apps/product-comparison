@@ -2,6 +2,7 @@ import React, { useMemo } from 'react'
 import { pathOr, findLast, propEq } from 'ramda'
 import ComparisonFieldRow from '../comparisonPageRow/ComparisonFieldRow'
 import ComparisonProductContext from '../../ComparisonProductContext'
+// import ComparisonContext from '../../ProductComparisonContext'
 import { getProductSpecificationFields } from '../utils/fieldUtils'
 
 interface Props {
@@ -10,24 +11,29 @@ interface Props {
 
 const ProductSpecifications = ({ productSpecificationsToHide }: Props) => {
   const { useComparisonProductState } = ComparisonProductContext
+  // const { useProductComparisonState } = ComparisonContext
 
+  // const comparisonData = useProductComparisonState()
   const productData = useComparisonProductState()
   const products = pathOr([] as ProductToCompare[], ['products'], productData)
 
-  const productSpecificationFields: ComparisonField[] = useMemo(() => {
-    const allProductSpecificationsList: string[][] = products.map(product => {
-      const groups = pathOr([], ['specificationGroups'], product)
-      const allSpecifications = findLast(propEq('name', 'allSpecifications'))(
-        groups
-      )
-      return pathOr([], ['specifications'], allSpecifications).map(
-        specification => pathOr('', ['name'], specification)
-      )
-    })
+  const allProductSpecificationsList: ComparisonField[] = useMemo(() => {
+    const allProductSpecificationsList: ProductSpecification[][] = products.map(
+      product => {
+        const groups = pathOr([], ['specificationGroups'], product)
+        const allSpecifications = findLast(propEq('name', 'allSpecifications'))(
+          groups
+        )
+        return pathOr([], ['specifications'], allSpecifications)
+      }
+    )
 
     let specificationsList: string[] = allProductSpecificationsList.reduce(
-      (accumulator: string[], currentValue: string[]) => {
-        return [...new Set([...accumulator, ...currentValue])]
+      (accumulator: string[], currentValue: ProductSpecification[]) => {
+        const current = currentValue.map(specification =>
+          pathOr('', ['name'], specification)
+        )
+        return [...new Set([...accumulator, ...current])]
       },
       [] as string[]
     )
@@ -49,7 +55,22 @@ const ProductSpecifications = ({ productSpecificationsToHide }: Props) => {
     return productSpecificationFields
   }, [productSpecificationsToHide, products])
 
-  return productSpecificationFields.map((field: ComparisonField) => {
+  // const isCommon: boolean = (specificationName: string, productSpecifications: Specification[]) => {
+
+  //   allProductSpecifications.
+
+  //   return false
+  // }
+
+  // const specificationFieldsToDisplay = useMemo(() => {
+  //   let specifications = ProductSpecifications
+  //   if (comparisonData.showDifferences) {
+
+  //   }
+  //   return specifications
+  // }, [ProductSpecifications, products, comparisonData])
+
+  return allProductSpecificationsList.map((field: ComparisonField) => {
     return <ComparisonFieldRow key={`field-${field.name}`} field={field} />
   })
 }

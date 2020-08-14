@@ -46,3 +46,8 @@ interface ComparisonField {
   displayValue: string
   showOnSite: boolean
 }
+
+interface ProductSpecification {
+  name: string
+  values: string[]
+}
