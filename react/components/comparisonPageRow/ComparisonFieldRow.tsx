@@ -14,7 +14,7 @@ const ComparisonFieldRow: StorefrontFunctionComponent<Props> = ({
 }: Props) => {
   const cssHandles = useCssHandles(CSS_HANDLES)
 
-  return field && field.name && field.fieldType ? (
+  return field && field.name && field.fieldType && field.showOnSite ? (
     <div
       className={`${cssHandles.rowContainer} flex flex-row`}
       key={`field-${field.name}`}

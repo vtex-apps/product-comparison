@@ -32,7 +32,11 @@ const ProductSummaryRow = () => {
   )
 
   useEffect(() => {
-    setShowDifferences(comparisonData.showDifferences)
+    const showDifferences =
+      comparisonData.products &&
+      comparisonData.products.length > 1 &&
+      comparisonData.showDifferences
+    setShowDifferences(showDifferences)
   }, [comparisonData])
 
   const onSelectorChanged = (e: { target: { checked: boolean } }) => {
@@ -51,16 +55,20 @@ const ProductSummaryRow = () => {
       className={`${cssHandles.productSummaryRowContainer} flex flex-row mt6 pa3`}
     >
       <div className={`${cssHandles.fieldNameCol} w-20 flex items-end ma1 pa3`}>
-        <div className={`${cssHandles.showDifferencesContainer} mb3`}>
-          <Checkbox
-            checked={showDifferences}
-            id={`id-differences`}
-            label="Show only differences"
-            name={`name-differences`}
-            onChange={onSelectorChanged}
-            value={showDifferences}
-          />
-        </div>
+        {comparisonProducts.length > 1 ? (
+          <div className={`${cssHandles.showDifferencesContainer} mb3`}>
+            <Checkbox
+              checked={showDifferences}
+              id={`id-differences`}
+              label="Show only differences"
+              name={`name-differences`}
+              onChange={onSelectorChanged}
+              value={showDifferences}
+            />
+          </div>
+        ) : (
+          <div />
+        )}
       </div>
       <ExtensionPoint id="list-context.comparison-product-summary-slider" />
     </div>

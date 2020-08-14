@@ -1,8 +1,8 @@
 import React, { useMemo } from 'react'
-import { pathOr, findLast, propEq } from 'ramda'
+import { pathOr, findLast, propEq, sort, uniq } from 'ramda'
 import ComparisonFieldRow from '../comparisonPageRow/ComparisonFieldRow'
 import ComparisonProductContext from '../../ComparisonProductContext'
-// import ComparisonContext from '../../ProductComparisonContext'
+import ComparisonContext from '../../ProductComparisonContext'
 import { getProductSpecificationFields } from '../utils/fieldUtils'
 
 interface Props {
@@ -11,9 +11,9 @@ interface Props {
 
 const ProductSpecifications = ({ productSpecificationsToHide }: Props) => {
   const { useComparisonProductState } = ComparisonProductContext
-  // const { useProductComparisonState } = ComparisonContext
+  const { useProductComparisonState } = ComparisonContext
 
-  // const comparisonData = useProductComparisonState()
+  const comparisonData = useProductComparisonState()
   const productData = useComparisonProductState()
   const products = pathOr([] as ProductToCompare[], ['products'], productData)
 
@@ -52,23 +52,33 @@ const ProductSpecifications = ({ productSpecificationsToHide }: Props) => {
       })
     )
 
+    if (comparisonData.showDifferences) {
+      return productSpecificationFields.map(field => {
+        const specifications = allProductSpecificationsList.map(
+          specifications => {
+            return findLast(propEq('name', field.name))(specifications)
+          }
+        )
+        const specificationValues = specifications.map(
+          (specification: ProductSpecification) => {
+            const specs = pathOr([], ['values'], specification)
+            return sort(
+              (a: string, b: string) => a.localeCompare(b),
+              specs
+            ).join(',')
+          }
+        )
+        const uniqueSpecifications = uniq(specificationValues)
+
+        return {
+          ...field,
+          ...{ showOnSite: uniqueSpecifications.length !== 1 },
+        }
+      })
+    }
+
     return productSpecificationFields
-  }, [productSpecificationsToHide, products])
-
-  // const isCommon: boolean = (specificationName: string, productSpecifications: Specification[]) => {
-
-  //   allProductSpecifications.
-
-  //   return false
-  // }
-
-  // const specificationFieldsToDisplay = useMemo(() => {
-  //   let specifications = ProductSpecifications
-  //   if (comparisonData.showDifferences) {
-
-  //   }
-  //   return specifications
-  // }, [ProductSpecifications, products, comparisonData])
+  }, [productSpecificationsToHide, products, comparisonData])
 
   return allProductSpecificationsList.map((field: ComparisonField) => {
     return <ComparisonFieldRow key={`field-${field.name}`} field={field} />

@@ -1,7 +1,8 @@
 import React, { useMemo } from 'react'
-import { pathOr } from 'ramda'
+import { pathOr, find, findLast, propEq, sort, uniq } from 'ramda'
 import ComparisonFieldRow from '../comparisonPageRow/ComparisonFieldRow'
 import ComparisonProductContext from '../../ComparisonProductContext'
+import ComparisonContext from '../../ProductComparisonContext'
 import { getSkuSpecificationFields } from '../utils/fieldUtils'
 
 interface Props {
@@ -10,7 +11,9 @@ interface Props {
 
 const SkuSpecifications = ({ skuSpecificationsToHide }: Props) => {
   const { useComparisonProductState } = ComparisonProductContext
+  const { useProductComparisonState } = ComparisonContext
 
+  const comparisonData = useProductComparisonState()
   const productData = useComparisonProductState()
   const products = pathOr([] as ProductToCompare[], ['products'], productData)
 
@@ -53,8 +56,46 @@ const SkuSpecifications = ({ skuSpecificationsToHide }: Props) => {
       })
     )
 
+    if (comparisonData.products && comparisonData.showDifferences) {
+      const allVariations: Variation[][] = comparisonData.products.map(
+        comparisonItem => {
+          const selectedProduct = find(
+            propEq('productId', comparisonItem.productId)
+          )(products)
+          const selectedSku = find(propEq('itemId', comparisonItem.skuId))(
+            pathOr([], ['items'], selectedProduct)
+          )
+
+          return pathOr([], ['variations'], selectedSku)
+        }
+      )
+
+      const a = skuSpecificationFieldsList.map(field => {
+        const specifications = allVariations.map(variations => {
+          return findLast(propEq('name', field.name))(variations)
+        })
+        const specificationValues = specifications.map(
+          (specification: ProductSpecification) => {
+            const specs = pathOr([], ['values'], specification)
+            return sort(
+              (a: string, b: string) => a.localeCompare(b),
+              specs
+            ).join(',')
+          }
+        )
+        const uniqueSpecifications = uniq(specificationValues)
+
+        return {
+          ...field,
+          ...{ showOnSite: uniqueSpecifications.length !== 1 },
+        }
+      })
+
+      return a
+    }
+
     return skuSpecificationFieldsList
-  }, [products, skuSpecificationsToHide])
+  }, [comparisonData, products, skuSpecificationsToHide])
 
   return skuSpecificationFields.map((field: ComparisonField) => {
     return <ComparisonFieldRow key={`field-${field.name}`} field={field} />

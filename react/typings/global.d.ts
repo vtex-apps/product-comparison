@@ -51,3 +51,8 @@ interface ProductSpecification {
   name: string
   values: string[]
 }
+
+interface Variation {
+  name: string
+  values: string[]
+}
