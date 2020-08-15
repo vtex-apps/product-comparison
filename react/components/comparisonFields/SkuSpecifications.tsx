@@ -4,12 +4,18 @@ import ComparisonFieldRow from '../comparisonPageRow/ComparisonFieldRow'
 import ComparisonProductContext from '../../ComparisonProductContext'
 import ComparisonContext from '../../ProductComparisonContext'
 import { getSkuSpecificationFields } from '../utils/fieldUtils'
+import { useCssHandles } from 'vtex.css-handles'
+import './fieldGroup.css'
+
+const CSS_HANDLES = ['title']
 
 interface Props {
+  titleText: string
   skuSpecificationsToHide?: string
 }
 
-const SkuSpecifications = ({ skuSpecificationsToHide }: Props) => {
+const SkuSpecifications = ({ skuSpecificationsToHide, titleText }: Props) => {
+  const cssHandles = useCssHandles(CSS_HANDLES)
   const { useComparisonProductState } = ComparisonProductContext
   const { useProductComparisonState } = ComparisonContext
 
@@ -70,7 +76,7 @@ const SkuSpecifications = ({ skuSpecificationsToHide }: Props) => {
         }
       )
 
-      const a = skuSpecificationFieldsList.map(field => {
+      return skuSpecificationFieldsList.map(field => {
         const specifications = allVariations.map(variations => {
           return findLast(propEq('name', field.name))(variations)
         })
@@ -90,16 +96,23 @@ const SkuSpecifications = ({ skuSpecificationsToHide }: Props) => {
           ...{ showOnSite: uniqueSpecifications.length !== 1 },
         }
       })
-
-      return a
     }
 
     return skuSpecificationFieldsList
   }, [comparisonData, products, skuSpecificationsToHide])
 
-  return skuSpecificationFields.map((field: ComparisonField) => {
-    return <ComparisonFieldRow key={`field-${field.name}`} field={field} />
-  })
+  return (
+    <div>
+      <div className={`${cssHandles.title} pa5 b`}>
+        <span>{titleText}</span>
+      </div>
+      <div>
+        {skuSpecificationFields.map((field: ComparisonField) => (
+          <ComparisonFieldRow key={`field-${field.name}`} field={field} />
+        ))}
+      </div>
+    </div>
+  )
 }
 
 SkuSpecifications.schema = {
@@ -107,6 +120,10 @@ SkuSpecifications.schema = {
   description: 'admin/editor.comparison-grid.description',
   type: 'object',
   properties: {
+    titleText: {
+      title: 'admin/editor.comparison-grid.titleText.title',
+      type: 'string',
+    },
     skuSpecificationsToHide: {
       title:
         'admin/editor.comparison-grid.sku-specifications-to-be-removed.title',

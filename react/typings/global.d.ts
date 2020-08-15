@@ -1,4 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+interface ToastInput {
+  message: string
+  action?: {
+    label: string
+    onClick: () => void
+  }
+}
+
 interface ProductToCompare {
   productId: string
   skuId: string

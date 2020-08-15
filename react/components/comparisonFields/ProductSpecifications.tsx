@@ -4,12 +4,21 @@ import ComparisonFieldRow from '../comparisonPageRow/ComparisonFieldRow'
 import ComparisonProductContext from '../../ComparisonProductContext'
 import ComparisonContext from '../../ProductComparisonContext'
 import { getProductSpecificationFields } from '../utils/fieldUtils'
+import { useCssHandles } from 'vtex.css-handles'
+import './fieldGroup.css'
+
+const CSS_HANDLES = ['title']
 
 interface Props {
+  titleText: string
   productSpecificationsToHide?: string
 }
 
-const ProductSpecifications = ({ productSpecificationsToHide }: Props) => {
+const ProductSpecifications = ({
+  productSpecificationsToHide,
+  titleText,
+}: Props) => {
+  const cssHandles = useCssHandles(CSS_HANDLES)
   const { useComparisonProductState } = ComparisonProductContext
   const { useProductComparisonState } = ComparisonContext
 
@@ -80,9 +89,18 @@ const ProductSpecifications = ({ productSpecificationsToHide }: Props) => {
     return productSpecificationFields
   }, [productSpecificationsToHide, products, comparisonData])
 
-  return allProductSpecificationsList.map((field: ComparisonField) => {
-    return <ComparisonFieldRow key={`field-${field.name}`} field={field} />
-  })
+  return (
+    <div>
+      <div className={`${cssHandles.title} pa5 b`}>
+        <span>{titleText}</span>
+      </div>
+      <div>
+        {allProductSpecificationsList.map((field: ComparisonField) => (
+          <ComparisonFieldRow key={`field-${field.name}`} field={field} />
+        ))}
+      </div>
+    </div>
+  )
 }
 
 ProductSpecifications.schema = {
@@ -90,6 +108,10 @@ ProductSpecifications.schema = {
   description: 'admin/editor.comparison-grid.description',
   type: 'object',
   properties: {
+    titleText: {
+      title: 'admin/editor.comparison-grid.titleText.title',
+      type: 'string',
+    },
     productSpecificationsToHide: {
       title:
         'admin/editor.comparison-grid.product-specifications-to-be-removed.title',

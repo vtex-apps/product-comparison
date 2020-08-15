@@ -9,6 +9,10 @@ declare module 'vtex.styleguide' {
   export const Layout: ComponentType<InputProps>
   export const PageHeader: ComponentType<InputProps>
   export const PageBlock: ComponentType<InputProps>
+  export const ToastProvider: ComponentType<InputProps>
+  export const ToastConsumer: ComponentType<InputProps>
+  export const withToast
+
   interface InputProps {
     [key: string]: any
   }

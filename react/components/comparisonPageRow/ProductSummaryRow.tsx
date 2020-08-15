@@ -52,7 +52,7 @@ const ProductSummaryRow = () => {
     <div />
   ) : (
     <div
-      className={`${cssHandles.productSummaryRowContainer} flex flex-row mt6 pa3`}
+      className={`mw9 ${cssHandles.productSummaryRowContainer} flex flex-row mt6 pa3`}
     >
       <div className={`${cssHandles.fieldNameCol} w-20 flex items-end ma1 pa3`}>
         {comparisonProducts.length > 1 ? (

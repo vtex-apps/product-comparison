@@ -5,19 +5,19 @@
   },
   "list-context.comparison-product-summary-slider#drawer": {
     "blocks": ["product-summary.shelf.product-comparison#drawer"],
-    "children": ["slider-layout#comparison"]
+    "children": ["slider-layout#comparison-drawer"]
   },
-  "slider-layout#comparison": {
+  "slider-layout#comparison-drawer": {
     "props": {
+      "blockClass": "comparison-drawer",
       "itemsPerPage": {
-        "desktop": 3,
+        "desktop": 4,
         "tablet": 3,
         "phone": 1
       },
       "showPaginationDots": "never",
       "infinite": true,
-      "fullWidth": false,
-      "blockClass": "shelf"
+      "fullWidth": true
     }
   },
   "product-summary.shelf.product-comparison#drawer": {
@@ -44,10 +44,7 @@
     }
   },
   "product-summary-column#drawer-col2": {
-    "children": [
-      "product-summary-name",
-      "product-summary-price#comparison"
-    ],
+    "children": ["product-summary-name", "product-summary-price#comparison"],
     "props": {
       "blockClass": "drawer-summary-col2"
     }
@@ -88,7 +85,7 @@
   },
   "list-context.comparison-product-summary-slider#comparison-page": {
     "blocks": ["product-summary.shelf.product-comparison#comparison-page"],
-    "children": ["slider-layout#comparison"]
+    "children": ["slider-layout#comparison-page-product-summary"]
   },
   "product-summary.shelf.product-comparison#comparison-page": {
     "children": [
@@ -103,7 +100,7 @@
       "blockClass": "comparison-page-summary"
     }
   },
-  
+
   "product-summary-image#comparison-page": {
     "props": {
       "width": 200,
@@ -111,25 +108,44 @@
     }
   },
   "product-comparison-block.product-specifications": {
-    "blocks": ["list-context.comparison-row#comparison-page-row"]
+    "blocks": ["list-context.comparison-row#comparison-page-row"],
+    "props": {
+      "titleText": "Product Specifications"
+    }
   },
   "product-comparison-block.sku-specifications": {
-    "blocks": ["list-context.comparison-row#comparison-page-row"]
+    "blocks": ["list-context.comparison-row#comparison-page-row"],
+    "props": {
+      "titleText": "Sku Specifications"
+    }
   },
   "list-context.comparison-row#comparison-page-row": {
     "children": ["slider-layout#comparison-no-arrows"]
   },
-  "slider-layout#comparison-no-arrows": {
+  "slider-layout#comparison-page-product-summary": {
     "props": {
+      "blockClass": "comparison-page",
       "itemsPerPage": {
-        "desktop": 3,
+        "desktop": 4,
         "tablet": 3,
         "phone": 1
       },
       "showPaginationDots": "never",
       "infinite": true,
-      "fullWidth": false,
-      "blockClass": "shelf",
+      "fullWidth": true
+    }
+  },
+  "slider-layout#comparison-no-arrows": {
+    "props": {
+      "itemsPerPage": {
+        "desktop": 4,
+        "tablet": 3,
+        "phone": 1
+      },
+      "showPaginationDots": "never",
+      "infinite": true,
+      "fullWidth": true,
+      "blockClass": "comparison-page",
       "showNavigationArrows": "never"
     }
   }

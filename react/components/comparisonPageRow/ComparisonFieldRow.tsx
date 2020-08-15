@@ -20,14 +20,12 @@ const ComparisonFieldRow: StorefrontFunctionComponent<Props> = ({
       key={`field-${field.name}`}
     >
       <div
-        className={`${cssHandles.fieldNameCol} w-20 flex items-center ma1 pa3`}
+        className={`${cssHandles.fieldNameCol} w-100 flex items-center ma1 pa3`}
       >
         <span>{field.displayValue}</span>
       </div>
       <ExtensionPoint id="list-context.comparison-row" field={field} />
     </div>
-  ) : (
-    <div />
-  )
+  ) : null
 }
 export default ComparisonFieldRow

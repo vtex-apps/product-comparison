@@ -60,12 +60,12 @@ const ComparisonFieldValue = ({ field, productToCompare }: Props) => {
     )
     return (
       <div
-        className={`${cssHandles.productSpecificationValues} flex flex-column`}
+        className={`${cssHandles.productSpecificationValues} flex justify-center flex-column`}
       >
         {values.map(value => {
           return (
             <span
-              className={cssHandles.productSpecificationValue}
+              className={`${cssHandles.productSpecificationValue} self-center-ns`}
               key={`${field.fieldType}-${field.name}-${value}`}
             >
               {value}
@@ -84,11 +84,13 @@ const ComparisonFieldValue = ({ field, productToCompare }: Props) => {
       find(propEq('name', field.name))(skuSpecifications)
     )
     return (
-      <div className={`${cssHandles.skuSpecificationValues} flex flex-column`}>
+      <div
+        className={`${cssHandles.skuSpecificationValues} flex justify-center flex-column`}
+      >
         {values.map(value => {
           return (
             <span
-              className={cssHandles.skuSpecificationValue}
+              className={`${cssHandles.skuSpecificationValue} self-center-ns`}
               key={`${field.fieldType}-${field.name}-${value}`}
             >
               {value}

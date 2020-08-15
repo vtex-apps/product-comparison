@@ -1,6 +1,7 @@
 import React, { ReactChildren, ReactChild } from 'react'
 import ComparisonContext from './ProductComparisonContext'
 import ComparisonProductWrapper from './ComparisonProductWrapper'
+import { ToastProvider } from 'vtex.styleguide'
 
 interface Props {
   children: ReactChildren | ReactChild
@@ -10,7 +11,9 @@ const ProductComparisonWrapper = ({ children }: Props) => {
 
   return (
     <ProductComparisonProvider>
-      <ComparisonProductWrapper>{children}</ComparisonProductWrapper>
+      <ComparisonProductWrapper>
+        <ToastProvider positioning="window">{children}</ToastProvider>
+      </ComparisonProductWrapper>
     </ProductComparisonProvider>
   )
 }

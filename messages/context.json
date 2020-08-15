@@ -23,5 +23,19 @@
   "admin/editor.comparison-grid-row.field.display-value.description": "Display name of the field in comparison page",
   "admin/editor.comparison-grid-row.styles.title": "Cell styles",
   "admin/editor.comparison-grid-row.styles.width.title": "Width",
-  "admin/editor.comparison-grid-row.styles.width.description": "Width of the cell as a percentage"
+  "admin/editor.comparison-grid-row.styles.width.description": "Width of the cell as a percentage",
+  "admin/editor.comparison-grid.titleText.title": "Title",
+  "store/product-comparison.product-selector.product": "Product:",
+  "store/product-comparison.product-selector.product-added": "added to compare",
+  "store/product-comparison.product-selector.product-removed": "removed from compare",
+  "store/product-comparison.product-selector.compare": "Compare",
+  "store/product-comparison.drawer.products": "Products",
+  "store/product-comparison.drawer.compare": "Compare",
+  "store/product-comparison.drawer.remove-all-message": "All products removed from comparison",
+  "store/product-comparison.drawer.remove-all": "Remove All",
+  "store/product-comparison.drawer.hide": "hide",
+  "store/product-comparison.drawer.show": "show",
+  "store/product-comparison.drawer.min-items-message": "You need to add at least two products to compare",
+  "store/product-comparison.drawer.max-items-message-1": "You can compare up to",
+  "store/product-comparison.drawer.max-items-message-2": "products at a time"
 }
