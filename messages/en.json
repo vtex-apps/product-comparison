@@ -37,5 +37,8 @@
   "store/product-comparison.drawer.show": "show",
   "store/product-comparison.drawer.min-items-message": "You need to add at least two products to compare",
   "store/product-comparison.drawer.max-items-message-1": "You can compare up to",
-  "store/product-comparison.drawer.max-items-message-2": "products at a time"
+  "store/product-comparison.drawer.max-items-message-2": "products at a time",
+  "store/product-comparison.main-page.back-to-products": "Back to products list",
+  "store/product-comparison.main-page.sort-by": "Sort by",
+  "store/product-comparison.main-page.order-added": "Order added"
 }

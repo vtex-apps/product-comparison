@@ -63,7 +63,9 @@ const RemoveButton = ({ showToast, intl }: Props) => {
   }
 
   return (
-    <div className={`${cssHandles.closeButtonContainer} flex justify-end`}>
+    <div
+      className={`${cssHandles.closeButtonContainer} flex justify-end items-start flex-grow-1`}
+    >
       <button
         className={`${cssHandles.closeButton} bg-transparent button-reset t-small pointer b--none-ns outline-0`}
         onClick={removeProductFromCompare}

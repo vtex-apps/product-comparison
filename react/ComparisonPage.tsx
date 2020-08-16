@@ -1,17 +1,49 @@
 import React, { ReactChildren, ReactChild } from 'react'
 import { pathOr, isEmpty } from 'ramda'
 import { useCssHandles } from 'vtex.css-handles'
-import { Layout, PageHeader, PageBlock, Button } from 'vtex.styleguide'
+import {
+  Layout,
+  PageHeader,
+  PageBlock,
+  Button,
+  withToast,
+  Dropdown,
+} from 'vtex.styleguide'
 import ComparisonContext from './ProductComparisonContext'
+import { InjectedIntlProps, injectIntl, defineMessages } from 'react-intl'
 import './global.css'
 
-const CSS_HANDLES = ['pageContainer']
+const CSS_HANDLES = ['pageContainer', 'sortBy']
 
-interface Props {
+interface Props extends InjectedIntlProps {
   children: ReactChildren | ReactChild
+  showToast?: (input: ToastInput) => void
 }
 
-const ComparisonPage = ({ children }: Props) => {
+const messages = defineMessages({
+  removeAll: {
+    defaultMessage: '',
+    id: 'store/product-comparison.drawer.remove-all',
+  },
+  removeAllMessage: {
+    defaultMessage: '',
+    id: 'store/product-comparison.drawer.remove-all-message',
+  },
+  backToProducts: {
+    defaultMessage: '',
+    id: 'store/product-comparison.main-page.back-to-products',
+  },
+  sortBy: {
+    defaultMessage: '',
+    id: 'store/product-comparison.main-page.sort-by',
+  },
+  orderAdded: {
+    defaultMessage: '',
+    id: 'store/product-comparison.main-page.order-added',
+  },
+})
+
+const ComparisonPage = ({ children, intl, showToast }: Props) => {
   const cssHandles = useCssHandles(CSS_HANDLES)
   const {
     useProductComparisonState,
@@ -27,10 +59,23 @@ const ComparisonPage = ({ children }: Props) => {
     comparisonData
   )
 
+  const showMessage = (message: string) => {
+    if (showToast) {
+      showToast({
+        message: message,
+      })
+    }
+  }
+
   const removeAllItems = () => {
     dispatchComparison({
       type: 'REMOVE_ALL',
     })
+    showMessage(intl.formatMessage(messages.removeAllMessage))
+  }
+
+  const onBackButtonClick = () => {
+    window.history.back()
   }
 
   return isEmpty(comparisonProducts) ? (
@@ -42,15 +87,34 @@ const ComparisonPage = ({ children }: Props) => {
         pageHeader={
           <PageHeader
             title={`Compare ${comparisonProducts.length} products`}
-            linkLabel="Back to products list"
+            linkLabel={intl.formatMessage(messages.backToProducts)}
+            onLinkClick={onBackButtonClick}
           >
-            <Button
-              variation="tertiary"
-              size="regular"
-              onClick={removeAllItems}
-            >
-              Clear All
-            </Button>
+            <div className="flex">
+              <div className={`${cssHandles.sortBy} flex items-center`}>
+                <span className="mr2">
+                  {intl.formatMessage(messages.sortBy)}
+                </span>
+                <Dropdown
+                  variation="inline"
+                  size="default"
+                  options={[
+                    { value: 'productName', label: 'Product Name' },
+                    { value: 'price', label: 'Price' },
+                  ]}
+                  value={`productName`}
+                />
+              </div>
+              <div>
+                <Button
+                  variation="tertiary"
+                  size="regular"
+                  onClick={removeAllItems}
+                >
+                  {intl.formatMessage(messages.removeAll)}
+                </Button>
+              </div>
+            </div>
           </PageHeader>
         }
       >
@@ -60,4 +124,4 @@ const ComparisonPage = ({ children }: Props) => {
   )
 }
 
-export default ComparisonPage
+export default withToast(injectIntl(ComparisonPage))

@@ -39,6 +39,21 @@
     padding-bottom: 5px;
 }
 
+.drawerContainer
+  :global(.vtex-product-summary-2-x-container--drawer-summary)
+  :global(.biscoindqa-product-comparison-0-x-closeButtonContainer),
+.drawerContainer
+  :global(.vtex-product-summary-2-x-container--drawer-summary)
+  :global(.vtex-product-comparison-0-x-closeButtonContainer){
+    background-color: unset
+}
+
+.drawerContainer
+  :global(.vtex-product-summary-2-x-container--drawer-summary){
+    max-width: 275px;
+}
+
+
 .expandCollapseButton {
 }
 

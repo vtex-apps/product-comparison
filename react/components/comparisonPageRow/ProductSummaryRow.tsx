@@ -4,6 +4,7 @@ import { ExtensionPoint } from 'vtex.render-runtime'
 import ComparisonContext from '../../ProductComparisonContext'
 import { useCssHandles } from 'vtex.css-handles'
 import { Checkbox } from 'vtex.styleguide'
+import ComparisonProductContext from '../../ComparisonProductContext'
 import './row.css'
 
 const CSS_HANDLES = [
@@ -22,6 +23,9 @@ const ProductSummaryRow = () => {
     useProductComparisonDispatch,
   } = ComparisonContext
 
+  const { useComparisonProductState } = ComparisonProductContext
+
+  const productData = useComparisonProductState()
   const comparisonData = useProductComparisonState()
   const dispatchComparison = useProductComparisonDispatch()
 
@@ -30,6 +34,7 @@ const ProductSummaryRow = () => {
     ['products'],
     comparisonData
   )
+  const products = pathOr([] as ProductToCompare[], ['products'], productData)
 
   useEffect(() => {
     const showDifferences =
@@ -55,7 +60,7 @@ const ProductSummaryRow = () => {
       className={`mw9 ${cssHandles.productSummaryRowContainer} flex flex-row mt6 pa3`}
     >
       <div className={`${cssHandles.fieldNameCol} w-20 flex items-end ma1 pa3`}>
-        {comparisonProducts.length > 1 ? (
+        {comparisonProducts.length > 1 && products ? (
           <div className={`${cssHandles.showDifferencesContainer} mb3`}>
             <Checkbox
               checked={showDifferences}

@@ -58,9 +58,10 @@ const messages = defineMessages({
 
 interface Props extends InjectedIntlProps {
   showToast?: (input: ToastInput) => void
+  comparisonPageUrl?: string
 }
 
-const ComparisonDrawer = ({ showToast, intl }: Props) => {
+const ComparisonDrawer = ({ showToast, intl, comparisonPageUrl }: Props) => {
   const cssHandles = useCssHandles(CSS_HANDLES)
   const [isCollapsed, setCollapsed] = useState(false)
   const {
@@ -142,18 +143,6 @@ const ComparisonDrawer = ({ showToast, intl }: Props) => {
                 </button>
               </div>
               <div className="flex-grow-1" />
-              <div className="flex mr2 ml2" onClick={onClickCompare}>
-                <Button
-                  block
-                  size="small"
-                  className={`${cssHandles.compareProductsButton} ma3`}
-                  href={
-                    comparisonProducts.length < 2 ? '#' : '/product-comparison'
-                  }
-                >
-                  {intl.formatMessage(messages.compare)}
-                </Button>
-              </div>
               <div className="flex mr2 ml2">
                 <Button
                   block
@@ -162,6 +151,22 @@ const ComparisonDrawer = ({ showToast, intl }: Props) => {
                   onClick={removeAllItems}
                 >
                   {intl.formatMessage(messages.removeAll)}
+                </Button>
+              </div>
+              <div className="flex mr2 ml2" onClick={onClickCompare}>
+                <Button
+                  block
+                  size="small"
+                  className={`${cssHandles.compareProductsButton} ma3`}
+                  href={
+                    comparisonProducts.length < 2
+                      ? '#'
+                      : comparisonPageUrl
+                      ? comparisonPageUrl
+                      : '/product-comparison'
+                  }
+                >
+                  {intl.formatMessage(messages.compare)}
                 </Button>
               </div>
             </div>
@@ -177,6 +182,18 @@ const ComparisonDrawer = ({ showToast, intl }: Props) => {
       </div>
     </div>
   )
+}
+
+ComparisonDrawer.schema = {
+  title: 'admin/editor.comparison-drawer.title',
+  description: 'admin/editor.comparison-drawer.description',
+  type: 'object',
+  properties: {
+    comparisonPageUrl: {
+      title: 'admin/editor.comparison-grid.drawer.title',
+      type: 'string',
+    },
+  },
 }
 
 export default withToast(injectIntl(ComparisonDrawer))

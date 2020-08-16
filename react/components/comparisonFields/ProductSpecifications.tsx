@@ -90,7 +90,7 @@ const ProductSpecifications = ({
   }, [productSpecificationsToHide, products, comparisonData])
 
   return (
-    <div>
+    <div className="mt3">
       <div className={`${cssHandles.title} pa5 b`}>
         <span>{titleText}</span>
       </div>
