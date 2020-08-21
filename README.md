@@ -4,8 +4,9 @@ VTEX Product Comparison app is responsible for collecting products (with selecte
 
 The app therefore exports few store blocks expected to configure full functionality, such as `sku selector`, `comparison drawer` and `comparison list` views.
 
-![Comparison drawer](https://user-images.githubusercontent.com/2637457/89266842-0a805180-d654-11ea-9a80-d34cc9f91c1b.PNG)
-![Comparison page](https://user-images.githubusercontent.com/2637457/89266856-0f450580-d654-11ea-998d-bcd7c46378fa.PNG)
+![Comparison drawer](https://user-images.githubusercontent.com/2637457/90900569-43a41a00-e3e7-11ea-9aa9-9a12bbec8c5e.png)
+![image](https://user-images.githubusercontent.com/2637457/90900828-a1386680-e3e7-11ea-96d1-e9ba2022aa7d.png)
+
 
 # Features and Blocks
 This application has few blocks that we can use to configure full feature.
