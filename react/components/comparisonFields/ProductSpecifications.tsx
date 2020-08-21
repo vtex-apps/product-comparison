@@ -89,7 +89,8 @@ const ProductSpecifications = ({
     return productSpecificationFields
   }, [productSpecificationsToHide, products, comparisonData])
 
-  return (
+  return allProductSpecificationsList &&
+    allProductSpecificationsList.length > 0 ? (
     <div className="mt3">
       <div className={`${cssHandles.title} pa5 b`}>
         <span>{titleText}</span>
@@ -100,6 +101,8 @@ const ProductSpecifications = ({
         ))}
       </div>
     </div>
+  ) : (
+    <div />
   )
 }
 

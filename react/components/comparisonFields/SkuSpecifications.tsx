@@ -101,7 +101,7 @@ const SkuSpecifications = ({ skuSpecificationsToHide, titleText }: Props) => {
     return skuSpecificationFieldsList
   }, [comparisonData, products, skuSpecificationsToHide])
 
-  return (
+  return skuSpecificationFields && skuSpecificationFields.length > 0 ? (
     <div className="mt3">
       <div className={`${cssHandles.title} pa5 b`}>
         <span>{titleText}</span>
@@ -112,6 +112,8 @@ const SkuSpecifications = ({ skuSpecificationsToHide, titleText }: Props) => {
         ))}
       </div>
     </div>
+  ) : (
+    <div />
   )
 }
 

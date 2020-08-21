@@ -22,25 +22,28 @@ const List = ({ children, products, comparisonProducts }: Props) => {
     const componentList =
       comparisonProducts &&
       products &&
-      comparisonProducts.map(comparisonProduct => {
-        const selectedProduct = find(
-          propEq('productId', comparisonProduct.productId)
-        )(products)
+      comparisonProducts
+        .map(comparisonProduct => {
+          const selectedProduct = find(
+            propEq('productId', comparisonProduct.productId)
+          )(products)
 
-        const normalizedProduct = mapCatalogProductToProductSummary(
-          selectedProduct,
-          comparisonProduct.skuId
-        )
-
-        return (
-          <ExtensionPoint
-            id="product-summary"
-            key={`${comparisonProduct.productId}-${comparisonProduct.skuId}`}
-            treePath={treePath}
-            product={normalizedProduct}
-          />
-        )
-      })
+          return mapCatalogProductToProductSummary(
+            selectedProduct,
+            comparisonProduct.skuId
+          )
+        })
+        .filter(product => pathOr('', ['productId'], product) !== '')
+        .map(normalizedProduct => {
+          return (
+            <ExtensionPoint
+              id="product-summary"
+              key={`${pathOr('', ['productId'], normalizedProduct)}`}
+              treePath={treePath}
+              product={normalizedProduct}
+            />
+          )
+        })
 
     return list.concat(componentList)
   }, [comparisonProducts, list, products, treePath])
@@ -67,28 +70,13 @@ const ProductSummaryList = ({ children }: Props) => {
   )
   const products = pathOr([] as ProductToCompare[], ['products'], productData)
 
-  // return (
-  //   <ProductListProvider>
-  //     <List products={products} comparisonProducts={comparisonProducts}>
-  //       {children}
-  //     </List>
-  //     <ProductSummeryListEventCaller />
-  //   </ProductListProvider>
-  // )
-
-  return products &&
-    comparisonProducts &&
-    comparisonProducts.length > 0 &&
-    products.length > 0 &&
-    products.length === comparisonProducts.length ? (
+  return (
     <ProductListProvider>
       <List products={products} comparisonProducts={comparisonProducts}>
         {children}
       </List>
       <ProductSummeryListEventCaller />
     </ProductListProvider>
-  ) : (
-    <div />
   )
 }
 

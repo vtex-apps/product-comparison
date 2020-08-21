@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Fixed
+- fix slider refresh issue
+
 ### Removed
 - remove unused files in product comparison grid
 

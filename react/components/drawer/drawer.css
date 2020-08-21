@@ -9,6 +9,7 @@
   max-height: 500px;
   bottom: 0;
   left: 0;
+  z-index: 1;
 }
 
 .drawerContainer :global(.vtex__icon-caret-up) {
@@ -35,8 +36,17 @@
 .drawerContainer
   :global(.vtex-product-summary-2-x-container--drawer-summary)
   :global(.vtex-product-summary-2-x-priceContainer) {
-    padding-top: 5px;
-    padding-bottom: 5px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.drawerContainer
+  :global(.vtex-product-summary-2-x-container--drawer-summary)
+  :global(.vtex-product-summary-2-x-nameContainer) {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  width: 175px;
+  white-space: nowrap;
 }
 
 .drawerContainer
@@ -44,15 +54,16 @@
   :global(.biscoindqa-product-comparison-0-x-closeButtonContainer),
 .drawerContainer
   :global(.vtex-product-summary-2-x-container--drawer-summary)
-  :global(.vtex-product-comparison-0-x-closeButtonContainer){
-    background-color: unset
-}
-
+  :global(.sbdind-sbd-components-0-x-closeButtonContainer),
 .drawerContainer
-  :global(.vtex-product-summary-2-x-container--drawer-summary){
-    max-width: 275px;
+  :global(.vtex-product-summary-2-x-container--drawer-summary)
+  :global(.vtex-product-comparison-0-x-closeButtonContainer) {
+  background-color: unset;
 }
 
+.drawerContainer :global(.vtex-product-summary-2-x-container--drawer-summary) {
+  max-width: 275px;
+}
 
 .expandCollapseButton {
 }
