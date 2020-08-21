@@ -17,7 +17,6 @@
 }
 
 .productSummaryRowContainer :global(.vtex-product-summary-2-x-imageContainer){
-  background-color: #F2F4F5;
   border-radius: 0 0 6px 6px;
   padding-bottom: 0.1rem;
 }
@@ -45,7 +44,7 @@
 
 .fieldNameCol {
   min-width: 198px;
-  width: 198px;
+  width: 15%;
   margin-right: 5px;
 }
 
@@ -59,4 +58,9 @@
 }
 
 .skuSpecifications {
+}
+
+.productSummaryRowContainer :global(.vtex-slider-layout-0-x-sliderLayoutContainer--comparison-page),
+.rowContainer :global(.vtex-slider-layout-0-x-sliderLayoutContainer){
+  width: 85%;
 }

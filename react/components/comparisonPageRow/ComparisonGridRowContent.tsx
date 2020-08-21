@@ -29,7 +29,7 @@ const List = ({ children, comparisonProducts, field }: Props) => {
         return (
           <div
             key={`${comparisonProduct.productId}-col`}
-            className={`${cssHandles.comparisonCol} w-100 flex justify-center ma1 pa3`}
+            className={`${cssHandles.comparisonCol} w-100 ma1 pa3`}
           >
             <ComparisonFieldValue
               field={field}

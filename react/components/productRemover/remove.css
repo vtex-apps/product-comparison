@@ -1,9 +1,8 @@
 .closeButton {
   font-weight: 300;
-  font-size: 0.875rem;
+  padding: unset;
 }
 
 .closeButtonContainer {
-  background-color: #F2F4F5;
   border-radius: 6px 6px 0 0;
 }

@@ -40,6 +40,7 @@ const listReducer = (state: State, action: ReducerActions): State => {
     case 'ADD_ALL_PRODUCTS': {
       const products = pathOr([], ['args', 'products'], action)
       return {
+        ...state,
         products: [...products],
       }
     }

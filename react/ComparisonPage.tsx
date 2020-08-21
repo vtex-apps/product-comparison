@@ -7,7 +7,7 @@ import {
   PageBlock,
   Button,
   withToast,
-  Dropdown,
+  // Dropdown,
 } from 'vtex.styleguide'
 import ComparisonContext from './ProductComparisonContext'
 import { InjectedIntlProps, injectIntl, defineMessages } from 'react-intl'
@@ -72,6 +72,7 @@ const ComparisonPage = ({ children, intl, showToast }: Props) => {
       type: 'REMOVE_ALL',
     })
     showMessage(intl.formatMessage(messages.removeAllMessage))
+    window.history.back()
   }
 
   const onBackButtonClick = () => {
@@ -92,7 +93,7 @@ const ComparisonPage = ({ children, intl, showToast }: Props) => {
           >
             <div className="flex">
               <div className={`${cssHandles.sortBy} flex items-center`}>
-                <span className="mr2">
+                {/* <span className="mr2">
                   {intl.formatMessage(messages.sortBy)}
                 </span>
                 <Dropdown
@@ -103,7 +104,7 @@ const ComparisonPage = ({ children, intl, showToast }: Props) => {
                     { value: 'price', label: 'Price' },
                   ]}
                   value={`productName`}
-                />
+                /> */}
               </div>
               <div>
                 <Button

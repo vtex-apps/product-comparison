@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
-import React, { useState } from 'react'
+import React from 'react'
 import { pathOr, isEmpty } from 'ramda'
 import ComparisonContext from '../../ProductComparisonContext'
 import { Button, Collapsible, withToast } from 'vtex.styleguide'
@@ -63,7 +63,7 @@ interface Props extends InjectedIntlProps {
 
 const ComparisonDrawer = ({ showToast, intl, comparisonPageUrl }: Props) => {
   const cssHandles = useCssHandles(CSS_HANDLES)
-  const [isCollapsed, setCollapsed] = useState(false)
+  // const [isCollapsed, setCollapsed] = useState(false)
   const {
     useProductComparisonState,
     useProductComparisonDispatch,
@@ -77,6 +77,7 @@ const ComparisonDrawer = ({ showToast, intl, comparisonPageUrl }: Props) => {
     ['products'],
     comparisonData
   )
+  const isCollapsed = pathOr(false, ['isDrawerCollapsed'], comparisonData)
 
   const showMessage = (message: string) => {
     if (showToast) {
@@ -94,7 +95,12 @@ const ComparisonDrawer = ({ showToast, intl, comparisonPageUrl }: Props) => {
   }
 
   const onExpandCollapse = () => {
-    setCollapsed(!isCollapsed)
+    dispatchComparison({
+      args: {
+        isDrawerCollapsed: !isCollapsed,
+      },
+      type: 'IS_DRAWER_COLLAPSED',
+    })
   }
 
   const onClickCompare = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {

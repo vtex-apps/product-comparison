@@ -48,6 +48,8 @@ const ProductSelector = ({ showToast, intl }: Props) => {
   const productName = pathOr('', ['product', 'productName'], valuesFromContext)
   const itemId = pathOr('', ['selectedItem', 'itemId'], valuesFromContext)
 
+  const isDrawerCollapsed = pathOr(false, ['isDrawerCollapsed'], comparisonData)
+
   useEffect(() => {
     const selectedProducts =
       productId && itemId
@@ -58,8 +60,8 @@ const ProductSelector = ({ showToast, intl }: Props) => {
     setIsChecked(selectedProducts && !isEmpty(selectedProducts))
   }, [comparisonData.products, itemId, productId])
 
-  const showMessage = (message: string) => {
-    if (showToast) {
+  const showMessage = (message: string, show: boolean = true) => {
+    if (showToast && show) {
       showToast({
         message: message,
       })
@@ -77,7 +79,8 @@ const ProductSelector = ({ showToast, intl }: Props) => {
       showMessage(
         `${intl.formatMessage(
           messages.product
-        )} "${productName}" ${intl.formatMessage(messages.added)}`
+        )} "${productName}" ${intl.formatMessage(messages.added)}`,
+        isDrawerCollapsed
       )
     } else {
       dispatchComparison({
@@ -89,7 +92,8 @@ const ProductSelector = ({ showToast, intl }: Props) => {
       showMessage(
         `${intl.formatMessage(
           messages.product
-        )} "${productName}" ${intl.formatMessage(messages.removed)}`
+        )} "${productName}" ${intl.formatMessage(messages.removed)}`,
+        isDrawerCollapsed
       )
     }
   }

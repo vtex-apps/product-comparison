@@ -4,6 +4,7 @@ import ComparisonContext from '../../ProductComparisonContext'
 import { useProductSummary } from 'vtex.product-summary-context/ProductSummaryContext'
 import { useCssHandles } from 'vtex.css-handles'
 import { withToast } from 'vtex.styleguide'
+import { IconClose } from 'vtex.store-icons'
 import { InjectedIntlProps, injectIntl, defineMessages } from 'react-intl'
 import './remove.css'
 
@@ -27,15 +28,21 @@ interface Props extends InjectedIntlProps {
 const RemoveButton = ({ showToast, intl }: Props) => {
   const cssHandles = useCssHandles(CSS_HANDLES)
 
-  const { useProductComparisonDispatch } = ComparisonContext
+  const {
+    useProductComparisonState,
+    useProductComparisonDispatch,
+  } = ComparisonContext
   const dispatchComparison = useProductComparisonDispatch()
   const valuesFromContext = useProductSummary()
   const productId = pathOr('', ['product', 'productId'], valuesFromContext)
   const productName = pathOr('', ['product', 'productName'], valuesFromContext)
   const itemId = pathOr('', ['selectedItem', 'itemId'], valuesFromContext)
 
-  const showMessage = (message: string) => {
-    if (showToast) {
+  const comparisonData = useProductComparisonState()
+  const isDrawerCollapsed = pathOr(false, ['isDrawerCollapsed'], comparisonData)
+
+  const showMessage = (message: string, show: boolean = true) => {
+    if (showToast && show) {
       showToast({
         message: message,
       })
@@ -58,7 +65,8 @@ const RemoveButton = ({ showToast, intl }: Props) => {
     showMessage(
       `${intl.formatMessage(
         messages.product
-      )} "${productName}" ${intl.formatMessage(messages.removed)}`
+      )} "${productName}" ${intl.formatMessage(messages.removed)}`,
+      isDrawerCollapsed
     )
   }
 
@@ -70,7 +78,7 @@ const RemoveButton = ({ showToast, intl }: Props) => {
         className={`${cssHandles.closeButton} bg-transparent button-reset t-small pointer b--none-ns outline-0`}
         onClick={removeProductFromCompare}
       >
-        x
+        <IconClose orientation="right" size={12} type="line" />
       </button>
     </div>
   )

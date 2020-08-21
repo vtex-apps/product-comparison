@@ -40,26 +40,14 @@
   padding-bottom: 5px;
 }
 
-.drawerContainer
+/* .drawerContainer
   :global(.vtex-product-summary-2-x-container--drawer-summary)
   :global(.vtex-product-summary-2-x-nameContainer) {
   text-overflow: ellipsis;
   overflow: hidden;
   width: 175px;
   white-space: nowrap;
-}
-
-.drawerContainer
-  :global(.vtex-product-summary-2-x-container--drawer-summary)
-  :global(.biscoindqa-product-comparison-0-x-closeButtonContainer),
-.drawerContainer
-  :global(.vtex-product-summary-2-x-container--drawer-summary)
-  :global(.sbdind-sbd-components-0-x-closeButtonContainer),
-.drawerContainer
-  :global(.vtex-product-summary-2-x-container--drawer-summary)
-  :global(.vtex-product-comparison-0-x-closeButtonContainer) {
-  background-color: unset;
-}
+} */
 
 .drawerContainer :global(.vtex-product-summary-2-x-container--drawer-summary) {
   max-width: 275px;

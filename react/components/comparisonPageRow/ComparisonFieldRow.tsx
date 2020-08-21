@@ -19,9 +19,7 @@ const ComparisonFieldRow: StorefrontFunctionComponent<Props> = ({
       className={`${cssHandles.rowContainer} flex flex-row`}
       key={`field-${field.name}`}
     >
-      <div
-        className={`${cssHandles.fieldNameCol} w-100 flex items-center ma1 pa3`}
-      >
+      <div className={`${cssHandles.fieldNameCol} w-100 ma1 pa3`}>
         <span>{field.displayValue}</span>
       </div>
       <ExtensionPoint id="list-context.comparison-row" field={field} />
