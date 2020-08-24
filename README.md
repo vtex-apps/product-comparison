@@ -123,7 +123,7 @@ This app provides `store blocks` to configure this feature in your store.
 
 ```
 
-### 5. Add route for the product comparison page
+### 6. Add route for the product comparison page
 Add new route for the product comparison custom page created in step 5. Create `routes.json` if not exist in `store-theme` application and put below content. 
 
 ```diff
@@ -137,67 +137,67 @@ Add new route for the product comparison custom page created in step 5. Create `
 
 ```
 
-# Features and Blocks
-This application has few blocks that we can use to configure full feature.
+# Features and Interfaces
+This application exposes below interfaces if you need to customize further. Refer `blocks.json` if you need more insight.
 
-Block | Description
+Interface | Description
 ------------ | -------------
-`comparison-context-wrapper` | This block contains `product comparison context` which will hold comparison item information
-`product-comparison` | This is the main component of comparison page which wraps `comparison-context-wrapper` 
-`product-comparison-block` | This is the generic child component which will extend to develop other feature blocks
-`product-comparison-block.selector` | This is the product selector checkbox which we can use inside product summary
-`product-comparison-block.drawer` | This is product comparison bucket which is placed bottom of the page
-`product-comparison-block.list` | This is product comparison page content, this block allows `product-summary` block and `product-comparison-block`
-`product-comparison-block.grid` | This is comparison comparison fields as grid (you will be able to show and hide fields)
-
+`comparison-context-wrapper` | This interface contains `product comparison context` which will hold comparison items
+`product-comparison-drawer`| This is product comparison drawer which holds items in product summary view
+`list-context.comparison-product-summary-slider` | Product summary list with slider layout
+`product-summary.shelf.product-comparison` | Extended product summary block for product comparison features
+`product-comparison-block` | This is the generic component which was extended to develop feature blocks
+`product-comparison-block.selector` | This is the product selector checkbox for product summary
+`product-comparison-block.close-button` | This is the remove button for product summary
+`comparison-page` | Product comparison page
+`roduct-comparison-block.product-summary-row` : First row of comparison row
+`list-context.comparison-row` | This block represents single row in product comparison page
+`product-comparison-block.product-summary-row` | Row with product summary lisging
+`product-comparison-block.product-specifications` | Product specification section
+`product-comparison-block.sku-specifications` | Sku specification section
 
 # Custom configurations in blocks level
 
 These are the `props` that are allowed inside blocks for customize this feature through `site-editor` section.
 
-  * ### `product-comparison-block.grid`
+  * ### `product-comparison-block.product-specifications`
   
     Prop | Description
     ------------ | -------------
-    productFieldsToHide | Comma separated list of product fields that needs to be hidden in product comparison grid
-    skuFieldsToHide | Comma separated list of sku fields that needs to be hidden in product comparison grid
-    productSpecificationsToHide | Comma separated list of product specifications that needs to be hidden in product comparison grid
-    skuSpecificationsToHide | Comma separated list of sku specifications that needs to be hidden in product comparison grid
-    
-    * ###### Available product fields
-      Field Name | Display Name | Description
-      ------------ | ------------- | -------------
-      `productName` | `Pdoduct Name` | Name of the product
-      `brand` | `Brand` | Brand Name of the product
-      `description` | `Description` | Product description
-      `productReference` | `Product Reference` | Product Reference Number
-      `name` | 'Sku Name' | Name of the sku
-      `ean` | `Ean` | EAN of the Sku
-      
-    * ###### Available sku fields
-      Field Name | Display Name | Description
-      ------------ | ------------- | -------------
-      `name` | 'Sku Name' | Name of the sku
-      `ean` | `Ean` | EAN of the Sku
-
-
+    productSpecificationsToHide | Comma separated list of product fields that needs to be hidden in product comparison grid
+        
+  * ### `product-comparison-block.sku-specifications`
+  
+    Prop | Description
+    ------------ | -------------
+    skuSpecificationsToHide | Comma separated list of sku specifications fields that needs to be hidden in comparison page
+        
 
 # Customization
 In order to apply CSS customization in this and other blocks, follow the instructions given in the recipe on Using CSS Handles for store customization.
 
 CSS handles |
 ------------ |
-drawerContainer |
-drawer |
-productThumbnail |
-thumbnailContentContainer |
-drawerImage |
-comparisonButtons |
-closeButton |
-compareProductsButton |
-productSummaryRow |
-comparisonNameCol |
-comparisonProductCol |
-productComparisonGrid | 
-productSpecifications |
-skuSpecifications |
+title|
+rowContainer|
+fieldNameCol|
+productFieldValue|
+skuFieldValue|
+productSpecificationValues|
+productSpecificationValue|
+skuSpecificationValues|
+skuSpecificationValue|
+comparisonCol|
+productSummaryRowContainer|
+fieldNameCol|
+showDifferencesContainer|
+drawerContainer|
+expandCollapseButton|
+comparisonButtons|
+compareProductsButton|
+drawer|
+closeButton|
+closeButtonContainer|
+productSelectorContainer|
+
+
