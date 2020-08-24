@@ -77,7 +77,8 @@ export const mapCatalogProductToProductSummary = (
   skuId: string,
   imageSize: number = 500
 ) => {
-  if (!product) return null
+  // eslint-disable-next-line @typescript-eslint/no-object-literal-type-assertion
+  if (!product) return {} as Product
   const normalizedProduct = { ...product }
   const items = normalizedProduct.items || []
   const sku = find(propEq('itemId', skuId))(items)

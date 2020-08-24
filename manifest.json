@@ -1,11 +1,12 @@
 {
-  "vendor": "biscoindqa",
+  "vendor": "vtex",
   "name": "product-comparison",
   "version": "0.0.1",
   "title": "Product Comparison",
   "description": "Product Comparison",
   "defaultLocale": "pt-BR",
   "builders": {
+    "styles": "2.x",
     "messages": "1.x",
     "store": "0.x",
     "react": "3.x"
@@ -20,7 +21,12 @@
     "vtex.store-graphql": "2.x",
     "vtex.product-summary-context": "0.x",
     "vtex.product-summary": "2.x",
-    "vtex.store-resources": "0.x"
+    "vtex.store-resources": "0.x",
+    "vtex.store-icons": "0.x",
+    "vtex.slider-layout": "0.x",
+    "vtex.list-context": "0.x",
+    "vtex.product-list-context": "0.x",
+    "vtex.flex-layout": "0.x"
   },
   "$schema": "https://raw.githubusercontent.com/vtex/node-vtex-api/master/gen/manifest.schema"
 }

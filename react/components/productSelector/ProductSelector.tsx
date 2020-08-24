@@ -1,11 +1,39 @@
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-import React, { useState, useEffect } from 'react'
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+import React, { useState, useEffect, MouseEvent } from 'react'
 import { pathOr, find, propEq, allPass, isEmpty } from 'ramda'
-import { Checkbox } from 'vtex.styleguide'
+import { Checkbox, withToast } from 'vtex.styleguide'
+import { useCssHandles } from 'vtex.css-handles'
 import ComparisonContext from '../../ProductComparisonContext'
 import { useProductSummary } from 'vtex.product-summary-context/ProductSummaryContext'
+import { InjectedIntlProps, injectIntl, defineMessages } from 'react-intl'
 
-const ProductSelector = () => {
+const CSS_HANDLES = ['productSelectorContainer']
+
+const messages = defineMessages({
+  product: {
+    defaultMessage: '',
+    id: 'store/product-comparison.product-selector.product',
+  },
+  added: {
+    defaultMessage: '',
+    id: 'store/product-comparison.product-selector.product-added',
+  },
+  removed: {
+    defaultMessage: '',
+    id: 'store/product-comparison.product-selector.product-removed',
+  },
+  compare: {
+    defaultMessage: '',
+    id: 'store/product-comparison.product-selector.compare',
+  },
+})
+
+interface Props extends InjectedIntlProps {
+  showToast?: (input: ToastInput) => void
+}
+
+const ProductSelector = ({ showToast, intl }: Props) => {
+  const cssHandles = useCssHandles(CSS_HANDLES)
   const [isChecked, setIsChecked] = useState(false)
   const valuesFromContext = useProductSummary()
   const {
@@ -17,7 +45,10 @@ const ProductSelector = () => {
   const dispatchComparison = useProductComparisonDispatch()
 
   const productId = pathOr('', ['product', 'productId'], valuesFromContext)
+  const productName = pathOr('', ['product', 'productName'], valuesFromContext)
   const itemId = pathOr('', ['selectedItem', 'itemId'], valuesFromContext)
+
+  const isDrawerCollapsed = pathOr(false, ['isDrawerCollapsed'], comparisonData)
 
   useEffect(() => {
     const selectedProducts =
@@ -29,10 +60,15 @@ const ProductSelector = () => {
     setIsChecked(selectedProducts && !isEmpty(selectedProducts))
   }, [comparisonData.products, itemId, productId])
 
-  const productSelectorChanged = (e: any | unknown) => {
-    // e.preventDefault()
-    // e.stopPropagation()
+  const showMessage = (message: string, show: boolean = true) => {
+    if (showToast && show) {
+      showToast({
+        message: message,
+      })
+    }
+  }
 
+  const productSelectorChanged = (e: { target: { checked: boolean } }) => {
     if (e.target.checked) {
       dispatchComparison({
         args: {
@@ -40,6 +76,12 @@ const ProductSelector = () => {
         },
         type: 'ADD',
       })
+      showMessage(
+        `${intl.formatMessage(
+          messages.product
+        )} "${productName}" ${intl.formatMessage(messages.added)}`,
+        isDrawerCollapsed
+      )
     } else {
       dispatchComparison({
         args: {
@@ -47,21 +89,31 @@ const ProductSelector = () => {
         },
         type: 'REMOVE',
       })
+      showMessage(
+        `${intl.formatMessage(
+          messages.product
+        )} "${productName}" ${intl.formatMessage(messages.removed)}`,
+        isDrawerCollapsed
+      )
     }
   }
 
-  const productSelectionOnClicked = (e: any | unknown) => {
+  const productSelectionOnClicked = (e: MouseEvent) => {
     e.preventDefault()
     e.stopPropagation()
   }
 
   return (
     // eslint-disable-next-line jsx-a11y/no-static-element-interactions
-    <div onClick={productSelectionOnClicked} className=" mb3">
+    // eslint-disable-next-line jsx-a11y/click-events-have-key-events
+    <div
+      onClick={productSelectionOnClicked}
+      className={`${cssHandles.productSelectorContainer} mb3`}
+    >
       <Checkbox
         checked={isChecked}
         id={`${productId}-${itemId}-product-comparison`}
-        label="Compare"
+        label={intl.formatMessage(messages.compare)}
         name={`${productId}-${itemId}-product-comparison`}
         onChange={productSelectorChanged}
         value={isChecked}
@@ -70,4 +122,4 @@ const ProductSelector = () => {
   )
 }
 
-export default ProductSelector
+export default withToast(injectIntl(ProductSelector))

@@ -1,38 +1,60 @@
-.drawerContainer {
-  position: fixed;
-  max-height: 100px;
-  bottom: 0;
-}
 .drawer {
-  background-color: white;
-  border-top: 5px solid #0f3e99;
-  box-shadow: 3px 0 3px -4px rgba(31, 73, 125, 0.8),
-    -3px 0 3px -4px rgba(31, 73, 125, 0.8);
-}
-
-.productThumbnail {
-  width: 200px;
-}
-
-.thumbnailContentContainer {
-}
-
-.drawerImage {
-  max-height: 60px;
-  max-width: 60px;
-}
-
-.comparisonButtons {
-}
-
-.closeButton {
-  height: 20px;
-  width: 20px;
-  padding: unset;
-  margin-left: -20px;
-  border: unset;
-  cursor: pointer;
 }
 
 .compareProductsButton {
+}
+
+.drawerContainer {
+  position: fixed;
+  max-height: 500px;
+  bottom: 0;
+  left: 0;
+  z-index: 1;
+}
+
+.drawerContainer :global(.vtex__icon-caret-up) {
+  display: none;
+}
+
+.drawerContainer :global(.vtex__icon-caret-down) {
+  display: none;
+}
+
+.drawerContainer :global(.vtex-product-summary-2-x-element--drawer-summary) {
+  flex-direction: row;
+}
+
+.drawerContainer
+  :global(.vtex-product-summary-2-x-column--drawer-summary-col2) {
+  flex-direction: column;
+  padding-left: 1rem;
+}
+
+.drawerContainer
+  :global(.vtex-product-summary-2-x-container--drawer-summary)
+  :global(.vtex-product-summary-2-x-nameContainer),
+.drawerContainer
+  :global(.vtex-product-summary-2-x-container--drawer-summary)
+  :global(.vtex-product-summary-2-x-priceContainer) {
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+/* .drawerContainer
+  :global(.vtex-product-summary-2-x-container--drawer-summary)
+  :global(.vtex-product-summary-2-x-nameContainer) {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  width: 175px;
+  white-space: nowrap;
+} */
+
+.drawerContainer :global(.vtex-product-summary-2-x-container--drawer-summary) {
+  max-width: 275px;
+}
+
+.expandCollapseButton {
+}
+
+.comparisonButtons {
 }

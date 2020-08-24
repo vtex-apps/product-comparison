@@ -1,4 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+interface ToastInput {
+  message: string
+  action?: {
+    label: string
+    onClick: () => void
+  }
+}
+
 interface ProductToCompare {
   productId: string
   skuId: string
@@ -45,4 +53,14 @@ interface ComparisonField {
   name: string
   displayValue: string
   showOnSite: boolean
+}
+
+interface ProductSpecification {
+  name: string
+  values: string[]
+}
+
+interface Variation {
+  name: string
+  values: string[]
 }

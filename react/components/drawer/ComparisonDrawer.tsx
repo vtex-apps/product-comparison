@@ -1,12 +1,69 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 import React from 'react'
 import { pathOr, isEmpty } from 'ramda'
 import ComparisonContext from '../../ProductComparisonContext'
+import { Button, Collapsible, withToast } from 'vtex.styleguide'
+import { ExtensionPoint } from 'vtex.render-runtime'
+import { useCssHandles } from 'vtex.css-handles'
+import { InjectedIntlProps, injectIntl, defineMessages } from 'react-intl'
+import './drawer.css'
 
-import styles from './drawer.css'
-import { Button } from 'vtex.styleguide'
-import ProductThumbnail from './ProductThumbnail'
+const CSS_HANDLES = [
+  'drawerContainer',
+  'expandCollapseButton',
+  'comparisonButtons',
+  'compareProductsButton',
+  'drawer',
+]
 
-const ComparisonDrawer = () => {
+const messages = defineMessages({
+  removeAll: {
+    defaultMessage: '',
+    id: 'store/product-comparison.drawer.remove-all',
+  },
+  products: {
+    defaultMessage: '',
+    id: 'store/product-comparison.drawer.products',
+  },
+  compare: {
+    defaultMessage: '',
+    id: 'store/product-comparison.drawer.compare',
+  },
+  removeAllMessage: {
+    defaultMessage: '',
+    id: 'store/product-comparison.drawer.remove-all-message',
+  },
+  show: {
+    defaultMessage: '',
+    id: 'store/product-comparison.drawer.show',
+  },
+  hide: {
+    defaultMessage: '',
+    id: 'store/product-comparison.drawer.hide',
+  },
+  minItemsMessage: {
+    defaultMessage: '',
+    id: 'store/product-comparison.drawer.min-items-message',
+  },
+  maxItemsMessage1: {
+    defaultMessage: '',
+    id: 'store/product-comparison.drawer.max-items-message-1',
+  },
+  maxItemsMessage2: {
+    defaultMessage: '',
+    id: 'store/product-comparison.drawer.max-items-message-2',
+  },
+})
+
+interface Props extends InjectedIntlProps {
+  showToast?: (input: ToastInput) => void
+  comparisonPageUrl?: string
+}
+
+const ComparisonDrawer = ({ showToast, intl, comparisonPageUrl }: Props) => {
+  const cssHandles = useCssHandles(CSS_HANDLES)
+  // const [isCollapsed, setCollapsed] = useState(false)
   const {
     useProductComparisonState,
     useProductComparisonDispatch,
@@ -20,51 +77,129 @@ const ComparisonDrawer = () => {
     ['products'],
     comparisonData
   )
+  const isCollapsed = pathOr(false, ['isDrawerCollapsed'], comparisonData)
+
+  const showMessage = (message: string) => {
+    if (showToast) {
+      showToast({
+        message: message,
+      })
+    }
+  }
 
   const removeAllItems = () => {
     dispatchComparison({
       type: 'REMOVE_ALL',
     })
+    showMessage(intl.formatMessage(messages.removeAllMessage))
+  }
+
+  const onExpandCollapse = () => {
+    dispatchComparison({
+      args: {
+        isDrawerCollapsed: !isCollapsed,
+      },
+      type: 'IS_DRAWER_COLLAPSED',
+    })
+  }
+
+  const onClickCompare = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    if (!comparisonProducts || comparisonProducts.length < 2) {
+      showMessage(intl.formatMessage(messages.minItemsMessage))
+      e.preventDefault()
+      e.stopPropagation()
+    } else if (comparisonProducts.length > 10) {
+      showMessage(
+        `${intl.formatMessage(
+          messages.maxItemsMessage1
+        )} ${10} ${intl.formatMessage(messages.maxItemsMessage2)}`
+      )
+      e.preventDefault()
+      e.stopPropagation()
+    }
   }
 
   return isEmpty(comparisonProducts) ? (
     <div />
   ) : (
-    <div className={`${styles.drawerContainer} mw9 w-100 flex justify-center`}>
-      <div className={`${styles.drawer} flex flex-row justify-center pl3 pr3`}>
-        {comparisonProducts.map(thumbnail => {
-          return (
-            <ProductThumbnail
-              key={`${thumbnail.productId}-${thumbnail.skuId}`}
-              productToCompare={thumbnail}
-            />
-          )
-        })}
-        <div className={`${styles.comparisonButtons} flex flex-column ma3`}>
-          <div className="">
-            <Button
-              block
-              size="small"
-              className={`${styles.compareProductsButton} ma3`}
-              href="/product-comparison"
+    <div
+      className={`${cssHandles.drawerContainer} bg-white w-100 bt-ns b--light-gray flex justify-center`}
+    >
+      <div className="mw9 w-100 ">
+        <Collapsible
+          header={
+            <div
+              className={`${cssHandles.comparisonButtons} flex flex-row ma3`}
             >
-              Compare
-            </Button>
+              <div className="flex items-center-ns mr2 ml2">
+                <span className="fw5 black">
+                  <span>{intl.formatMessage(messages.compare)} </span>{' '}
+                  <span>{comparisonProducts.length}</span>{' '}
+                  <span>{intl.formatMessage(messages.products)}</span>
+                </span>
+              </div>
+              <div className="flex mr2 ml2">
+                <button
+                  onClick={onExpandCollapse}
+                  className={`${cssHandles.expandCollapseButton} bg-transparent bn-ns t-small c-action-primary hover-c-action-primary pointer`}
+                >
+                  {!isCollapsed
+                    ? intl.formatMessage(messages.hide)
+                    : intl.formatMessage(messages.show)}
+                </button>
+              </div>
+              <div className="flex-grow-1" />
+              <div className="flex mr2 ml2">
+                <Button
+                  block
+                  variation="danger-tertiary"
+                  size="small"
+                  onClick={removeAllItems}
+                >
+                  {intl.formatMessage(messages.removeAll)}
+                </Button>
+              </div>
+              <div className="flex mr2 ml2" onClick={onClickCompare}>
+                <Button
+                  block
+                  size="small"
+                  className={`${cssHandles.compareProductsButton} ma3`}
+                  href={
+                    comparisonProducts.length < 2
+                      ? '#'
+                      : comparisonPageUrl
+                      ? comparisonPageUrl
+                      : '/product-comparison'
+                  }
+                >
+                  {intl.formatMessage(messages.compare)}
+                </Button>
+              </div>
+            </div>
+          }
+          isOpen={!isCollapsed}
+        >
+          <div
+            className={`${cssHandles.drawer} flex flex-row justify-center pl3 pr3`}
+          >
+            <ExtensionPoint id="list-context.comparison-product-summary-slider" />
           </div>
-          <div className="mt3">
-            <Button
-              block
-              variation="danger-tertiary"
-              size="small"
-              onClick={removeAllItems}
-            >
-              Remove All
-            </Button>
-          </div>
-        </div>
+        </Collapsible>
       </div>
     </div>
   )
 }
 
-export default ComparisonDrawer
+ComparisonDrawer.schema = {
+  title: 'admin/editor.comparison-drawer.title',
+  description: 'admin/editor.comparison-drawer.description',
+  type: 'object',
+  properties: {
+    comparisonPageUrl: {
+      title: 'admin/editor.comparison-grid.drawer.title',
+      type: 'string',
+    },
+  },
+}
+
+export default withToast(injectIntl(ComparisonDrawer))

@@ -2,26 +2,55 @@
   "comparison-context-wrapper": {
     "component": "ProductComparisonWrapper"
   },
-  "product-comparison": {
-    "around": ["comparison-context-wrapper"],
-    "allowed": ["product-comparison-block"]
-  },
+
   "product-comparison-block": {},
-  
+
   "product-comparison-block.selector": {
     "component": "ProductSelector"
   },
-  "product-comparison-block.drawer": {
+
+  "product-comparison-drawer": {
+    "allowed": ["list-context.comparison-product-summary-slider"],
     "component": "ComparisonDrawer"
   },
-  "product-comparison-block.list": {
-    "component": "ComparisonList",
-    "allowed": ["product-summary", "product-comparison-block"]
+
+  "list-context.comparison-product-summary-slider": {
+    "allowed": ["product-summary"],
+    "composition": "children",
+    "component": "ProductSummaryList"
   },
-  "product-comparison-block.grid": {
-    "component": "ComparisonGrid"
+
+  "comparison-page": {
+    "around": ["comparison-context-wrapper"],
+    "component": "ComparisonPage",
+    "composition": "children"
   },
-  "product-comparison-block.grid-row": {
-    "component": "ComparisonGridRow"
+
+  "product-comparison-block.product-summary-row": {
+    "component": "ProductSummaryRow",
+    "allowed": ["list-context.comparison-product-summary-slider"]
+  },
+
+  "product-comparison-block.product-specifications": {
+    "allowed": ["list-context.comparison-row"],
+    "component": "ProductSpecifications"
+  },
+
+  "product-comparison-block.sku-specifications": {
+    "allowed": ["list-context.comparison-row"],
+    "component": "SkuSpecifications"
+  },
+
+  "product-comparison-block.close-button": {
+    "component": "RemoveButton"
+  },
+
+  "list-context.comparison-row": {
+    "composition": "children",
+    "component": "ComparisonGridRowContent"
+  },
+
+  "product-summary.shelf.product-comparison": {
+    "allowed": ["product-comparison-block"]
   }
 }

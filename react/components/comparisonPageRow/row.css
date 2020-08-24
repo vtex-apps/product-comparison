@@ -1,0 +1,66 @@
+.productSummaryRowContainer
+  :global(.vtex-product-summary-2-x-nameContainer) {
+  display: flex;
+  justify-content: center;
+}
+
+.rowContainer:nth-child(even) {
+  background-color: #F2F4F5;
+}
+
+.rowContainer :global(.vtex-slider-layout-0-x-slide){
+  margin-bottom: unset;
+}
+
+.productSummaryRowContainer :global(.vtex-slider-layout-0-x-slideChildrenContainer){
+  width: 220px;
+}
+
+.productSummaryRowContainer :global(.vtex-product-summary-2-x-imageContainer){
+  border-radius: 0 0 6px 6px;
+  padding-bottom: 0.1rem;
+}
+
+.productSummaryRowContainer :global(.vtex-product-summary-2-x-nameContainer),
+.productSummaryRowContainer :global(.vtex-product-summary-2-x-priceContainer){
+  padding-top: 0.6rem;
+  padding-bottom: 0.6rem;
+}
+
+.productSummaryRowContainer :global(.vtex-product-summary-2-x-buyButtonContainer){
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+
+.productSummaryRowContainer :global(.vtex-slider-layout-0-x-slide),
+.rowContainer :global(.vtex-slider-layout-0-x-slide){
+  width:220px !important;
+}
+
+.productSummaryRowContainer :global(.vtex-slider-layout-0-x-sliderTrackContainer),
+.rowContainer :global(.vtex-slider-layout-0-x-sliderTrackContainer){
+  max-width: 1255px;
+}
+
+.fieldNameCol {
+  min-width: 198px;
+  width: 15%;
+  margin-right: 5px;
+}
+
+.comparisonProductCol {
+}
+
+.productComparisonGrid {
+}
+
+.productSpecifications {
+}
+
+.skuSpecifications {
+}
+
+.productSummaryRowContainer :global(.vtex-slider-layout-0-x-sliderLayoutContainer--comparison-page),
+.rowContainer :global(.vtex-slider-layout-0-x-sliderLayoutContainer){
+  width: 85%;
+}

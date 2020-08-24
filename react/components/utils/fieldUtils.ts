@@ -92,17 +92,17 @@ export const getSkuFields = (fieldsToHide?: string) => {
     switch (fieldName) {
       case 'name':
         value = {
-          fieldType: 'ProductField',
-          name: 'productName',
-          displayValue: 'Product Name',
+          fieldType: 'SkuField',
+          name: 'name',
+          displayValue: 'Sku Name',
           showOnSite: true,
         }
         break
       case 'ean':
         value = {
-          fieldType: 'ProductField',
-          name: 'brand',
-          displayValue: 'Brand',
+          fieldType: 'SkuField',
+          name: 'ean',
+          displayValue: 'Ean',
           showOnSite: true,
         }
         break

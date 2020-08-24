@@ -1,0 +1,154 @@
+{
+  // START: Product comparison drawer
+  "product-comparison-drawer": {
+    "blocks": ["list-context.comparison-product-summary-slider#drawer"]
+  },
+  "list-context.comparison-product-summary-slider#drawer": {
+    "blocks": ["product-summary.shelf.product-comparison#drawer"],
+    "children": ["slider-layout#comparison-drawer"]
+  },
+  "slider-layout#comparison-drawer": {
+    "props": {
+      "blockClass": "comparison-drawer",
+      "itemsPerPage": {
+        "desktop": 4,
+        "tablet": 3,
+        "phone": 1
+      },
+      "showPaginationDots": "never",
+      "infinite": true,
+      "fullWidth": true
+    }
+  },
+  "product-summary.shelf.product-comparison#drawer": {
+    "children": [
+      "product-summary-column#drawer-col1",
+      "product-summary-column#drawer-col2",
+      "product-comparison-block.close-button"
+    ],
+    "props": {
+      "blockClass": "drawer-summary"
+    }
+  },
+  "product-summary-column#drawer-col1": {
+    "children": ["product-summary-image#drawer"],
+    "props": {
+      "blockClass": "drawer-summary-col1"
+    }
+  },
+  "product-summary-image#drawer": {
+    "props": {
+      "showBadge": false,
+      "width": 75,
+      "heightProp": 75
+    }
+  },
+  "product-summary-column#drawer-col2": {
+    "children": ["product-summary-name", "product-summary-price#comparison"],
+    "props": {
+      "blockClass": "drawer-summary-col2"
+    }
+  },
+  "product-summary-price#comparison": {
+    "props": {
+      "showListPrice": false,
+      "showSellingPriceRange": false,
+      "showLabels": false,
+      "showInstallments": false,
+      "showDiscountValue": false
+    }
+  },
+  // START: Product comparison drawer
+
+  // START: Product comparison page
+  "comparison-page": {
+    "children": ["slider-layout-group#comparison-page"]
+  },
+
+  // "flex-layout.col#comparison-page": {
+  //   "children": ["slider-layout-group#comparison-page"],
+  //   "props": {
+  //     "blockClass": "comparison-page",
+  //     "fullWidth": true
+  //   }
+  // },
+
+  "slider-layout-group#comparison-page": {
+    "children": [
+      "product-comparison-block.product-summary-row",
+      "product-comparison-block.product-specifications",
+      "product-comparison-block.sku-specifications"
+    ]
+  },
+  "product-comparison-block.product-summary-row": {
+    "blocks": ["list-context.comparison-product-summary-slider#comparison-page"]
+  },
+  "list-context.comparison-product-summary-slider#comparison-page": {
+    "blocks": ["product-summary.shelf.product-comparison#comparison-page"],
+    "children": ["slider-layout#comparison-page-product-summary"]
+  },
+  "product-summary.shelf.product-comparison#comparison-page": {
+    "children": [
+      "product-comparison-block.close-button",
+      "product-summary-image#comparison-page",
+      "product-summary-name",
+      "product-summary-space",
+      "product-summary-price#comparison",
+      "product-summary-buy-button"
+    ],
+    "props": {
+      "blockClass": "comparison-page-summary"
+    }
+  },
+
+  "product-summary-image#comparison-page": {
+    "props": {
+      "width": 200,
+      "heightProp": 200
+    }
+  },
+  "product-comparison-block.product-specifications": {
+    "blocks": ["list-context.comparison-row#comparison-page-row"],
+    "props": {
+      "titleText": "Product Specifications"
+    }
+  },
+  "product-comparison-block.sku-specifications": {
+    "blocks": ["list-context.comparison-row#comparison-page-row"],
+    "props": {
+      "titleText": "Sku Specifications"
+    }
+  },
+  "list-context.comparison-row#comparison-page-row": {
+    "children": ["slider-layout#comparison-no-arrows"]
+  },
+  "slider-layout#comparison-page-product-summary": {
+    "props": {
+      "blockClass": "comparison-page",
+      "itemsPerPage": {
+        "desktop": 4,
+        "tablet": 3,
+        "phone": 1
+      },
+      "showPaginationDots": "never",
+      "infinite": true,
+      "fullWidth": true
+    }
+  },
+  "slider-layout#comparison-no-arrows": {
+    "props": {
+      "itemsPerPage": {
+        "desktop": 4,
+        "tablet": 3,
+        "phone": 1
+      },
+      "showPaginationDots": "never",
+      "infinite": true,
+      "fullWidth": true,
+      "blockClass": "comparison-page",
+      "showNavigationArrows": "never"
+    }
+  }
+
+  // END: Product comparison page
+}
