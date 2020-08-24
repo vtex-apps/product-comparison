@@ -138,7 +138,7 @@ Add new route for the product comparison custom page created in step 5. Create `
 ```
 
 # Features and Interfaces
-This application exposes below interfaces if you need to customize further. Refer `blocks.json` if you need more insight.
+If you need to customize further, this application exposes below interfaces. Refer `blocks.json` if you need more insight.
 
 Interface | Description
 ------------ | -------------
