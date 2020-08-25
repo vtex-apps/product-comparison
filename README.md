@@ -99,6 +99,13 @@ This will add comparison drawer to search results page
   }
 }
 
+...
+"gallery": {
+-  "blocks": ["product-summary.shelf"]
++  "blocks": ["product-summary.shelf.product-comparison#search"]
+}
+...
+
 ```
 
 ### 5. Create new blocks json file `product-comparison.json` inside `/store/blocks` folder in `store-theme` and add the content below
