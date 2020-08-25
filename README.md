@@ -9,7 +9,7 @@ This app provides `store blocks` to configure this feature in your store.
 
 # Configuration
 
-### 1. Add `Product Comparison` app to store theme
+### 1. Add `Product Comparison` app as a dependency to store theme `manufest.json`
 
 ```
 "dependencies": {
@@ -19,7 +19,7 @@ This app provides `store blocks` to configure this feature in your store.
 }
 ```
 
-### 2. Create `interfaces.json` in `store-theme` project if not already exist and put these two extended interfaces
+### 2. Create `interfaces.json` inside `store-theme` `/store` folder, if it is not already exist then put below extended interfaces
 
 ```diff
 {
@@ -32,7 +32,7 @@ This app provides `store blocks` to configure this feature in your store.
 }
 ```
 
-### 3. Replace `store.search` block with `store.search.product-comparison`
+### 3. Replace `store.search` block with `store.search.product-comparison` block (inside `search.jsonc` file)
 `store.search.product-comparison` block wraps `store.search` block with comparison context, so we can reflect selected products in comparison drawer at the same time.
 
 ```diff
@@ -62,7 +62,8 @@ This app provides `store blocks` to configure this feature in your store.
   etc.
 ```
 
-### 4. Replace `search-result-layout.desktop` block with `search-result-layout.desktop.product-comparison` to add comparison drawer to search results page
+### 4. Replace `search-result-layout.desktop` block with `search-result-layout.desktop.product-comparison` block (inside `search.jsonc` file)
+This will add comparison drawer to search results page
 
 ```diff
 {
@@ -124,7 +125,7 @@ This app provides `store blocks` to configure this feature in your store.
 ```
 
 ### 6. Add route for the product comparison page
-Add new route for the product comparison custom page created in step 5. Create `routes.json` if not exist in `store-theme` application and put below content. 
+Add new route for the product comparison custom page created in step 5. Create `routes.json` (inside `/store` folder) if not exist in `store-theme` application and put below content. 
 
 ```diff
 {
