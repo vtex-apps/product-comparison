@@ -48,19 +48,35 @@ interface Styles {
   [key: string]: any | unknown
 }
 
+interface GroupedComparisonFields {
+  [key: string]: ComparisonField[]
+}
+
 interface ComparisonField {
   fieldType: string
+  groupName?: string
   name: string
   displayValue: string
   showOnSite: boolean
 }
 
+interface ProductSpecificationGroup {
+  name: string
+  originalName: string
+  specifications: ProductSpecification[]
+}
+
 interface ProductSpecification {
   name: string
   values: string[]
+  groupName?: string
 }
 
 interface Variation {
   name: string
   values: string[]
+}
+
+interface SpecificationGroupValues {
+  [key: string]: ProductSpecification[]
 }

@@ -36,6 +36,11 @@
     "component": "ProductSpecifications"
   },
 
+  "product-comparison-block.grouped-product-specifications": {
+    "allowed": ["list-context.comparison-row"],
+    "component": "GroupedProductSpecifications"
+  },
+
   "product-comparison-block.sku-specifications": {
     "allowed": ["list-context.comparison-row"],
     "component": "SkuSpecifications"

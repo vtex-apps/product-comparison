@@ -98,6 +98,35 @@ const ComparisonFieldValue = ({ field, productToCompare }: Props) => {
       </div>
     )
   }
+  if (field.fieldType === 'GroupedSpecification') {
+    const groups = pathOr([], ['specificationGroups'], selectedProduct)
+    const groupedSpecification = findLast(propEq('name', field.groupName))(
+      groups
+    )
+    const specifications = pathOr([], ['specifications'], groupedSpecification)
+
+    const values = pathOr(
+      [],
+      ['values'],
+      find(propEq('name', field.name))(specifications)
+    )
+    return (
+      <div
+        className={`${cssHandles.productSpecificationValues} flex flex-column`}
+      >
+        {values.map(value => {
+          return (
+            <span
+              className={`${cssHandles.productSpecificationValue}`}
+              key={`${field.fieldType}-${field.name}-${value}`}
+            >
+              {value}
+            </span>
+          )
+        })}
+      </div>
+    )
+  }
 
   return <div></div>
 }
