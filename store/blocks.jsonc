@@ -65,14 +65,6 @@
     "children": ["slider-layout-group#comparison-page"]
   },
 
-  // "flex-layout.col#comparison-page": {
-  //   "children": ["slider-layout-group#comparison-page"],
-  //   "props": {
-  //     "blockClass": "comparison-page",
-  //     "fullWidth": true
-  //   }
-  // },
-
   "slider-layout-group#comparison-page": {
     "children": [
       "product-comparison-block.product-summary-row",
@@ -151,6 +143,5 @@
       "showNavigationArrows": "never"
     }
   }
-
   // END: Product comparison page
 }
