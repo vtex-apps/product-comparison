@@ -153,12 +153,20 @@ Interface | Description
 `roduct-comparison-block.product-summary-row` : First row of comparison row
 `list-context.comparison-row` | This block represents single row in product comparison page
 `product-comparison-block.product-summary-row` | Row with product summary lisging
-`product-comparison-block.product-specifications` | Product specification section
-`product-comparison-block.sku-specifications` | Sku specification section
+`product-comparison-block.grouped-product-specifications` | Product specifications separating with specification groups
+`product-comparison-block.product-specifications` | Product specification section (Not comes with default setup)
+`product-comparison-block.sku-specifications` | Sku specification section (Not comes with default setup)
 
 # Custom configurations in blocks level
 
 These are the `props` that are allowed inside blocks for customize this feature through `site-editor` section.
+
+  * ### `product-comparison-block.grouped-product-specifications`
+  
+    Prop | Description
+    ------------ | -------------
+    productSpecificationsToHide | Comma separated list of product fields that needs to be hidden in product comparison grid
+    productSpecificationGroupsToHide | Comma separated list of product specification groups that needs to be hidden in product comparison grid
 
   * ### `product-comparison-block.product-specifications`
   
