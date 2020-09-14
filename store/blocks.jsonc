@@ -65,19 +65,10 @@
     "children": ["slider-layout-group#comparison-page"]
   },
 
-  // "flex-layout.col#comparison-page": {
-  //   "children": ["slider-layout-group#comparison-page"],
-  //   "props": {
-  //     "blockClass": "comparison-page",
-  //     "fullWidth": true
-  //   }
-  // },
-
   "slider-layout-group#comparison-page": {
     "children": [
       "product-comparison-block.product-summary-row",
-      "product-comparison-block.product-specifications",
-      "product-comparison-block.sku-specifications"
+      "product-comparison-block.grouped-product-specifications"
     ]
   },
   "product-comparison-block.product-summary-row": {
@@ -107,18 +98,21 @@
       "heightProp": 200
     }
   },
-  "product-comparison-block.product-specifications": {
-    "blocks": ["list-context.comparison-row#comparison-page-row"],
-    "props": {
-      "titleText": "Product Specifications"
-    }
+  "product-comparison-block.grouped-product-specifications": {
+    "blocks": ["list-context.comparison-row#comparison-page-row"]
   },
-  "product-comparison-block.sku-specifications": {
-    "blocks": ["list-context.comparison-row#comparison-page-row"],
-    "props": {
-      "titleText": "Sku Specifications"
-    }
-  },
+  // "product-comparison-block.product-specifications": {
+  //   "blocks": ["list-context.comparison-row#comparison-page-row"],
+  //   "props": {
+  //     "titleText": "Product Specifications"
+  //   }
+  // },
+  // "product-comparison-block.sku-specifications": {
+  //   "blocks": ["list-context.comparison-row#comparison-page-row"],
+  //   "props": {
+  //     "titleText": "Sku Specifications"
+  //   }
+  // },
   "list-context.comparison-row#comparison-page-row": {
     "children": ["slider-layout#comparison-no-arrows"]
   },
@@ -149,6 +143,5 @@
       "showNavigationArrows": "never"
     }
   }
-
   // END: Product comparison page
 }

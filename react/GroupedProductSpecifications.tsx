@@ -1,0 +1,3 @@
+import GroupedProductSpecifications from './components/comparisonFields/GroupedProductSpecifications'
+
+export default GroupedProductSpecifications
