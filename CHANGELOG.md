@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Changed
+- Change vendor name and application name
+
 ### Added
 - Added product specification groups for comparison
 

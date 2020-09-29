@@ -1,6 +1,6 @@
 {
-  "vendor": "sbdind",
-  "name": "sbd-components",
+  "vendor": "vtex",
+  "name": "product-comparison",
   "version": "0.0.1",
   "title": "Product Comparison",
   "description": "Product Comparison",
