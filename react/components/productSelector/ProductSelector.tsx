@@ -30,9 +30,10 @@ const messages = defineMessages({
 
 interface Props extends InjectedIntlProps {
   showToast?: (input: ToastInput) => void
+  withCondition?: boolean
 }
 
-const ProductSelector = ({ showToast, intl }: Props) => {
+const ProductSelector = ({ showToast, intl, withCondition }: Props) => {
   const cssHandles = useCssHandles(CSS_HANDLES)
   const [isChecked, setIsChecked] = useState(false)
   const valuesFromContext = useProductSummary()
@@ -68,11 +69,18 @@ const ProductSelector = ({ showToast, intl }: Props) => {
     }
   }
 
+  const categoryArrayLength = valuesFromContext?.product?.categories.length;
+  const categoryAvailable = categoryArrayLength === 1 ? valuesFromContext?.product?.categories[0] : valuesFromContext?.product?.categories[categoryArrayLength - 2]
+
   const productSelectorChanged = (e: { target: { checked: boolean } }) => {
     if (e.target.checked) {
       dispatchComparison({
         args: {
-          product: { productId: productId, skuId: itemId },
+          product: {
+            productId: productId,
+            skuId: itemId,
+            categoryId: categoryAvailable,
+          },
         },
         type: 'ADD',
       })
@@ -85,7 +93,11 @@ const ProductSelector = ({ showToast, intl }: Props) => {
     } else {
       dispatchComparison({
         args: {
-          product: { productId: productId, skuId: itemId },
+          product: {
+            productId: productId,
+            skuId: itemId,
+            categoryId: categoryAvailable,
+          },
         },
         type: 'REMOVE',
       })
@@ -103,6 +115,9 @@ const ProductSelector = ({ showToast, intl }: Props) => {
     e.stopPropagation()
   }
 
+  const categoryCheck = (comparisonData?.products[0]?.categoryId &&
+    categoryAvailable !== comparisonData?.products[0]?.categoryId)
+
   return (
     // eslint-disable-next-line jsx-a11y/no-static-element-interactions
     // eslint-disable-next-line jsx-a11y/click-events-have-key-events
@@ -117,6 +132,10 @@ const ProductSelector = ({ showToast, intl }: Props) => {
         name={`${productId}-${itemId}-product-comparison`}
         onChange={productSelectorChanged}
         value={isChecked}
+        disabled={
+          withCondition &&
+          categoryCheck
+        }
       />
     </div>
   )
