@@ -138,6 +138,7 @@ const ComparisonDrawer = ({ showToast, intl, comparisonPageUrl }: Props) => {
                   <span>{intl.formatMessage(messages.products)}</span>
                 </span>
               </div>
+              <div className="flex-grow-1" />
               <div className="flex mr2 ml2">
                 <button
                   onClick={onExpandCollapse}
@@ -148,7 +149,6 @@ const ComparisonDrawer = ({ showToast, intl, comparisonPageUrl }: Props) => {
                     : intl.formatMessage(messages.show)}
                 </button>
               </div>
-              <div className="flex-grow-1" />
               <div className="flex mr2 ml2">
                 <Button
                   block
