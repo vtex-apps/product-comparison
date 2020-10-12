@@ -24,7 +24,7 @@
     "eslint-config-vtex-react": "^4.1.0",
     "prettier": "^1.18.2",
     "tslint-eslint-rules": "^5.4.0",
-    "typescript": "3.8.3"
+    "typescript": "3.9.7"
   },
-  "version": "0.1.0"
+  "version": "0.2.0"
 }
