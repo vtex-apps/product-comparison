@@ -15,6 +15,9 @@ const CSS_HANDLES = [
   'comparisonButtons',
   'compareProductsButton',
   'drawer',
+  'compareProductButtonWrapper',
+  'removeAllWrapper',
+  'hideOrShowText',
 ]
 
 const messages = defineMessages({
@@ -144,12 +147,14 @@ const ComparisonDrawer = ({ showToast, intl, comparisonPageUrl }: Props) => {
                   onClick={onExpandCollapse}
                   className={`${cssHandles.expandCollapseButton} bg-transparent bn-ns t-small c-action-primary hover-c-action-primary pointer`}
                 >
-                  {!isCollapsed
-                    ? intl.formatMessage(messages.hide)
-                    : intl.formatMessage(messages.show)}
+                    <span className={cssHandles.hideOrShowText}>
+                      {!isCollapsed
+                          ? intl.formatMessage(messages.hide)
+                          : intl.formatMessage(messages.show)}
+                    </span>
                 </button>
               </div>
-              <div className="flex mr2 ml2">
+              <div className={`flex mr2 ml2 ${cssHandles.removeAllWrapper}`}>
                 <Button
                   block
                   variation="danger-tertiary"
@@ -159,7 +164,7 @@ const ComparisonDrawer = ({ showToast, intl, comparisonPageUrl }: Props) => {
                   {intl.formatMessage(messages.removeAll)}
                 </Button>
               </div>
-              <div className="flex mr2 ml2" onClick={onClickCompare}>
+              <div className={`flex mr2 ml2 ${cssHandles.compareProductButtonWrapper}`} onClick={onClickCompare}>
                 <Button
                   block
                   size="small"
