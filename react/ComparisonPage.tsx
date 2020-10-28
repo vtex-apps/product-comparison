@@ -13,7 +13,7 @@ import ComparisonContext from './ProductComparisonContext'
 import { InjectedIntlProps, injectIntl, defineMessages } from 'react-intl'
 import './global.css'
 
-const CSS_HANDLES = ['pageContainer', 'sortBy']
+const CSS_HANDLES = ['pageContainer', 'sortBy', 'removeAllItemsButtonWrapper']
 
 interface Props extends InjectedIntlProps {
   children: ReactChildren | ReactChild
@@ -106,7 +106,7 @@ const ComparisonPage = ({ children, intl, showToast }: Props) => {
                   value={`productName`}
                 /> */}
               </div>
-              <div>
+              <div className={cssHandles.removeAllItemsButtonWrapper}>
                 <Button
                   variation="tertiary"
                   size="regular"
