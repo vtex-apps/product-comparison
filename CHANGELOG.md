@@ -9,11 +9,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Added
 - Condition for comparing products based on the category tree of the first product selected for comparison, this condition renders the checkbox unclickable for products that do not match the category of the first selected product.
-- CSS Handles:
-  - `removeAllItemsButtonWrapper`
-  - `compareProductButtonWrapper`
-  - `removeAllWrapper`
-  - `hideOrShowText`
 
 ## [0.2.0] - 2020-10-08
 
@@ -56,4 +51,5 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Added product comparison basic functionalities 
 - Add changelog
 - Product comparison page basic functionality 
+
 
