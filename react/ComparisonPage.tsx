@@ -41,6 +41,14 @@ const messages = defineMessages({
     defaultMessage: '',
     id: 'store/product-comparison.main-page.order-added',
   },
+  compare: {
+    defaultMessage: '',
+    id: 'store/product-comparison.product-selector.compare',
+  },
+  products: {
+    defaultMessage: '',
+    id: 'store/product-comparison.drawer.products',
+  },
 })
 
 const ComparisonPage = ({ children, intl, showToast }: Props) => {
@@ -87,7 +95,7 @@ const ComparisonPage = ({ children, intl, showToast }: Props) => {
         fullWidth
         pageHeader={
           <PageHeader
-            title={`Compare ${comparisonProducts.length} products`}
+            title={`${intl.formatMessage(messages.compare)} ${comparisonProducts.length} ${intl.formatMessage(messages.products).toLowerCase()}`}
             linkLabel={intl.formatMessage(messages.backToProducts)}
             onLinkClick={onBackButtonClick}
           >
