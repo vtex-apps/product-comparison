@@ -215,5 +215,9 @@ drawer|
 closeButton|
 closeButtonContainer|
 productSelectorContainer|
+removeAllItemsButtonWrapper|
+compareProductButtonWrapper|
+removeAllWrapper|
+hideOrShowText|
 
 
