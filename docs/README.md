@@ -197,6 +197,136 @@ Check out the full list of `product-comparison` app below:
 | :------------: | :-----------: | :----------------------------: | :--------:    |
 | `skuSpecificationsToHide` | `[string]` | List of SKU specification fields that should be hidden on the Product Comparison page. The desired SKU specification fields must be separated by comma. | `undefined` |
 
+To have a better undestand, this is how this props is used inside `product-comparison` app. You don't need to care with it because it works this is used internally in the app.
+
+**Product Comparison Drawer**
+```
+"product-comparison-drawer-teste": {
+  "blocks": ["list-context.comparison-product-summary-slider#drawer"]
+},
+"list-context.comparison-product-summary-slider#drawer": {
+  "blocks": ["product-summary.shelf.product-comparison#drawer"],
+  "children": ["slider-layout#comparison-drawer"]
+},
+"slider-layout#comparison-drawer": {
+  "props": {
+    "blockClass": "comparison-drawer",
+    "itemsPerPage": {
+      "desktop": 4,
+      "tablet": 3,
+      "phone": 1
+    },
+    "showPaginationDots": "never",
+    "infinite": true,
+    "fullWidth": true
+  }
+},
+"product-summary.shelf.product-comparison#drawer": {
+  "children": [
+    "product-summary-column#drawer-col2",
+    "product-comparison-block.close-button"
+  ],
+  "props": {
+    "blockClass": "drawer-summary"
+  }
+},
+"product-summary-column#drawer-col2": {
+  "children": ["product-summary-name", "product-summary-price#comparison"],
+  "props": {
+    "blockClass": "drawer-summary-col2"
+  }
+},
+"product-summary-price#comparison": {
+  "props": {
+    "showListPrice": false,
+    "showSellingPriceRange": false,
+    "showLabels": false,
+    "showInstallments": false,
+    "showDiscountValue": false
+  }
+}
+```
+
+**Product Comparison Page**
+```
+"comparison-page": {
+  "children": ["slider-layout-group#comparison-page"]
+},
+
+"slider-layout-group#comparison-page": {
+  "children": [
+    "product-comparison-block.product-summary-row",
+    "product-comparison-block.grouped-product-specifications"
+  ]
+},
+"product-comparison-block.product-summary-row": {
+  "blocks": ["list-context.comparison-product-summary-slider#comparison-page"]
+},
+"list-context.comparison-product-summary-slider#comparison-page": {
+  "blocks": ["product-summary.shelf.product-comparison#comparison-page"],
+  "children": ["slider-layout#comparison-page-product-summary"]
+},
+"product-summary.shelf.product-comparison#comparison-page": {
+  "children": [
+    "flex-layout.row",
+    "product-summary-image#comparison-page",
+    "product-summary-name",
+    "product-summary-space",
+    "product-summary-price#comparison",
+    "product-summary-buy-button"
+  ],
+  "props": {
+    "blockClass": "comparison-page-summary"
+  }
+},
+"flex-layout.row": {
+  "children": ["product-comparison-block.close-button"],
+  "props": {
+    "blockClass": "close",
+    "horizontalAlign": "right"
+  }
+},
+"product-summary-image#comparison-page": {
+  "props": {
+    "width": 200,
+    "heightProp": 200
+  }
+},
+"product-comparison-block.grouped-product-specifications": {
+  "blocks": ["list-context.comparison-row#comparison-page-row"]
+},
+"list-context.comparison-row#comparison-page-row": {
+  "children": ["slider-layout#comparison-no-arrows"]
+},
+"slider-layout#comparison-page-product-summary": {
+  "props": {
+    "blockClass": "comparison-page",
+    "itemsPerPage": {
+      "desktop": 4,
+      "tablet": 3,
+      "phone": 1
+    },
+    "showPaginationDots": "never",
+    "infinite": true,
+    "fullWidth": true
+  }
+},
+"slider-layout#comparison-no-arrows": {
+  "props": {
+    "itemsPerPage": {
+      "desktop": 4,
+      "tablet": 3,
+      "phone": 1
+    },
+    "showPaginationDots": "never",
+    "infinite": true,
+    "fullWidth": true,
+    "blockClass": "comparison-page",
+    "showNavigationArrows": "never"
+  }
+}
+```
+
 # Customization
 
 In order to apply CSS customizations in this and other blocks, follow the instructions given in the recipe on [Using CSS Handles for store customization](https://vtex.io/docs/recipes/style/using-css-handles-for-store-customization).
