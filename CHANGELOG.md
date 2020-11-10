@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Added
+- CSS Handles:
+  - `removeAllItemsButtonWrapper`
+  - `compareProductButtonWrapper`
+  - `removeAllWrapper`
+  - `hideOrShowText`
+  
 ## [0.3.0] - 2020-11-06
 
 ### Added
