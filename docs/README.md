@@ -197,7 +197,7 @@ Check out the full list of `product-comparison` app below:
 | :------------: | :-----------: | :----------------------------: | :--------:    |
 | `skuSpecificationsToHide` | `[string]` | List of SKU specification fields that should be hidden on the Product Comparison page. The desired SKU specification fields must be separated by comma. | `undefined` |
 
-To have a better undestand, this is how this props is used inside `product-comparison` app. You don't need to care with it because it works this is used internally in the app.
+To have a better understand, see how this props is used inside `product-comparison` app. You don't need to care with it because it works internally in the app.
 
 **Product Comparison Drawer**
 ```
