@@ -9,9 +9,16 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Changed
 - Changed Checkbox label, from ProductSummaryRow.tsx to use react intl instead of simple text
-
-### Changed
 - Changed PageHeader title label, from ComparisonPage.tsx to use react intl instead of simple text
+
+## [0.4.0] - 2020-11-10
+
+### Added
+- CSS Handles:
+  - `removeAllItemsButtonWrapper`
+  - `compareProductButtonWrapper`
+  - `removeAllWrapper`
+  - `hideOrShowText`
 
 ## [0.3.0] - 2020-11-06
 
