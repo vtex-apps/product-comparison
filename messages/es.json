@@ -42,5 +42,9 @@
   "store/product-comparison.main-page.sort-by": "Sort by",
   "store/product-comparison.main-page.order-added": "Order added",
   "admin/editor.comparison-grid.product-specification-groups-to-be-removed.title": "Hide Product Specification Group",
-  "admin/editor.comparison-grid.product-specification-groups-to-be-removed.description": "Names of product specification groups which needs to be hidden in comparison page (separate them by comma `,`)"
+  "admin/editor.comparison-grid.product-specification-groups-to-be-removed.description": "Names of product specification groups which needs to be hidden in comparison page (separate them by comma `,`)",
+  "admin/editor.product-comparison-wrapper.title": "Product comparison wrapper",
+  "admin/editor.product-comparison-wrapper.description": "Product comparison wrapper params",
+  "admin/editor.product-comparison-wrapper.maxItemsToCompare": "Maximum number of items to compare",
+  "store/product-comparison.product-selector.upper-limit-exceeded": "Can't add this item to compare, bucket size exceeded"
 }
