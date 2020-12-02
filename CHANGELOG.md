@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Changed
+- Limit comparison bucket size and given it as app configuration parameter
+- Enhance product comparison context to add array of items at once 
+- Show notifications when comparison bucket is full
 
 ## [0.5.0] - 2020-11-19
 
