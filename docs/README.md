@@ -308,6 +308,18 @@ In any desired template, such as the `store.search`, add the `product-comparison
 | :------------: | :-----------: | :----------------------------: | :--------:    |
 | `skuSpecificationsToHide` | `[string]` | List of SKU specification fields that should be hidden on the Product Comparison page. The desired SKU specification fields must be separated by comma. | `undefined` |
 
+
+### Step 6 - Change the comparison bucket size
+
+This is optional configuration, you can change the maximum number of items in comparison bucket by giving fixed number in app configuration. 
+Default value is 10 items, when you exceed maximum limit you will get a notification.
+
+#### Steps
+
+1. Go to `/admin/apps`, you will find `Product Comparison` app under `installed` apps
+2. Click on settings 
+3. Put the maximum comparison bucket size in your application
+
 ## Customization
 
 In order to apply CSS customizations in this and other blocks, follow the instructions given in the recipe on [Using CSS Handles for store customization](https://vtex.io/docs/recipes/style/using-css-handles-for-store-customization).
