@@ -29,22 +29,21 @@ In your theme's `manifest.json` file, add the `Product Comparison` app as a depe
  }
 ```
 
-Now, you are able to use all the blocks exported by the `product-comparison` app. Check out the full list below:
+Now, you are able to use all the blocks exported by the Product Comparison app. Check out the full list below:
 
 | Block name   | Description                |
 | :--------:   | :------------------------: |
-| `product-comparison-drawer` | product comparison drawer which holds items in product summary view | 
-| `list-context.comparison-product-summary-slider` | Product summary list with slider layout |
-| `product-summary.shelf.product-comparison` | Extended product summary block for product comparison features | 
-| `product-comparison-block` | This is the generic component which was extended to develop feature blocks | 
-| `product-comparison-block.selector` | This is the product selector checkbox for product summary |
-| `product-comparison-block.close-button` | This is the remove button for product summary |
-| `product-comparison-block.product-summary-row` : First row of comparison row | 
-| `list-context.comparison-row` | This block represents single row in product comparison page |
-| `product-comparison-block.product-summary-row` | Row with product summary lisging | 
-| `product-comparison-block.grouped-product-specifications` | Product specifications separating with specification groups |
-| `product-comparison-block.product-specifications` | Product specification section (Not comes with default setup) |
-| `product-comparison-block.sku-specifications` | Sku specification section (Not comes with default setup) | 
+| `product-comparison-drawer` | ![https://img.shields.io/badge/-Mandatory-red](https://img.shields.io/badge/-Mandatory-red) Main block responsible for rendering the drawer from the Product Comparison component in which the items will be compared. |
+| `list-context.comparison-product-summary-slider` | Extends the `list-context` block to built the Product Comparison component using the [Slider Layout](https://vtex.io/docs/components/layout-blocks/vtex.slider-layout/.) |
+| `product-summary.shelf.product-comparison` | Extends the default `product-summary.shelf` block (from the [Product Summary app](https://vtex.io/docs/components/all/vtex.product-summary/)) for the Product Comparison component's features. |
+| `product-comparison-block` | Logical block that, once extended (see blocks listed below), is responsible for rendering the Product Comparison component's features. |
+| `product-comparison-block.selector` | Renders the selector checkbox on the Product Comparison component. |
+| `product-comparison-block.close-button` | Renders the close button on the Product Comparison component. |
+| `product-comparison-block.product-summary-row` | Renders the first row to list and compare products on the Product Comparison component. |
+| `list-context.comparison-row` | Extends the `list-context` block to built a row in the Product Comparison page using the [Slider Layout](https://vtex.io/docs/components/layout-blocks/vtex.slider-layout/.) |
+| `product-comparison-block.grouped-product-specifications` | Renders the section for product specification groups. |
+| `product-comparison-block.product-specifications` | Renders the section for product specifications. |
+| `product-comparison-block.sku-specifications` | Renders the section for SKU specifications. |
 
 ### Step 2 - Adding extended interfaces
 
@@ -106,8 +105,23 @@ In the theme's `interfaces.json` file, add the following extented interfaces:
     "search-not-found-layout"
   ]
 },
-...
+```
 
+3. Replace the `product-summary.shelf`, child of the `gallery` block, with the `product-summary.shelf.product-comparison`:
+
+```diff
+"gallery": {
+-  "blocks": ["product-summary.shelf"]
++  "blocks": ["product-summary.shelf.product-comparison#search"]
+}
+...
+```
+
+### Step 4 - Building the Product Comparison component
+
+In any desired template, such as the `store.search`, add the `product-comparison-drawer` block as shown below:
+
+```json
 - "search-result-layout.desktop#search": {
 + "search-result-layout.desktop.product-comparison#search": {
   "children": [
@@ -117,7 +131,7 @@ In the theme's `interfaces.json` file, add the following extented interfaces:
     "flex-layout.row#searchbread",
     "flex-layout.row#searchtitle",
     "flex-layout.row#result",
-+    "product-comparison-drawer"
++   "product-comparison-drawer"
   ],
   "props": {
     "pagination": "show-more",
@@ -131,62 +145,141 @@ In the theme's `interfaces.json` file, add the following extented interfaces:
 ...
 ```
 
-:information_source: *This will add the Product Comparison drawer to the store's search results page..
+> ℹ️ *By adding the `product-comparison-drawer` block as showed above, you will be declaring the following structure behind the scenes:*
 
-3. Replace the `product-summary.shelf`, child of the `gallery` block, with the `product-summary.shelf.product-comparison`:
-
-```diff
-"gallery": {
--  "blocks": ["product-summary.shelf"]
-+  "blocks": ["product-summary.shelf.product-comparison#search"]
+```json
+"product-comparison-drawer": {
+  "blocks": ["list-context.comparison-product-summary-slider#drawer"]
+},
+"list-context.comparison-product-summary-slider#drawer": {
+  "blocks": ["product-summary.shelf.product-comparison#drawer"],
+  "children": ["slider-layout#comparison-drawer"]
+},
+"slider-layout#comparison-drawer": {
+  "props": {
+    "blockClass": "comparison-drawer",
+    "itemsPerPage": {
+      "desktop": 4,
+      "tablet": 3,
+      "phone": 1
+    },
+    "showPaginationDots": "never",
+    "infinite": true,
+    "fullWidth": true
+  }
+},
+"product-summary.shelf.product-comparison#drawer": {
+  "children": [
+    "product-summary-column#drawer-col2",
+    "product-comparison-block.close-button"
+  ],
+  "props": {
+    "blockClass": "drawer-summary"
+  }
+},
+"product-summary-column#drawer-col2": {
+  "children": ["product-summary-name", "product-summary-price#comparison"],
+  "props": {
+    "blockClass": "drawer-summary-col2"
+  }
+},
+"product-summary-price#comparison": {
+  "props": {
+    "showListPrice": false,
+    "showSellingPriceRange": false,
+    "showLabels": false,
+    "showInstallments": false,
+    "showDiscountValue": false
+  }
 }
-...
 ```
 
-### Step 4 - Building the Product Comparison page 
+> ℹ️ *The code above is a default implementation of the Product Comparison component. If any changes are desired, declare the code above in your theme and perform the needed updates according to the available blocks.*
+
+### Step 5 - Building the Product Comparison page
 
 1. In the `/store/blocks` folder, create a new file called `product-comparison.json` and add in it the following JSON:
 
-```diff
-+{
-+  "store.custom#product-comparison-list": {
-+    "children": [
-+      "comparison-page"
-+    ]
-+  },
-+  "product-summary.shelf.product-comparison#search": {
-+    "children": [
-+      "product-summary-image",
-+      "product-summary-name",
-+      "product-summary-attachment-list",
-+      "product-summary-space",
-+      "product-summary-column#1",
-+      "product-comparison-block.selector"
-+    ]
-+  }
-+}
+```json
+"comparison-page": {
+  "children": ["slider-layout-group#comparison-page"]
+},
+
+"slider-layout-group#comparison-page": {
+  "children": [
+    "product-comparison-block.product-summary-row",
+    "product-comparison-block.grouped-product-specifications"
+  ]
+},
+"product-comparison-block.product-summary-row": {
+  "blocks": ["list-context.comparison-product-summary-slider#comparison-page"]
+},
+"list-context.comparison-product-summary-slider#comparison-page": {
+  "blocks": ["product-summary.shelf.product-comparison#comparison-page"],
+  "children": ["slider-layout#comparison-page-product-summary"]
+},
+"product-summary.shelf.product-comparison#comparison-page": {
+  "children": [
+    "flex-layout.row",
+    "product-summary-image#comparison-page",
+    "product-summary-name",
+    "product-summary-space",
+    "product-summary-price#comparison",
+    "product-summary-buy-button"
+  ],
+  "props": {
+    "blockClass": "comparison-page-summary"
+  }
+},
+"flex-layout.row": {
+  "children": ["product-comparison-block.close-button"],
+  "props": {
+    "blockClass": "close",
+    "horizontalAlign": "right"
+  }
+},
+"product-summary-image#comparison-page": {
+  "props": {
+    "width": 200,
+    "heightProp": 200
+  }
+},
+"product-comparison-block.grouped-product-specifications": {
+  "blocks": ["list-context.comparison-row#comparison-page-row"]
+},
+"list-context.comparison-row#comparison-page-row": {
+  "children": ["slider-layout#comparison-no-arrows"]
+},
+"slider-layout#comparison-page-product-summary": {
+  "props": {
+    "blockClass": "comparison-page",
+    "itemsPerPage": {
+      "desktop": 4,
+      "tablet": 3,
+      "phone": 1
+    },
+    "showPaginationDots": "never",
+    "infinite": true,
+    "fullWidth": true
+  }
+},
+"slider-layout#comparison-no-arrows": {
+  "props": {
+    "itemsPerPage": {
+      "desktop": 4,
+      "tablet": 3,
+      "phone": 1
+    },
+    "showPaginationDots": "never",
+    "infinite": true,
+    "fullWidth": true,
+    "blockClass": "comparison-page",
+    "showNavigationArrows": "never"
+  }
+}
 ```
 
-#### `product-comparison-block.grouped-product-specifications` props
-  
-| Prop name      | Type          | Description                    | Default value | 
-| :------------: | :-----------: | :----------------------------: | :-----------: |  
-| `productSpecificationsToHide` | `[string]` | List of product fields that should be hidden in the Product Comparison page. The desired product fields must be separated by comma. | `undefined` | 
-| `productSpecificationGroupsToHide` | `[string]` | List of product specification groups that should be hidden on the Product Comparison page. The desired product specification groups must be separated by comma. | `undefined` |  
-
-#### `product-comparison-block.product-specifications` props
-
-| Prop name      | Type          | Description                    | Default value | 
-| :------------: | :-----------: | :----------------------------: | :--------:    |  
-| `productSpecificationsToHide` | `[string]` | List of product fields that should be hidden in the Product Comparison page. The desired product fields must be separated by comma. | `undefined` | 
-        
-#### `product-comparison-block.sku-specifications` props
-
-| Prop name      | Type          | Description                    | Default value | 
-| :------------: | :-----------: | :----------------------------: | :--------:    |  
-| `skuSpecificationsToHide` | `[string]` | List of SKU specification fields that should be hidden on the Product Comparison page. The desired SKU specification fields must be separated by comma. | `undefined` | 
-
-2. In the theme's `routes.json` file, add the following new routes for the Product Comparison page:
+2. In the theme's `routes.json` file, add a new route for the Product Comparison page:
 
 ```diff
 +{
@@ -196,13 +289,32 @@ In the theme's `interfaces.json` file, add the following extented interfaces:
 +}
 ```
 
-# Customization
+#### `product-comparison-block.grouped-product-specifications` props
+
+| Prop name      | Type          | Description                    | Default value |
+| :------------: | :-----------: | :----------------------------: | :-----------: |
+| `productSpecificationsToHide` | `[string]` | List of product fields that should be hidden in the Product Comparison page. The desired product fields must be separated by comma. | `undefined` |
+| `productSpecificationGroupsToHide` | `[string]` | List of product specification groups that should be hidden on the Product Comparison page. The desired product specification groups must be separated by comma. | `undefined` |
+
+#### `product-comparison-block.product-specifications` props
+
+| Prop name      | Type          | Description                    | Default value |
+| :------------: | :-----------: | :----------------------------: | :--------:    |
+| `productSpecificationsToHide` | `[string]` | List of product fields that should be hidden in the Product Comparison page. The desired product fields must be separated by comma. | `undefined` |
+
+#### `product-comparison-block.sku-specifications` props
+
+| Prop name      | Type          | Description                    | Default value |
+| :------------: | :-----------: | :----------------------------: | :--------:    |
+| `skuSpecificationsToHide` | `[string]` | List of SKU specification fields that should be hidden on the Product Comparison page. The desired SKU specification fields must be separated by comma. | `undefined` |
+
+## Customization
 
 In order to apply CSS customizations in this and other blocks, follow the instructions given in the recipe on [Using CSS Handles for store customization](https://vtex.io/docs/recipes/style/using-css-handles-for-store-customization).
 
 | CSS Handles                  |
 | :--------------------------: |
-| `closeButton`                | 
+| `closeButton`                |
 | `closeButtonContainer`       |
 | `compareProductsButton`      |
 | `comparisonButtons`          |
