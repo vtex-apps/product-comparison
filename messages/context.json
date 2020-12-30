@@ -1,4 +1,6 @@
 {
+  "admin/editor.product-summary-row.title":"Comparison row",
+  "admin/editor.product-summary-row.description":"",
   "editor.countdown.title": "Countdown",
   "editor.countdown.description": "Countdown component",
   "admin/editor.comparison-grid.title": "Comparison Grid",
