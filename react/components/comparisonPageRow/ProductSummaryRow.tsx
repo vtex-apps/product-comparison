@@ -22,7 +22,6 @@ const ProductSummaryRow = ({isShowDifferenceDefault}:ProductSummaryRowProps) => 
   const cssHandles = useCssHandles(CSS_HANDLES)
   const [isShowDifferenceByDefault, changesChecked] = useState(isShowDifferenceDefault)
   const [showDifferences, setShowDifferences] = useState(false)
-  console.log("state shown->"+showDifferences)
   const {
     useProductComparisonState,
     useProductComparisonDispatch,
@@ -48,7 +47,6 @@ const ProductSummaryRow = ({isShowDifferenceDefault}:ProductSummaryRowProps) => 
       (comparisonData.showDifferences || isShowDifferenceByDefault)
     setShowDifferences(showDifferences)
   }, [comparisonData])
-  debugger
   const onSelectorChanged = (e: { target: { checked: boolean } }) => {
     changesChecked(!isShowDifferenceByDefault)
     dispatchComparison({
