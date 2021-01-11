@@ -10,6 +10,7 @@ interface ToastInput {
 interface ProductToCompare {
   productId: string
   skuId: string
+  categoryId?: string
 }
 interface Sku {
   itemId: string
