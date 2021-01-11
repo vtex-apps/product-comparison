@@ -10,7 +10,6 @@ declare module 'vtex.styleguide' {
   export const PageHeader: ComponentType<InputProps>
   export const PageBlock: ComponentType<InputProps>
   export const ToastProvider: ComponentType<InputProps>
-  export const Spinner: ComponentType<InputProps>
   export const ToastConsumer: ComponentType<InputProps>
   export const Dropdown: ComponentType<InputProps>
   export const withToast

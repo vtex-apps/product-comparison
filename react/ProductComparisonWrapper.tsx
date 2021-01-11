@@ -5,7 +5,6 @@ import { ToastProvider } from 'vtex.styleguide'
 
 interface Props {
   children: ReactChildren | ReactChild
-  maxNumberOfItemsToCompare: number | undefined
 }
 const ProductComparisonWrapper = ({ children }: Props) => {
   const { ProductComparisonProvider } = ComparisonContext

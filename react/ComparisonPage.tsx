@@ -1,16 +1,16 @@
-import React, { ReactChild, ReactChildren } from 'react'
-import { isEmpty, pathOr } from 'ramda'
+import React, { ReactChildren, ReactChild } from 'react'
+import { pathOr, isEmpty } from 'ramda'
 import { useCssHandles } from 'vtex.css-handles'
 import {
-  Button,
   Layout,
-  PageBlock,
   PageHeader,
-  Spinner,
+  PageBlock,
+  Button,
   withToast,
+  // Dropdown,
 } from 'vtex.styleguide'
 import ComparisonContext from './ProductComparisonContext'
-import { defineMessages, InjectedIntlProps, injectIntl } from 'react-intl'
+import { InjectedIntlProps, injectIntl, defineMessages } from 'react-intl'
 import './global.css'
 
 const CSS_HANDLES = ['pageContainer', 'sortBy', 'removeAllItemsButtonWrapper']
@@ -80,9 +80,7 @@ const ComparisonPage = ({ children, intl, showToast }: Props) => {
   }
 
   return isEmpty(comparisonProducts) ? (
-    <div className={'mw3 center'}>
-      <Spinner />
-    </div>
+    <div />
   ) : (
     <div className={`${cssHandles.pageContainer} mw9 center`}>
       <Layout
