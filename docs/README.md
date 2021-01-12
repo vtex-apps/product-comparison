@@ -313,6 +313,18 @@ In any desired template, such as the `store.search`, add the `product-comparison
 | Prop name      | Type          | Description                    | Default value |
 | :------------: | :-----------: | :----------------------------: | :--------:    |
 | `isShowDifferenceDefault` | `boolean` | Set the "show only differences" checkbox to true as the default value on the comparison page. | `false` |
+=======
+
+### Step 6 - Change the comparison bucket size
+
+This is optional configuration, you can change the maximum number of items in comparison bucket by giving fixed number in app configuration. 
+Default value is 10 items, when you exceed maximum limit you will get a notification.
+
+#### Steps
+
+1. Go to `/admin/apps`, you will find `Product Comparison` app under `installed` apps
+2. Click on settings 
+3. Put the maximum comparison bucket size in your application
 
 ## Customization
 

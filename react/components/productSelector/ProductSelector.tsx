@@ -26,6 +26,10 @@ const messages = defineMessages({
     defaultMessage: '',
     id: 'store/product-comparison.product-selector.compare',
   },
+  comparisonUpperLimit: {
+    defaultMessage: '',
+    id: 'store/product-comparison.product-selector.upper-limit-exceeded',
+  }
 })
 
 interface Props extends InjectedIntlProps {
@@ -49,16 +53,22 @@ const ProductSelector = ({ showToast, intl }: Props) => {
   const itemId = pathOr('', ['selectedItem', 'itemId'], valuesFromContext)
 
   const isDrawerCollapsed = pathOr(false, ['isDrawerCollapsed'], comparisonData)
+  const productsSelected = pathOr([], ['products'], comparisonData)
+  const maxItemsToCompare = pathOr(
+    0,
+    ['maxNumberOfItemsToCompare'],
+    comparisonData
+  )
 
   useEffect(() => {
     const selectedProducts =
       productId && itemId
         ? find(
             allPass([propEq('productId', productId), propEq('skuId', itemId)])
-          )(comparisonData.products)
+          )(productsSelected)
         : []
     setIsChecked(selectedProducts && !isEmpty(selectedProducts))
-  }, [comparisonData.products, itemId, productId])
+  }, [productsSelected, itemId, productId])
 
   const showMessage = (message: string, show: boolean = true) => {
     if (showToast && show) {
@@ -69,7 +79,10 @@ const ProductSelector = ({ showToast, intl }: Props) => {
   }
 
   const productSelectorChanged = (e: { target: { checked: boolean } }) => {
-    if (e.target.checked) {
+    if (e.target.checked && productsSelected.length === maxItemsToCompare) {
+      setIsChecked(false)
+      showMessage(`${intl.formatMessage(messages.comparisonUpperLimit)}`, true)
+    } else if (e.target.checked) {
       dispatchComparison({
         args: {
           product: { productId: productId, skuId: itemId },
