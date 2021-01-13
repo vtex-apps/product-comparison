@@ -308,6 +308,12 @@ In any desired template, such as the `store.search`, add the `product-comparison
 | :------------: | :-----------: | :----------------------------: | :--------:    |
 | `skuSpecificationsToHide` | `[string]` | List of SKU specification fields that should be hidden on the Product Comparison page. The desired SKU specification fields must be separated by comma. | `undefined` |
 
+#### `product-comparison-block.product-summary-row` props
+
+| Prop name      | Type          | Description                    | Default value |
+| :------------: | :-----------: | :----------------------------: | :--------:    |
+| `isShowDifferenceDefault` | `boolean` | Set the "show only differences" checkbox to true as the default value on the comparison page. | `false` |
+=======
 
 ### Step 6 - Change the comparison bucket size
 
