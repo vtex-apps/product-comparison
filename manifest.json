@@ -1,7 +1,7 @@
 {
   "vendor": "vtex",
   "name": "product-comparison",
-  "version": "0.5.0",
+  "version": "0.8.0",
   "title": "Product Comparison",
   "description": "Product Comparison",
   "defaultLocale": "pt-BR",
@@ -27,7 +27,19 @@
     "vtex.slider-layout": "0.x",
     "vtex.list-context": "0.x",
     "vtex.product-list-context": "0.x",
-    "vtex.flex-layout": "0.x"
+    "vtex.flex-layout": "0.x",
+    "vtex.apps-graphql": "2.x"
+  },
+  "settingsSchema": {
+    "title": "Product comparison",
+    "type": "object",
+    "properties": {
+      "maxNumberOfItemsToCompare": {
+        "title": "Comparison bucket upper limit",
+        "description": "Maximum number of items to compare. Default value is 10",
+        "type": "number"
+      }
+    }
   },
   "$schema": "https://raw.githubusercontent.com/vtex/node-vtex-api/master/gen/manifest.schema"
 }

@@ -8,11 +8,15 @@ import ComparisonProductContext from '../../ComparisonProductContext'
 import { InjectedIntlProps, injectIntl, defineMessages } from 'react-intl'
 import './row.css'
 
+interface ProductSummaryRowProps {
+  isShowDifferenceDefault: boolean
+}
+
 const messages = defineMessages({
-  show_differences: {
+  showDifferences: {
     defaultMessage: '',
     id: 'store/product-comparison.product-summary-row.show-differences',
-  }
+  },
 })
 
 const CSS_HANDLES = [
@@ -21,11 +25,15 @@ const CSS_HANDLES = [
   'showDifferencesContainer',
 ]
 
-const ProductSummaryRow = ({ intl }: InjectedIntlProps) => {
+const ProductSummaryRow = ({
+  isShowDifferenceDefault,
+  intl,
+}: ProductSummaryRowProps & InjectedIntlProps) => {
   const cssHandles = useCssHandles(CSS_HANDLES)
-
+  const [isShowDifferenceByDefault, changesChecked] = useState(
+    isShowDifferenceDefault
+  )
   const [showDifferences, setShowDifferences] = useState(false)
-
   const {
     useProductComparisonState,
     useProductComparisonDispatch,
@@ -48,11 +56,11 @@ const ProductSummaryRow = ({ intl }: InjectedIntlProps) => {
     const showDifferences =
       comparisonData.products &&
       comparisonData.products.length > 1 &&
-      comparisonData.showDifferences
+      (comparisonData.showDifferences || isShowDifferenceByDefault)
     setShowDifferences(showDifferences)
-  }, [comparisonData])
-
+  }, [comparisonData, isShowDifferenceByDefault])
   const onSelectorChanged = (e: { target: { checked: boolean } }) => {
+    changesChecked(!isShowDifferenceByDefault)
     dispatchComparison({
       args: {
         showDifferences: e.target.checked,
@@ -73,7 +81,7 @@ const ProductSummaryRow = ({ intl }: InjectedIntlProps) => {
             <Checkbox
               checked={showDifferences}
               id={`id-differences`}
-              label={intl.formatMessage(messages.show_differences)}
+              label={intl.formatMessage(messages.showDifferences)}
               name={`name-differences`}
               onChange={onSelectorChanged}
               value={showDifferences}
@@ -86,6 +94,19 @@ const ProductSummaryRow = ({ intl }: InjectedIntlProps) => {
       <ExtensionPoint id="list-context.comparison-product-summary-slider" />
     </div>
   )
+}
+ProductSummaryRow.schema = {
+  title: 'editor.product-summary-row.title',
+  description: 'editor.product-summary-row.description',
+  type: 'object',
+  properties: {
+    isShowDifferenceDefault: {
+      title: 'Show difference',
+      description: '',
+      default: false,
+      type: 'boolean',
+    },
+  },
 }
 
 export default injectIntl(ProductSummaryRow)
