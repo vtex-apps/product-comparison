@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { pathOr, isEmpty } from 'ramda'
 import { ExtensionPoint } from 'vtex.render-runtime'
-import ComparisonContext from '../../ProductComparisonContext'
+import ComparisonContext, { Dispatch } from '../../ProductComparisonContext'
 import { useCssHandles } from 'vtex.css-handles'
 import { Checkbox } from 'vtex.styleguide'
 import ComparisonProductContext from '../../ComparisonProductContext'
@@ -18,8 +18,18 @@ const CSS_HANDLES = [
   'showDifferencesContainer',
 ]
 
+const setShowDifferenceFirstTime = (isShowDifferenceDefault :boolean,dispatchComparison :Dispatch) =>{
+  dispatchComparison({
+    args: {
+      showDifferences: isShowDifferenceDefault,
+    },
+    type: 'SET_SHOW_DIFFERENCES',
+  })
+}
+
 const ProductSummaryRow = ({isShowDifferenceDefault}:ProductSummaryRowProps) => {
   const cssHandles = useCssHandles(CSS_HANDLES)
+  
   const [isShowDifferenceByDefault, changesChecked] = useState(isShowDifferenceDefault)
   const [showDifferences, setShowDifferences] = useState(false)
   const {
@@ -39,14 +49,19 @@ const ProductSummaryRow = ({isShowDifferenceDefault}:ProductSummaryRowProps) => 
     comparisonData
   )
   const products = pathOr([] as ProductToCompare[], ['products'], productData)
+  
+  useEffect(() =>{
+    setShowDifferenceFirstTime(isShowDifferenceByDefault,dispatchComparison)
+  }, [])
 
   useEffect(() => {
     const showDifferences =
       comparisonData.products &&
       comparisonData.products.length > 1 &&
-      (comparisonData.showDifferences || isShowDifferenceByDefault)
+      comparisonData.showDifferences
     setShowDifferences(showDifferences)
   }, [comparisonData])
+
   const onSelectorChanged = (e: { target: { checked: boolean } }) => {
     changesChecked(!isShowDifferenceByDefault)
     dispatchComparison({
