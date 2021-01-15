@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [0.6.0] - 2021-01-11
+
+### Added
+- Implemented loading behaviour for products comparison page.
+
+### Changed
+- Limit comparison bucket size and given it as app configuration parameter
+- Enhance product comparison context to add array of items at once 
+- Show notifications when comparison bucket is full
+
 ## [0.5.0] - 2020-11-19
 
 ## [0.4.0] - 2020-11-10
