@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Changed
+- Update compare button url to render runtime navigate function 
+
 ## [0.8.0] - 2021-01-13
 
 ## [0.7.0] - 2021-01-12
