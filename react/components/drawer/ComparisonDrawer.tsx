@@ -124,6 +124,16 @@ const ComparisonDrawer = ({ showToast, intl, comparisonPageUrl }: Props) => {
     }
   }
 
+  const navigateToComparisonPage = () => {
+    const url =
+      comparisonProducts.length < 2
+        ? '#'
+        : comparisonPageUrl
+        ? comparisonPageUrl
+        : '/product-comparison'
+    navigate({ to: url })
+  }
+
   return isEmpty(comparisonProducts) ? (
     <div />
   ) : (
@@ -149,11 +159,11 @@ const ComparisonDrawer = ({ showToast, intl, comparisonPageUrl }: Props) => {
                   onClick={onExpandCollapse}
                   className={`${cssHandles.expandCollapseButton} bg-transparent bn-ns t-small c-action-primary hover-c-action-primary pointer`}
                 >
-                   <span className={cssHandles.hideOrShowText}>
+                  <span className={cssHandles.hideOrShowText}>
                     {!isCollapsed
                       ? intl.formatMessage(messages.hide)
                       : intl.formatMessage(messages.show)}
-                    </span>
+                  </span>
                 </button>
               </div>
               <div className={`flex mr2 ml2 ${cssHandles.removeAllWrapper}`}>
@@ -166,16 +176,15 @@ const ComparisonDrawer = ({ showToast, intl, comparisonPageUrl }: Props) => {
                   {intl.formatMessage(messages.removeAll)}
                 </Button>
               </div>
-              <div className={`flex mr2 ml2 ${cssHandles.compareProductButtonWrapper}`} onClick={onClickCompare}>
+              <div
+                className={`flex mr2 ml2 ${cssHandles.compareProductButtonWrapper}`}
+                onClick={onClickCompare}
+              >
                 <Button
                   block
                   size="small"
                   className={`${cssHandles.compareProductsButton} ma3`}
-                  onClick={() => navigate({ to: comparisonProducts.length < 2
-                    ? '#'
-                    : comparisonPageUrl
-                    ? comparisonPageUrl
-                    : '/product-comparison' })}
+                  onClick={navigateToComparisonPage}
                 >
                   {intl.formatMessage(messages.compare)}
                 </Button>
