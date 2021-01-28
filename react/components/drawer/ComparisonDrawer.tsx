@@ -7,6 +7,7 @@ import { Button, Collapsible, withToast } from 'vtex.styleguide'
 import { ExtensionPoint } from 'vtex.render-runtime'
 import { useCssHandles } from 'vtex.css-handles'
 import { InjectedIntlProps, injectIntl, defineMessages } from 'react-intl'
+import { useRuntime } from 'vtex.render-runtime'
 import './drawer.css'
 
 const CSS_HANDLES = [
@@ -66,6 +67,7 @@ interface Props extends InjectedIntlProps {
 
 const ComparisonDrawer = ({ showToast, intl, comparisonPageUrl }: Props) => {
   const cssHandles = useCssHandles(CSS_HANDLES)
+  const { navigate } = useRuntime()
   // const [isCollapsed, setCollapsed] = useState(false)
   const {
     useProductComparisonState,
@@ -169,13 +171,11 @@ const ComparisonDrawer = ({ showToast, intl, comparisonPageUrl }: Props) => {
                   block
                   size="small"
                   className={`${cssHandles.compareProductsButton} ma3`}
-                  href={
-                    comparisonProducts.length < 2
-                      ? '#'
-                      : comparisonPageUrl
-                      ? comparisonPageUrl
-                      : '/product-comparison'
-                  }
+                  onClick={() => navigate({ to: comparisonProducts.length < 2
+                    ? '#'
+                    : comparisonPageUrl
+                    ? comparisonPageUrl
+                    : '/product-comparison' })}
                 >
                   {intl.formatMessage(messages.compare)}
                 </Button>
