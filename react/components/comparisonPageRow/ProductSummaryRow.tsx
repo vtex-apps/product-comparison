@@ -7,17 +7,21 @@ import { Checkbox } from 'vtex.styleguide'
 import ComparisonProductContext from '../../ComparisonProductContext'
 import './row.css'
 
+interface ProductSummaryRowProps{
+  isShowDifferenceDefault:boolean;
+}
+ 
+
 const CSS_HANDLES = [
   'productSummaryRowContainer',
   'fieldNameCol',
   'showDifferencesContainer',
 ]
 
-const ProductSummaryRow = () => {
+const ProductSummaryRow = ({isShowDifferenceDefault}:ProductSummaryRowProps) => {
   const cssHandles = useCssHandles(CSS_HANDLES)
-
+  const [isShowDifferenceByDefault, changesChecked] = useState(isShowDifferenceDefault)
   const [showDifferences, setShowDifferences] = useState(false)
-
   const {
     useProductComparisonState,
     useProductComparisonDispatch,
@@ -40,11 +44,11 @@ const ProductSummaryRow = () => {
     const showDifferences =
       comparisonData.products &&
       comparisonData.products.length > 1 &&
-      comparisonData.showDifferences
+      (comparisonData.showDifferences || isShowDifferenceByDefault)
     setShowDifferences(showDifferences)
   }, [comparisonData])
-
   const onSelectorChanged = (e: { target: { checked: boolean } }) => {
+    changesChecked(!isShowDifferenceByDefault)
     dispatchComparison({
       args: {
         showDifferences: e.target.checked,
@@ -79,5 +83,17 @@ const ProductSummaryRow = () => {
     </div>
   )
 }
-
+ProductSummaryRow.schema = {
+  title: 'editor.product-summary-row.title',
+  description: 'editor.product-summary-row.description',
+  type: 'object',
+  properties: {
+    isShowDifferenceDefault:{
+      title:'Show difference',
+      description:'',
+      default:false,
+      type:'boolean'
+    }
+  }
+}
 export default ProductSummaryRow

@@ -1,7 +1,7 @@
 {
   "vendor": "vtex",
   "name": "product-comparison",
-  "version": "0.5.0",
+  "version": "0.8.0",
   "title": "Product Comparison",
   "description": "Product Comparison",
   "defaultLocale": "pt-BR",
