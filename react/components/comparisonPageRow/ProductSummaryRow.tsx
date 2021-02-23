@@ -6,6 +6,7 @@ import { useCssHandles } from 'vtex.css-handles'
 import { Checkbox } from 'vtex.styleguide'
 import ComparisonProductContext from '../../ComparisonProductContext'
 import './row.css'
+import { usePixel } from 'vtex.pixel-manager'
 
 const CSS_HANDLES = [
   'productSummaryRowContainer',
@@ -36,6 +37,21 @@ const ProductSummaryRow = () => {
   )
   const products = pathOr([] as ProductToCompare[], ['products'], productData)
 
+  const { push } = usePixel()
+
+  const pixelEvent = (products: object, length: number) => {
+    if (!!length && length >= 2) {
+      push({
+        event: 'productComparison',
+        products,
+        compareProductN: length,
+      })
+    }
+  }
+  useEffect(() => {
+    pixelEvent(comparisonData.products, comparisonData.products.length)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
   useEffect(() => {
     const showDifferences =
       comparisonData.products &&
