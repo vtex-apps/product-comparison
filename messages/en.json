@@ -41,6 +41,8 @@
   "store/product-comparison.main-page.back-to-products": "Back to products list",
   "store/product-comparison.main-page.sort-by": "Sort by",
   "store/product-comparison.main-page.order-added": "Order added",
+  "store/product-comparison.main-page.title": "Compare {productsLength} products",
+  "store/product-comparison.product-summary-row.show-differences": "Show only differences",
   "admin/editor.comparison-grid.product-specification-groups-to-be-removed.title": "Hide Product Specification Group",
   "admin/editor.comparison-grid.product-specification-groups-to-be-removed.description": "Names of product specification groups which needs to be hidden in comparison page (separate them by comma `,`)",
   "store/product-comparison.product-selector.upper-limit-exceeded": "Can't add this item to compare, bucket size exceeded"

@@ -5,12 +5,19 @@ import ComparisonContext from '../../ProductComparisonContext'
 import { useCssHandles } from 'vtex.css-handles'
 import { Checkbox } from 'vtex.styleguide'
 import ComparisonProductContext from '../../ComparisonProductContext'
+import { InjectedIntlProps, injectIntl, defineMessages } from 'react-intl'
 import './row.css'
 
-interface ProductSummaryRowProps{
-  isShowDifferenceDefault:boolean;
+interface ProductSummaryRowProps {
+  isShowDifferenceDefault: boolean
 }
- 
+
+const messages = defineMessages({
+  showDifferences: {
+    defaultMessage: '',
+    id: 'store/product-comparison.product-summary-row.show-differences',
+  },
+})
 
 const CSS_HANDLES = [
   'productSummaryRowContainer',
@@ -18,9 +25,14 @@ const CSS_HANDLES = [
   'showDifferencesContainer',
 ]
 
-const ProductSummaryRow = ({isShowDifferenceDefault}:ProductSummaryRowProps) => {
+const ProductSummaryRow = ({
+  isShowDifferenceDefault,
+  intl,
+}: ProductSummaryRowProps & InjectedIntlProps) => {
   const cssHandles = useCssHandles(CSS_HANDLES)
-  const [isShowDifferenceByDefault, changesChecked] = useState(isShowDifferenceDefault)
+  const [isShowDifferenceByDefault, changesChecked] = useState(
+    isShowDifferenceDefault
+  )
   const [showDifferences, setShowDifferences] = useState(false)
   const {
     useProductComparisonState,
@@ -46,7 +58,7 @@ const ProductSummaryRow = ({isShowDifferenceDefault}:ProductSummaryRowProps) => 
       comparisonData.products.length > 1 &&
       (comparisonData.showDifferences || isShowDifferenceByDefault)
     setShowDifferences(showDifferences)
-  }, [comparisonData])
+  }, [comparisonData, isShowDifferenceByDefault])
   const onSelectorChanged = (e: { target: { checked: boolean } }) => {
     changesChecked(!isShowDifferenceByDefault)
     dispatchComparison({
@@ -69,7 +81,7 @@ const ProductSummaryRow = ({isShowDifferenceDefault}:ProductSummaryRowProps) => 
             <Checkbox
               checked={showDifferences}
               id={`id-differences`}
-              label="Show only differences"
+              label={intl.formatMessage(messages.showDifferences)}
               name={`name-differences`}
               onChange={onSelectorChanged}
               value={showDifferences}
@@ -88,12 +100,13 @@ ProductSummaryRow.schema = {
   description: 'editor.product-summary-row.description',
   type: 'object',
   properties: {
-    isShowDifferenceDefault:{
-      title:'Show difference',
-      description:'',
-      default:false,
-      type:'boolean'
-    }
-  }
+    isShowDifferenceDefault: {
+      title: 'Show difference',
+      description: '',
+      default: false,
+      type: 'boolean',
+    },
+  },
 }
-export default ProductSummaryRow
+
+export default injectIntl(ProductSummaryRow)
