@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [0.9.0] - 2021-02-24
+- Translation for main page title
+- Translation for "Show only differences" button
+
+### Changed
+- Update compare button url to render runtime navigate function 
+- Extract navigate to a function
+
+## [0.8.0] - 2021-01-13
+
+## [0.7.0] - 2021-01-12
+
 ## [0.6.0] - 2021-01-11
 
 ### Added
