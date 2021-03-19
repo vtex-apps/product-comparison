@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [0.9.1] - 2021-03-19
+
 ## [0.9.0] - 2021-02-24
 - Translation for main page title
 - Translation for "Show only differences" button
