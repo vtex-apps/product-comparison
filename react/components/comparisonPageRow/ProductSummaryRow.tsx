@@ -6,8 +6,9 @@ import { useCssHandles } from 'vtex.css-handles'
 import { Checkbox } from 'vtex.styleguide'
 import ComparisonProductContext from '../../ComparisonProductContext'
 import './row.css'
+import { InjectedIntlProps, injectIntl, defineMessages } from 'react-intl'
 
-interface ProductSummaryRowProps{
+interface ProductSummaryRowProps extends InjectedIntlProps {
   isShowDifferenceDefault:boolean;
 }
  
@@ -27,7 +28,15 @@ const setShowDifferenceFirstTime = (isShowDifferenceDefault :boolean,dispatchCom
   })
 }
 
-const ProductSummaryRow = ({isShowDifferenceDefault}:ProductSummaryRowProps) => {
+const messages = defineMessages({
+  showDifferences: {
+    defaultMessage: '',
+    id: 'store/product-comparison.product-summary-row.show-differences',
+  },
+})
+
+
+const ProductSummaryRow = ({ isShowDifferenceDefault, intl }: ProductSummaryRowProps) => {
   const cssHandles = useCssHandles(CSS_HANDLES)
   
   const [isShowDifferenceByDefault, changesChecked] = useState(isShowDifferenceDefault)
@@ -71,7 +80,6 @@ const ProductSummaryRow = ({isShowDifferenceDefault}:ProductSummaryRowProps) => 
       type: 'SET_SHOW_DIFFERENCES',
     })
   }
-
   return isEmpty(comparisonProducts) ? (
     <div />
   ) : (
@@ -84,7 +92,7 @@ const ProductSummaryRow = ({isShowDifferenceDefault}:ProductSummaryRowProps) => 
             <Checkbox
               checked={showDifferences}
               id={`id-differences`}
-              label="Show only differences"
+              label={intl.formatMessage(messages.showDifferences)}
               name={`name-differences`}
               onChange={onSelectorChanged}
               value={showDifferences}
@@ -111,4 +119,4 @@ ProductSummaryRow.schema = {
     }
   }
 }
-export default ProductSummaryRow
+export default injectIntl(ProductSummaryRow)
