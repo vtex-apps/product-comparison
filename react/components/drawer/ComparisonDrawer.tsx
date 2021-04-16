@@ -20,6 +20,10 @@ const CSS_HANDLES = [
   'compareProductButtonWrapper',
   'removeAllWrapper',
   'hideOrShowText',
+  'drawerTitleOuterContainer',
+  'drawerTitleInnerContainer',
+  'drawerOpened',
+  'drawerClosed'
 ]
 
 const messages = defineMessages({
@@ -139,7 +143,7 @@ const ComparisonDrawer = ({ showToast, intl, comparisonPageUrl }: Props) => {
     <div />
   ) : (
     <div
-      className={`${cssHandles.drawerContainer} bg-white w-100 bt-ns b--light-gray flex justify-center`}
+      className={`${cssHandles.drawerContainer} ${isCollapsed ? cssHandles.drawerClosed : cssHandles.drawerOpened} bg-white w-100 bt-ns b--light-gray flex justify-center`}
     >
       <div className="mw9 w-100 ">
         <Collapsible
@@ -147,8 +151,8 @@ const ComparisonDrawer = ({ showToast, intl, comparisonPageUrl }: Props) => {
             <div
               className={`${cssHandles.comparisonButtons} flex flex-row ma3`}
             >
-              <div className="flex items-center-ns mr2 ml2">
-                <span className="fw5 black">
+              <div className={`flex items-center-ns mr2 ml2  ${cssHandles.drawerTitleOuterContainer}`}>
+                <span className={`fw5 black  ${cssHandles.drawerTitleInnerContainer}`}>
                   <span>{intl.formatMessage(messages.compare)} </span>{' '}
                   <span>{comparisonProducts.length}</span>{' '}
                   <span>{intl.formatMessage(messages.products)}</span>
