@@ -6,8 +6,41 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
 ### Added
 - Added pixel event
+
+## [0.9.2] - 2021-04-09
+
+### Changed
+
+- Changed hardcoded label string "Show only differences" to use predefined message
+
+## [0.9.1] - 2021-03-19
+
+## [0.9.0] - 2021-02-24
+- Translation for main page title
+- Translation for "Show only differences" button
+
+### Changed
+- Update compare button url to render runtime navigate function 
+- Extract navigate to a function
+
+## [0.8.0] - 2021-01-13
+
+## [0.7.0] - 2021-01-12
+
+## [0.6.0] - 2021-01-11
+
+### Added
+- Implemented loading behaviour for products comparison page.
+
+### Changed
+- Limit comparison bucket size and given it as app configuration parameter
+- Enhance product comparison context to add array of items at once 
+- Show notifications when comparison bucket is full
+
+
 ## [0.5.0] - 2020-11-19
 
 ## [0.4.0] - 2020-11-10

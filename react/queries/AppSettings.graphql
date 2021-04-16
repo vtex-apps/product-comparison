@@ -1,0 +1,6 @@
+query AppSettings($version: String) {
+  appSettings(app: "vtex.product-comparison", version: $version)
+    @context(provider: "vtex.apps-graphql") {
+    message
+  }
+}

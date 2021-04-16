@@ -7,6 +7,7 @@ import { Button, Collapsible, withToast } from 'vtex.styleguide'
 import { ExtensionPoint } from 'vtex.render-runtime'
 import { useCssHandles } from 'vtex.css-handles'
 import { InjectedIntlProps, injectIntl, defineMessages } from 'react-intl'
+import { useRuntime } from 'vtex.render-runtime'
 import './drawer.css'
 
 const CSS_HANDLES = [
@@ -66,6 +67,7 @@ interface Props extends InjectedIntlProps {
 
 const ComparisonDrawer = ({ showToast, intl, comparisonPageUrl }: Props) => {
   const cssHandles = useCssHandles(CSS_HANDLES)
+  const { navigate } = useRuntime()
   // const [isCollapsed, setCollapsed] = useState(false)
   const {
     useProductComparisonState,
@@ -122,6 +124,16 @@ const ComparisonDrawer = ({ showToast, intl, comparisonPageUrl }: Props) => {
     }
   }
 
+  const navigateToComparisonPage = () => {
+    const url =
+      comparisonProducts.length < 2
+        ? '#'
+        : comparisonPageUrl
+        ? comparisonPageUrl
+        : '/product-comparison'
+    navigate({ to: url })
+  }
+
   return isEmpty(comparisonProducts) ? (
     <div />
   ) : (
@@ -147,11 +159,11 @@ const ComparisonDrawer = ({ showToast, intl, comparisonPageUrl }: Props) => {
                   onClick={onExpandCollapse}
                   className={`${cssHandles.expandCollapseButton} bg-transparent bn-ns t-small c-action-primary hover-c-action-primary pointer`}
                 >
-                   <span className={cssHandles.hideOrShowText}>
+                  <span className={cssHandles.hideOrShowText}>
                     {!isCollapsed
                       ? intl.formatMessage(messages.hide)
                       : intl.formatMessage(messages.show)}
-                    </span>
+                  </span>
                 </button>
               </div>
               <div className={`flex mr2 ml2 ${cssHandles.removeAllWrapper}`}>
@@ -164,18 +176,15 @@ const ComparisonDrawer = ({ showToast, intl, comparisonPageUrl }: Props) => {
                   {intl.formatMessage(messages.removeAll)}
                 </Button>
               </div>
-              <div className={`flex mr2 ml2 ${cssHandles.compareProductButtonWrapper}`} onClick={onClickCompare}>
+              <div
+                className={`flex mr2 ml2 ${cssHandles.compareProductButtonWrapper}`}
+                onClick={onClickCompare}
+              >
                 <Button
                   block
                   size="small"
                   className={`${cssHandles.compareProductsButton} ma3`}
-                  href={
-                    comparisonProducts.length < 2
-                      ? '#'
-                      : comparisonPageUrl
-                      ? comparisonPageUrl
-                      : '/product-comparison'
-                  }
+                  onClick={navigateToComparisonPage}
                 >
                   {intl.formatMessage(messages.compare)}
                 </Button>
