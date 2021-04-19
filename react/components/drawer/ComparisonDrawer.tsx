@@ -2,12 +2,13 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import React from 'react'
 import { pathOr, isEmpty } from 'ramda'
-import ComparisonContext from '../../ProductComparisonContext'
 import { Button, Collapsible, withToast } from 'vtex.styleguide'
-import { ExtensionPoint } from 'vtex.render-runtime'
+import { ExtensionPoint, useRuntime } from 'vtex.render-runtime'
 import { useCssHandles } from 'vtex.css-handles'
-import { InjectedIntlProps, injectIntl, defineMessages } from 'react-intl'
-import { useRuntime } from 'vtex.render-runtime'
+import type { InjectedIntlProps } from 'react-intl'
+import { injectIntl, defineMessages } from 'react-intl'
+
+import ComparisonContext from '../../ProductComparisonContext'
 import './drawer.css'
 
 const CSS_HANDLES = [
@@ -82,12 +83,13 @@ const ComparisonDrawer = ({ showToast, intl, comparisonPageUrl }: Props) => {
     ['products'],
     comparisonData
   )
+
   const isCollapsed = pathOr(false, ['isDrawerCollapsed'], comparisonData)
 
   const showMessage = (message: string) => {
     if (showToast) {
       showToast({
-        message: message,
+        message,
       })
     }
   }
@@ -128,9 +130,8 @@ const ComparisonDrawer = ({ showToast, intl, comparisonPageUrl }: Props) => {
     const url =
       comparisonProducts.length < 2
         ? '#'
-        : comparisonPageUrl
-        ? comparisonPageUrl
-        : '/product-comparison'
+        : comparisonPageUrl || '/product-comparison'
+
     navigate({ to: url })
   }
 

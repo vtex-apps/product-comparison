@@ -1,8 +1,10 @@
-import React, { useMemo, ReactChildren, ReactChild } from 'react'
+import type { ReactChildren, ReactChild } from 'react'
+import React, { useMemo } from 'react'
 import { pathOr, propEq, find } from 'ramda'
 import { ExtensionPoint, useTreePath } from 'vtex.render-runtime'
 import { useListContext, ListContextProvider } from 'vtex.list-context'
 import { ProductListContext } from 'vtex.product-list-context'
+
 import { mapCatalogProductToProductSummary } from '../utils/normalize'
 import ProductSummeryListEventCaller from './ProductSummeryListEventCaller'
 import ComparisonContext from '../../ProductComparisonContext'
@@ -23,7 +25,7 @@ const List = ({ children, products, comparisonProducts }: Props) => {
       comparisonProducts &&
       products &&
       comparisonProducts
-        .map(comparisonProduct => {
+        .map((comparisonProduct) => {
           const selectedProduct = find(
             propEq('productId', comparisonProduct.productId)
           )(products)
@@ -33,8 +35,8 @@ const List = ({ children, products, comparisonProducts }: Props) => {
             comparisonProduct.skuId
           )
         })
-        .filter(product => pathOr('', ['productId'], product) !== '')
-        .map(normalizedProduct => {
+        .filter((product) => pathOr('', ['productId'], product) !== '')
+        .map((normalizedProduct) => {
           return (
             <ExtensionPoint
               id="product-summary"
@@ -68,6 +70,7 @@ const ProductSummaryList = ({ children }: Props) => {
     ['products'],
     comparisonData
   )
+
   const products = pathOr([] as ProductToCompare[], ['products'], productData)
 
   return (

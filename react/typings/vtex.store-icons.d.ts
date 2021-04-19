@@ -1,5 +1,6 @@
 declare module 'vtex.store-icons' {
-  import { ComponentType } from 'react'
+  import type { ComponentType } from 'react'
+
   interface Props {
     size: number
     viewBox?: string

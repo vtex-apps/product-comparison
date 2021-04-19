@@ -1,11 +1,5 @@
-import React, {
-  ReactChildren,
-  ReactChild,
-  useReducer,
-  useContext,
-  createContext,
-  useEffect,
-} from 'react'
+import type { ReactChildren, ReactChild } from 'react'
+import React, { useReducer, useContext, createContext, useEffect } from 'react'
 import { pathOr, reject, propEq, allPass } from 'ramda'
 
 export interface State {
@@ -39,25 +33,30 @@ const listReducer = (state: State, action: ReducerActions): State => {
   switch (action.type) {
     case 'ADD_ALL_PRODUCTS': {
       const products = pathOr([], ['args', 'products'], action)
+
       return {
         ...state,
         products: [...products],
       }
     }
+
     case 'ADD_PRODUCT': {
       const { product } = action.args
       const newProductList = [...state.products, product]
+
       return {
         ...state,
         products: newProductList,
       }
     }
+
     case 'REMOVE_ALL_PRODUCTS': {
       return {
         ...state,
         products: [],
       }
     }
+
     case 'REMOVE_PRODUCT': {
       const { product } = action.args
       const remaining = reject(
@@ -68,8 +67,10 @@ const listReducer = (state: State, action: ReducerActions): State => {
       )(state.products)
 
       localStorage.setItem('PRODUCTS_TO_COMPARE', JSON.stringify(remaining))
+
       return { ...state, products: remaining }
     }
+
     default: {
       throw new Error(`Unhandled action type on product-list-context`)
     }
@@ -81,7 +82,7 @@ const DEFAULT_STATE: State = {
 }
 
 const ComparisonProductContext = createContext<State>(DEFAULT_STATE)
-const ComparisonProductDispatchContext = createContext<Dispatch>(action => {
+const ComparisonProductDispatchContext = createContext<Dispatch>((action) => {
   console.error('error in dispatch ', action)
 })
 
@@ -99,7 +100,7 @@ const ComparisonProductProvider = ({ products, children }: Props) => {
 
   useEffect(() => {
     if (products && products.length > 0) {
-      dispatch({ type: 'ADD_ALL_PRODUCTS', args: { products: products } })
+      dispatch({ type: 'ADD_ALL_PRODUCTS', args: { products } })
     }
   }, [products])
 

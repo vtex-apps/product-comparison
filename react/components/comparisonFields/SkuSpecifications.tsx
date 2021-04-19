@@ -1,10 +1,11 @@
 import React, { useMemo } from 'react'
 import { pathOr, find, findLast, propEq, sort, uniq } from 'ramda'
+import { useCssHandles } from 'vtex.css-handles'
+
 import ComparisonFieldRow from '../comparisonPageRow/ComparisonFieldRow'
 import ComparisonProductContext from '../../ComparisonProductContext'
 import ComparisonContext from '../../ProductComparisonContext'
 import { getSkuSpecificationFields } from '../utils/fieldUtils'
-import { useCssHandles } from 'vtex.css-handles'
 import './fieldGroup.css'
 
 const CSS_HANDLES = ['title']
@@ -24,7 +25,7 @@ const SkuSpecifications = ({ skuSpecificationsToHide, titleText }: Props) => {
   const products = pathOr([] as ProductToCompare[], ['products'], productData)
 
   const skuSpecificationFields: ComparisonField[] = useMemo(() => {
-    const allSkuSpecificationsList: string[][] = products.map(product => {
+    const allSkuSpecificationsList: string[][] = products.map((product) => {
       const skuSpecificationsList = pathOr([], ['skuSpecifications'], product)
       const skuSpecificationNamesList: string[] = skuSpecificationsList.reduce(
         (accumulator: string[], currentValue) => {
@@ -38,7 +39,7 @@ const SkuSpecifications = ({ skuSpecificationsToHide, titleText }: Props) => {
         [] as string[]
       )
 
-      return skuSpecificationNamesList.filter(name => name !== '')
+      return skuSpecificationNamesList.filter((name) => name !== '')
     })
 
     let specificationsList: string[] = allSkuSpecificationsList.reduce(
@@ -54,7 +55,7 @@ const SkuSpecifications = ({ skuSpecificationsToHide, titleText }: Props) => {
     )
 
     const skuSpecificationFieldsList = specificationsList.map(
-      specificationName => ({
+      (specificationName) => ({
         fieldType: 'SkuSpecificationField',
         name: specificationName,
         displayValue: specificationName,
@@ -64,10 +65,11 @@ const SkuSpecifications = ({ skuSpecificationsToHide, titleText }: Props) => {
 
     if (comparisonData.products && comparisonData.showDifferences) {
       const allVariations: Variation[][] = comparisonData.products.map(
-        comparisonItem => {
+        (comparisonItem) => {
           const selectedProduct = find(
             propEq('productId', comparisonItem.productId)
           )(products)
+
           const selectedSku = find(propEq('itemId', comparisonItem.skuId))(
             pathOr([], ['items'], selectedProduct)
           )
@@ -76,19 +78,22 @@ const SkuSpecifications = ({ skuSpecificationsToHide, titleText }: Props) => {
         }
       )
 
-      return skuSpecificationFieldsList.map(field => {
-        const specifications = allVariations.map(variations => {
+      return skuSpecificationFieldsList.map((field) => {
+        const specifications = allVariations.map((variations) => {
           return findLast(propEq('name', field.name))(variations)
         })
+
         const specificationValues = specifications.map(
           (specification: ProductSpecification) => {
             const specs = pathOr([], ['values'], specification)
+
             return sort(
               (a: string, b: string) => a.localeCompare(b),
               specs
             ).join(',')
           }
         )
+
         const uniqueSpecifications = uniq(specificationValues)
 
         return {

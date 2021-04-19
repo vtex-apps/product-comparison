@@ -6,8 +6,8 @@ export const splitString = (text?: string) => {
   }
 
   return split(',', text)
-    .filter(str => str !== null && str !== '')
-    .map(str => trim(str))
+    .filter((str) => str !== null && str !== '')
+    .map((str) => trim(str))
 }
 
 export const getProductSpecificationFields = (
@@ -15,6 +15,7 @@ export const getProductSpecificationFields = (
   fieldsToHide?: string
 ) => {
   const removeList = splitString(fieldsToHide)
+
   return without(removeList, existing)
 }
 
@@ -23,6 +24,7 @@ export const getSkuSpecificationFields = (
   fieldsToHide?: string
 ) => {
   const removeList = splitString(fieldsToHide)
+
   return without(removeList, existing)
 }
 
@@ -31,7 +33,7 @@ export const getProductFields = (fieldsToHide?: string) => {
   const removeList = splitString(fieldsToHide)
   const fieldsSelected = without(removeList, fieldNames)
 
-  const fields = fieldsSelected.map(fieldName => {
+  const fields = fieldsSelected.map((fieldName) => {
     let value = {}
 
     switch (fieldName) {
@@ -43,6 +45,7 @@ export const getProductFields = (fieldsToHide?: string) => {
           showOnSite: true,
         }
         break
+
       case 'brand':
         value = {
           fieldType: 'ProductField',
@@ -51,6 +54,7 @@ export const getProductFields = (fieldsToHide?: string) => {
           showOnSite: true,
         }
         break
+
       case 'description':
         value = {
           fieldType: 'ProductField',
@@ -59,6 +63,7 @@ export const getProductFields = (fieldsToHide?: string) => {
           showOnSite: true,
         }
         break
+
       case 'productReference':
         value = {
           fieldType: 'ProductField',
@@ -67,6 +72,7 @@ export const getProductFields = (fieldsToHide?: string) => {
           showOnSite: true,
         }
         break
+
       default:
         value = {
           fieldType: '',
@@ -76,6 +82,7 @@ export const getProductFields = (fieldsToHide?: string) => {
         }
         break
     }
+
     return value as ComparisonField
   })
 
@@ -87,8 +94,9 @@ export const getSkuFields = (fieldsToHide?: string) => {
   const removeList = splitString(fieldsToHide)
   const fieldsSelected = without(removeList, fieldNames)
 
-  const fields = fieldsSelected.map(fieldName => {
+  const fields = fieldsSelected.map((fieldName) => {
     let value = {}
+
     switch (fieldName) {
       case 'name':
         value = {
@@ -98,6 +106,7 @@ export const getSkuFields = (fieldsToHide?: string) => {
           showOnSite: true,
         }
         break
+
       case 'ean':
         value = {
           fieldType: 'SkuField',
@@ -106,6 +115,7 @@ export const getSkuFields = (fieldsToHide?: string) => {
           showOnSite: true,
         }
         break
+
       default:
         value = {
           fieldType: '',
@@ -115,6 +125,7 @@ export const getSkuFields = (fieldsToHide?: string) => {
         }
         break
     }
+
     return value as ComparisonField
   })
 

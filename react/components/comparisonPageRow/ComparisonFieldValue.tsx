@@ -1,7 +1,8 @@
 import React from 'react'
 import { pathOr, find, propEq, findLast } from 'ramda'
-import ComparisonProductContext from '../../ComparisonProductContext'
 import { useCssHandles } from 'vtex.css-handles'
+
+import ComparisonProductContext from '../../ComparisonProductContext'
 import './row.css'
 
 const CSS_HANDLES = [
@@ -26,6 +27,7 @@ const ComparisonFieldValue = ({ field, productToCompare }: Props) => {
   const selectedProduct = find(propEq('productId', productToCompare.productId))(
     products
   )
+
   const selectedSku = find(propEq('itemId', productToCompare.skuId))(
     pathOr([], ['items'], selectedProduct)
   )
@@ -51,6 +53,7 @@ const ComparisonFieldValue = ({ field, productToCompare }: Props) => {
     const allSpecifications = findLast(propEq('name', 'allSpecifications'))(
       groups
     )
+
     const specifications = pathOr([], ['specifications'], allSpecifications)
 
     const values = pathOr(
@@ -58,11 +61,12 @@ const ComparisonFieldValue = ({ field, productToCompare }: Props) => {
       ['values'],
       find(propEq('name', field.name))(specifications)
     )
+
     return (
       <div
         className={`${cssHandles.productSpecificationValues} flex flex-column`}
       >
-        {values.map(value => {
+        {values.map((value) => {
           return (
             <span
               className={`${cssHandles.productSpecificationValue}`}
@@ -83,9 +87,10 @@ const ComparisonFieldValue = ({ field, productToCompare }: Props) => {
       ['values'],
       find(propEq('name', field.name))(skuSpecifications)
     )
+
     return (
       <div className={`${cssHandles.skuSpecificationValues} flex flex-column`}>
-        {values.map(value => {
+        {values.map((value) => {
           return (
             <span
               className={`${cssHandles.skuSpecificationValue}`}
@@ -98,11 +103,13 @@ const ComparisonFieldValue = ({ field, productToCompare }: Props) => {
       </div>
     )
   }
+
   if (field.fieldType === 'GroupedSpecification') {
     const groups = pathOr([], ['specificationGroups'], selectedProduct)
     const groupedSpecification = findLast(propEq('name', field.groupName))(
       groups
     )
+
     const specifications = pathOr([], ['specifications'], groupedSpecification)
 
     const values = pathOr(
@@ -110,11 +117,12 @@ const ComparisonFieldValue = ({ field, productToCompare }: Props) => {
       ['values'],
       find(propEq('name', field.name))(specifications)
     )
+
     return (
       <div
         className={`${cssHandles.productSpecificationValues} flex flex-column`}
       >
-        {values.map(value => {
+        {values.map((value) => {
           return (
             <span
               className={`${cssHandles.productSpecificationValue}`}
@@ -128,7 +136,7 @@ const ComparisonFieldValue = ({ field, productToCompare }: Props) => {
     )
   }
 
-  return <div></div>
+  return <div />
 }
 
 export default ComparisonFieldValue

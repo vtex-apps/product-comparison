@@ -1,13 +1,8 @@
-import React, {
-  ReactChildren,
-  ReactChild,
-  useReducer,
-  useContext,
-  createContext,
-  useEffect,
-} from 'react'
+import type { ReactChildren, ReactChild } from 'react'
+import React, { useReducer, useContext, createContext, useEffect } from 'react'
 import { pathOr, reject, propEq, allPass } from 'ramda'
 import { useQuery } from 'react-apollo'
+
 import AppSettings from './queries/AppSettings.graphql'
 
 export interface State {
@@ -76,11 +71,13 @@ const listReducer = (state: State, action: ReducerActions): State => {
         0,
         state.maxNumberOfItemsToCompare
       )
+
       return {
         ...state,
         products: productsToCompare,
       }
     }
+
     case 'ADD_MULTIPLE': {
       const products = pathOr([], ['args', 'products'], action)
 
@@ -102,33 +99,40 @@ const listReducer = (state: State, action: ReducerActions): State => {
         'PRODUCTS_TO_COMPARE',
         JSON.stringify(newProductList)
       )
+
       return {
         ...state,
         products: newProductList,
       }
     }
+
     case 'ADD': {
       const { product } = action.args
       const newProductList = [...state.products, product].slice(
         0,
         state.maxNumberOfItemsToCompare
       )
+
       localStorage.setItem(
         'PRODUCTS_TO_COMPARE',
         JSON.stringify(newProductList)
       )
+
       return {
         ...state,
         products: newProductList,
       }
     }
+
     case 'REMOVE_ALL': {
       localStorage.setItem('PRODUCTS_TO_COMPARE', JSON.stringify([]))
+
       return {
         ...state,
         products: [],
       }
     }
+
     case 'REMOVE': {
       const { product } = action.args
       const remaining = reject(
@@ -139,26 +143,31 @@ const listReducer = (state: State, action: ReducerActions): State => {
       )(state.products)
 
       localStorage.setItem('PRODUCTS_TO_COMPARE', JSON.stringify(remaining))
+
       return { ...state, products: remaining }
     }
+
     case 'SET_SHOW_DIFFERENCES': {
       return {
         ...state,
         ...{ showDifferences: action.args.showDifferences },
       }
     }
+
     case 'IS_DRAWER_COLLAPSED': {
       return {
         ...state,
         isDrawerCollapsed: action.args.isDrawerCollapsed,
       }
     }
+
     case 'SET_MAX_LIMIT': {
       return {
         ...state,
         maxNumberOfItemsToCompare: action.args.maxLimit,
       }
     }
+
     default: {
       throw new Error(`Unhandled action type on product-list-context`)
     }
@@ -175,7 +184,7 @@ const DEFAULT_STATE: State = {
 }
 
 const ComparisonContext = createContext<State>(DEFAULT_STATE)
-const ComparisonDispatchContext = createContext<Dispatch>(action => {
+const ComparisonDispatchContext = createContext<Dispatch>((action) => {
   console.error('error in dispatch ', action)
 })
 
@@ -223,6 +232,7 @@ const ProductComparisonProvider = ({ children }: Props) => {
     const productsToCompare = (initialProducts
       ? JSON.parse(initialProducts)
       : []) as ProductToCompare[]
+
     dispatch({ type: 'ADD_ALL', args: { products: productsToCompare } })
   }, [])
 

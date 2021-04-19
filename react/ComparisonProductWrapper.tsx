@@ -1,8 +1,10 @@
-import React, { useEffect, useState, ReactChildren, ReactChild } from 'react'
+import type { ReactChildren, ReactChild } from 'react'
+import React, { useEffect, useState } from 'react'
 import { pathOr } from 'ramda'
 // import { pathOr, propEq, find } from 'ramda'
 import productsQuery from 'vtex.store-resources/QueryProduct'
 import { useApolloClient } from 'react-apollo'
+
 import ComparisonContext from './ProductComparisonContext'
 import ComparisonProductContext from './ComparisonProductContext'
 // import { mapCatalogProductToProductSummary } from './components/utils/normalize'
@@ -37,7 +39,7 @@ const ComparisonProductWrapper = ({ children }: Props) => {
           },
         })
       })
-    ).then((productsList: { data: { product: Product } }[]) => {
+    ).then((productsList: Array<{ data: { product: Product } }>) => {
       const responseProducts: Product[] = productsList.map(
         (productResponse: { data: { product: Product } }) =>
           // eslint-disable-next-line @typescript-eslint/no-object-literal-type-assertion

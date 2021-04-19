@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 declare module 'vtex.styleguide' {
-  import { ComponentType } from 'react'
+  import type { ComponentType } from 'react'
 
   export const Input: ComponentType<InputProps>
   export const Checkbox: ComponentType<InputProps>
