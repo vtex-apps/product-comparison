@@ -1,3 +1,4 @@
+// eslint-disable-next-line prettier/prettier
 import type { ReactChildren, ReactChild } from 'react'
 import React, { useMemo } from 'react'
 import { pathOr, propEq, find } from 'ramda'
@@ -74,7 +75,7 @@ const ProductSummaryList = ({ children }: Props) => {
   const products = pathOr([] as ProductToCompare[], ['products'], productData)
 
   return (
-    <ProductListProvider>
+    <ProductListProvider listName="product-list">
       <List products={products} comparisonProducts={comparisonProducts}>
         {children}
       </List>
