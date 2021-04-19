@@ -6,12 +6,12 @@ import { useCssHandles } from 'vtex.css-handles'
 import { Checkbox } from 'vtex.styleguide'
 import ComparisonProductContext from '../../ComparisonProductContext'
 import './row.css'
+import { usePixel } from 'vtex.pixel-manager'
 import { InjectedIntlProps, injectIntl, defineMessages } from 'react-intl'
 
 interface ProductSummaryRowProps extends InjectedIntlProps {
   isShowDifferenceDefault:boolean;
 }
- 
 
 const CSS_HANDLES = [
   'productSummaryRowContainer',
@@ -63,6 +63,21 @@ const ProductSummaryRow = ({ isShowDifferenceDefault, intl }: ProductSummaryRowP
     setShowDifferenceFirstTime(isShowDifferenceByDefault,dispatchComparison)
   }, [])
 
+  const { push } = usePixel()
+
+  const pixelEvent = (products: object, length: number) => {
+    if (!!length && length >= 2) {
+      push({
+        event: 'productComparison',
+        products,
+        compareProductN: length,
+      })
+    }
+  }
+  useEffect(() => {
+    pixelEvent(comparisonData.products, comparisonData.products.length)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
   useEffect(() => {
     const showDifferences =
       comparisonData.products &&

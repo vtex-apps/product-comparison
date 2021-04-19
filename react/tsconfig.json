@@ -21,7 +21,7 @@
     "types": ["node", "jest", "graphql"]
   },
   "exclude": ["node_modules"],
-  "include": ["./typings/*.d.ts", "./**/*.tsx", "./**/*.ts"],
+  "include": ["./typings/*.d.ts", "./**/*.tsx", "./**/*.ts", "__mocks__/vtex.pixel-manager.js"],
   "typeAcquisition": {
     "enable": false
   }

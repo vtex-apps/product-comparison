@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Added
+- Added pixel event
+
 ## [0.9.2] - 2021-04-09
 
 ### Changed
@@ -36,6 +39,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Limit comparison bucket size and given it as app configuration parameter
 - Enhance product comparison context to add array of items at once 
 - Show notifications when comparison bucket is full
+
 
 ## [0.5.0] - 2020-11-19
 
