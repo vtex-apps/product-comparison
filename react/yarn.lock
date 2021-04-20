@@ -5379,9 +5379,9 @@ verror@1.10.0:
   version "0.2.0"
   resolved "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.list-context@0.2.0/public/@types/vtex.list-context#935b748d394851ced7f3b06bbedf59f4ee3ca8a6"
 
-"vtex.pixel-manager@http://vtex.vtexassets.com/_v/public/typings/v1/vtex.pixel-manager@1.7.0/public/@types/vtex.pixel-manager":
-  version "1.7.0"
-  resolved "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.pixel-manager@1.7.0/public/@types/vtex.pixel-manager#ea1ce0a76fe0cec68006c8d9c609f5f9939058cd"
+"vtex.pixel-manager@http://vtex.vtexassets.com/_v/public/typings/v1/vtex.pixel-manager@1.8.0/public/@types/vtex.pixel-manager":
+  version "1.8.0"
+  resolved "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.pixel-manager@1.8.0/public/@types/vtex.pixel-manager#3ccfcb1927614984a5f7a3e5650c8c8d2bd3c0f4"
 
 "vtex.product-list-context@http://vtex.vtexassets.com/_v/public/typings/v1/vtex.product-list-context@0.3.1/public/@types/vtex.product-list-context":
   version "0.3.1"
@@ -5395,9 +5395,9 @@ verror@1.10.0:
   version "2.71.2"
   resolved "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.product-summary@2.71.2/public/@types/vtex.product-summary#73406cac42f705f742dd61c0f5b6c9cba526f825"
 
-"vtex.render-runtime@http://vtex.vtexassets.com/_v/public/typings/v1/vtex.render-runtime@8.128.2/public/@types/vtex.render-runtime":
-  version "8.128.2"
-  resolved "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.render-runtime@8.128.2/public/@types/vtex.render-runtime#67f5975f7edd73c9afa7bee57734540c0ead5428"
+"vtex.render-runtime@http://vtex.vtexassets.com/_v/public/typings/v1/vtex.render-runtime@8.128.3/public/@types/vtex.render-runtime":
+  version "8.128.3"
+  resolved "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.render-runtime@8.128.3/public/@types/vtex.render-runtime#2e7f819a42b5923f57137156f876deac854a359e"
 
 "vtex.slider-layout@http://vtex.vtexassets.com/_v/public/typings/v1/vtex.slider-layout@0.18.0/public/@types/vtex.slider-layout":
   version "0.18.0"
