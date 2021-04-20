@@ -26,4 +26,5 @@ const ComparisonFieldRow: StorefrontFunctionComponent<Props> = ({
     </div>
   ) : null
 }
+
 export default ComparisonFieldRow

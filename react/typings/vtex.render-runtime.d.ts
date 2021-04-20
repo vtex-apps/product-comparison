@@ -1,7 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* Typings for `render-runtime` */
 declare module 'vtex.render-runtime' {
-  import { Component, ComponentType, ReactElement, ReactType } from 'react'
+  import type { ComponentType, ReactElement, ReactType } from 'react'
+  import { Component } from 'react'
 
   export interface NavigationOptions {
     page: string
@@ -27,7 +28,7 @@ declare module 'vtex.render-runtime' {
   }
 
   export const ChildBlock: ComponentType<ChildBlockProps>
-  export const useChildBlock = function({ id: string }): object {}
+  export const useChildBlock = function ({ id: string }): object {}
 
   export const Helmet: ReactElement
   export const Link: ReactType

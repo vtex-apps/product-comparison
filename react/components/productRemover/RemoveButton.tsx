@@ -1,11 +1,14 @@
-import React, { MouseEvent } from 'react'
+import type { MouseEvent } from 'react'
+import React from 'react'
 import { pathOr } from 'ramda'
-import ComparisonContext from '../../ProductComparisonContext'
 import { useProductSummary } from 'vtex.product-summary-context/ProductSummaryContext'
 import { useCssHandles } from 'vtex.css-handles'
 import { withToast } from 'vtex.styleguide'
 import { IconClose } from 'vtex.store-icons'
-import { InjectedIntlProps, injectIntl, defineMessages } from 'react-intl'
+import type { InjectedIntlProps } from 'react-intl'
+import { injectIntl, defineMessages } from 'react-intl'
+
+import ComparisonContext from '../../ProductComparisonContext'
 import './remove.css'
 
 const CSS_HANDLES = ['closeButton', 'closeButtonContainer']
@@ -32,6 +35,7 @@ const RemoveButton = ({ showToast, intl }: Props) => {
     useProductComparisonState,
     useProductComparisonDispatch,
   } = ComparisonContext
+
   const dispatchComparison = useProductComparisonDispatch()
   const valuesFromContext = useProductSummary()
   const productId = pathOr('', ['product', 'productId'], valuesFromContext)
@@ -41,10 +45,10 @@ const RemoveButton = ({ showToast, intl }: Props) => {
   const comparisonData = useProductComparisonState()
   const isDrawerCollapsed = pathOr(false, ['isDrawerCollapsed'], comparisonData)
 
-  const showMessage = (message: string, show: boolean = true) => {
+  const showMessage = (message: string, show = true) => {
     if (showToast && show) {
       showToast({
-        message: message,
+        message,
       })
     }
   }
@@ -56,7 +60,7 @@ const RemoveButton = ({ showToast, intl }: Props) => {
     dispatchComparison({
       args: {
         product: {
-          productId: productId,
+          productId,
           skuId: itemId,
         },
       },

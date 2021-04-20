@@ -1,16 +1,21 @@
 import React, { useState, useEffect } from 'react'
 import { pathOr, isEmpty } from 'ramda'
 import { ExtensionPoint } from 'vtex.render-runtime'
-import ComparisonContext, { Dispatch } from '../../ProductComparisonContext'
 import { useCssHandles } from 'vtex.css-handles'
 import { Checkbox } from 'vtex.styleguide'
+
 import ComparisonProductContext from '../../ComparisonProductContext'
+
 import './row.css'
 import { usePixel } from 'vtex.pixel-manager'
-import { InjectedIntlProps, injectIntl, defineMessages } from 'react-intl'
+import type { InjectedIntlProps } from 'react-intl'
+import { injectIntl, defineMessages } from 'react-intl'
+
+import ComparisonContext from '../../ProductComparisonContext'
+import type { Dispatch } from '../../ProductComparisonContext'
 
 interface ProductSummaryRowProps extends InjectedIntlProps {
-  isShowDifferenceDefault:boolean;
+  isShowDifferenceDefault: boolean
 }
 
 const CSS_HANDLES = [
@@ -19,7 +24,10 @@ const CSS_HANDLES = [
   'showDifferencesContainer',
 ]
 
-const setShowDifferenceFirstTime = (isShowDifferenceDefault :boolean,dispatchComparison :Dispatch) =>{
+const setShowDifferenceFirstTime = (
+  isShowDifferenceDefault: boolean,
+  dispatchComparison: Dispatch
+) => {
   dispatchComparison({
     args: {
       showDifferences: isShowDifferenceDefault,
@@ -35,11 +43,16 @@ const messages = defineMessages({
   },
 })
 
-
-const ProductSummaryRow = ({ isShowDifferenceDefault, intl }: ProductSummaryRowProps) => {
+const ProductSummaryRow = ({
+  isShowDifferenceDefault,
+  intl,
+}: ProductSummaryRowProps) => {
   const cssHandles = useCssHandles(CSS_HANDLES)
-  
-  const [isShowDifferenceByDefault, changesChecked] = useState(isShowDifferenceDefault)
+
+  const [isShowDifferenceByDefault, changesChecked] = useState(
+    isShowDifferenceDefault
+  )
+
   const [showDifferences, setShowDifferences] = useState(false)
   const {
     useProductComparisonState,
@@ -57,10 +70,11 @@ const ProductSummaryRow = ({ isShowDifferenceDefault, intl }: ProductSummaryRowP
     ['products'],
     comparisonData
   )
+
   const products = pathOr([] as ProductToCompare[], ['products'], productData)
-  
-  useEffect(() =>{
-    setShowDifferenceFirstTime(isShowDifferenceByDefault,dispatchComparison)
+
+  useEffect(() => {
+    setShowDifferenceFirstTime(isShowDifferenceByDefault, dispatchComparison)
   }, [])
 
   const { push } = usePixel()
@@ -74,6 +88,7 @@ const ProductSummaryRow = ({ isShowDifferenceDefault, intl }: ProductSummaryRowP
       })
     }
   }
+
   useEffect(() => {
     pixelEvent(comparisonData.products, comparisonData.products.length)
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -83,6 +98,7 @@ const ProductSummaryRow = ({ isShowDifferenceDefault, intl }: ProductSummaryRowP
       comparisonData.products &&
       comparisonData.products.length > 1 &&
       comparisonData.showDifferences
+
     setShowDifferences(showDifferences)
   }, [comparisonData])
 
@@ -95,6 +111,7 @@ const ProductSummaryRow = ({ isShowDifferenceDefault, intl }: ProductSummaryRowP
       type: 'SET_SHOW_DIFFERENCES',
     })
   }
+
   return isEmpty(comparisonProducts) ? (
     <div />
   ) : (
@@ -106,9 +123,9 @@ const ProductSummaryRow = ({ isShowDifferenceDefault, intl }: ProductSummaryRowP
           <div className={`${cssHandles.showDifferencesContainer} mb3`}>
             <Checkbox
               checked={showDifferences}
-              id={`id-differences`}
+              id="id-differences"
               label={intl.formatMessage(messages.showDifferences)}
-              name={`name-differences`}
+              name="name-differences"
               onChange={onSelectorChanged}
               value={showDifferences}
             />
@@ -121,17 +138,18 @@ const ProductSummaryRow = ({ isShowDifferenceDefault, intl }: ProductSummaryRowP
     </div>
   )
 }
+
 ProductSummaryRow.schema = {
   title: 'editor.product-summary-row.title',
   description: 'editor.product-summary-row.description',
   type: 'object',
   properties: {
-    isShowDifferenceDefault:{
-      title:'Show difference',
-      description:'',
-      default:false,
-      type:'boolean'
-    }
-  }
+    isShowDifferenceDefault: {
+      title: 'Show difference',
+      description: '',
+      default: false,
+      type: 'boolean',
+    },
+  },
 }
 export default injectIntl(ProductSummaryRow)

@@ -1,10 +1,11 @@
 import React, { useMemo } from 'react'
 import { pathOr, findLast, propEq, sort, uniq } from 'ramda'
+import { useCssHandles } from 'vtex.css-handles'
+
 import ComparisonFieldRow from '../comparisonPageRow/ComparisonFieldRow'
 import ComparisonProductContext from '../../ComparisonProductContext'
 import ComparisonContext from '../../ProductComparisonContext'
 import { getProductSpecificationFields } from '../utils/fieldUtils'
-import { useCssHandles } from 'vtex.css-handles'
 import './fieldGroup.css'
 
 const CSS_HANDLES = ['title']
@@ -28,20 +29,22 @@ const ProductSpecifications = ({
 
   const allProductSpecificationsList: ComparisonField[] = useMemo(() => {
     const allProductSpecificationsList: ProductSpecification[][] = products.map(
-      product => {
+      (product) => {
         const groups = pathOr([], ['specificationGroups'], product)
         const allSpecifications = findLast(propEq('name', 'allSpecifications'))(
           groups
         )
+
         return pathOr([], ['specifications'], allSpecifications)
       }
     )
 
     let specificationsList: string[] = allProductSpecificationsList.reduce(
       (accumulator: string[], currentValue: ProductSpecification[]) => {
-        const current = currentValue.map(specification =>
+        const current = currentValue.map((specification) =>
           pathOr('', ['name'], specification)
         )
+
         return [...new Set([...accumulator, ...current])]
       },
       [] as string[]
@@ -53,7 +56,7 @@ const ProductSpecifications = ({
     )
 
     const productSpecificationFields = specificationsList.map(
-      specificationName => ({
+      (specificationName) => ({
         fieldType: 'ProductSpecificationField',
         name: specificationName,
         displayValue: specificationName,
@@ -62,21 +65,24 @@ const ProductSpecifications = ({
     )
 
     if (comparisonData.showDifferences) {
-      return productSpecificationFields.map(field => {
+      return productSpecificationFields.map((field) => {
         const specifications = allProductSpecificationsList.map(
-          specifications => {
+          (specifications) => {
             return findLast(propEq('name', field.name))(specifications)
           }
         )
+
         const specificationValues = specifications.map(
           (specification: ProductSpecification) => {
             const specs = pathOr([], ['values'], specification)
+
             return sort(
               (a: string, b: string) => a.localeCompare(b),
               specs
             ).join(',')
           }
         )
+
         const uniqueSpecifications = uniq(specificationValues)
 
         return {

@@ -1,7 +1,9 @@
-import React, { ReactChildren, ReactChild } from 'react'
+import type { ReactChildren, ReactChild } from 'react'
+import React from 'react'
+import { ToastProvider } from 'vtex.styleguide'
+
 import ComparisonContext from './ProductComparisonContext'
 import ComparisonProductWrapper from './ComparisonProductWrapper'
-import { ToastProvider } from 'vtex.styleguide'
 
 interface Props {
   children: ReactChildren | ReactChild

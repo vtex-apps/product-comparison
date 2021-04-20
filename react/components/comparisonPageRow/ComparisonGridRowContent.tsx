@@ -1,12 +1,14 @@
-import React, { useMemo, ReactChildren, ReactChild } from 'react'
+import type { ReactChildren, ReactChild } from 'react'
+import React, { useMemo } from 'react'
 import { pathOr } from 'ramda'
 import { useListContext, ListContextProvider } from 'vtex.list-context'
 import { ProductListContext } from 'vtex.product-list-context'
+import { useCssHandles } from 'vtex.css-handles'
+
 import ProductSummeryListEventCaller from '../productSummaryList/ProductSummeryListEventCaller'
 import ComparisonContext from '../../ProductComparisonContext'
 import ComparisonProductContext from '../../ComparisonProductContext'
 import ComparisonFieldValue from './ComparisonFieldValue'
-import { useCssHandles } from 'vtex.css-handles'
 import './row.css'
 
 const CSS_HANDLES = ['comparisonCol']
@@ -25,7 +27,7 @@ const List = ({ children, comparisonProducts, field }: Props) => {
   const newListContextValue = useMemo(() => {
     const componentList =
       comparisonProducts &&
-      comparisonProducts.map(comparisonProduct => {
+      comparisonProducts.map((comparisonProduct) => {
         return (
           <div
             key={`${comparisonProduct.productId}-col`}
@@ -62,10 +64,11 @@ const ComparisonGridRowContent = ({ children, field }: Props) => {
     ['products'],
     comparisonData
   )
+
   const products = pathOr([] as ProductToCompare[], ['products'], productData)
 
   return (
-    <ProductListProvider listName={'row-content'}>
+    <ProductListProvider listName="row-content">
       <List
         products={products}
         comparisonProducts={comparisonProducts}

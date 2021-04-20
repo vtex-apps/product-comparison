@@ -1,10 +1,11 @@
 import React, { useMemo } from 'react'
-import { contains, pathOr, keys, findLast, propEq, sort, uniq } from 'ramda' //, findLast, propEq, sort, uniq,
+import { contains, pathOr, keys, findLast, propEq, sort, uniq } from 'ramda' // , findLast, propEq, sort, uniq,
+import { useCssHandles } from 'vtex.css-handles'
+
 import ComparisonFieldRow from '../comparisonPageRow/ComparisonFieldRow'
 import ComparisonProductContext from '../../ComparisonProductContext'
 import ComparisonContext from '../../ProductComparisonContext'
 import { splitString } from '../utils/fieldUtils'
-import { useCssHandles } from 'vtex.css-handles'
 import './fieldGroup.css'
 
 const CSS_HANDLES = ['title']
@@ -34,7 +35,7 @@ const GroupedProductSpecifications = ({
 
   const allProductSpecificationsList: GroupedComparisonFields = useMemo(() => {
     const allProductSpecificationGroups: ProductSpecificationGroup[][] = products.map(
-      product => {
+      (product) => {
         return pathOr([], ['specificationGroups'], product)
       }
     )
@@ -68,14 +69,16 @@ const GroupedProductSpecifications = ({
                 const isExists = groupedSpecifications.find(
                   (s: ProductSpecification) => s.name == specification.name
                 )
+
                 if (
                   !isExists &&
                   !contains(specification.name, specificationsToHide)
                 ) {
                   const gSpec: ProductSpecification = {
                     ...specification,
-                    ...{ groupName: groupName },
+                    ...{ groupName },
                   }
+
                   groupedSpecifications.push(gSpec)
                 }
               })
@@ -87,6 +90,7 @@ const GroupedProductSpecifications = ({
             }
           }
         )
+
         return accumulator
       },
       {}
@@ -106,6 +110,7 @@ const GroupedProductSpecifications = ({
             showOnSite: true,
           })
         )
+
         return {
           ...accumulator,
           ...{ [currentValue]: fields },
@@ -146,6 +151,7 @@ const GroupedProductSpecifications = ({
                 )(specifications)
 
                 const specs = pathOr([], ['values'], selectedSpecification)
+
                 return sort(
                   (a: string, b: string) => a.localeCompare(b),
                   specs
@@ -154,10 +160,12 @@ const GroupedProductSpecifications = ({
             )
 
             const uniqueSpecifications = uniq(specificationFieldValues)
+
             if (uniqueSpecifications.length !== 1) {
               differentFields.push(field)
             }
           })
+
           return {
             ...accumulator,
             ...{ [currentValue]: differentFields },
@@ -165,6 +173,7 @@ const GroupedProductSpecifications = ({
         },
         {}
       )
+
       return differentComparisonFields
     }
 
@@ -185,6 +194,7 @@ const GroupedProductSpecifications = ({
         [groupName],
         allProductSpecificationsList
       )
+
       return (
         specifications.length > 0 && (
           <div key={groupName} className="mt3">

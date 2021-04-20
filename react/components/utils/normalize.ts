@@ -75,7 +75,7 @@ const resizeImage = (url: string, imageSize: number) =>
 export const mapCatalogProductToProductSummary = (
   product: Product,
   skuId: string,
-  imageSize: number = 500
+  imageSize = 500
 ) => {
   // eslint-disable-next-line @typescript-eslint/no-object-literal-type-assertion
   if (!product) return {} as Product
@@ -87,7 +87,7 @@ export const mapCatalogProductToProductSummary = (
     const [seller = defaultSeller] = pathOr([], ['sellers'], sku)
     const [referenceId = defaultReference] = pathOr([], ['referenceId'], sku)
     const catalogImages: SkuImage[] = pathOr([], ['images'], sku)
-    const normalizedImages = catalogImages.map(image => ({
+    const normalizedImages = catalogImages.map((image) => ({
       ...image,
       imageUrl: resizeImage(image.imageUrl, imageSize),
     }))

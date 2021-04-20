@@ -1,4 +1,5 @@
-import React, { ReactChild, ReactChildren } from 'react'
+import type { ReactChild, ReactChildren } from 'react'
+import React from 'react'
 import { isEmpty, pathOr } from 'ramda'
 import { useCssHandles } from 'vtex.css-handles'
 import {
@@ -9,8 +10,10 @@ import {
   Spinner,
   withToast,
 } from 'vtex.styleguide'
+import type { InjectedIntlProps } from 'react-intl'
+import { defineMessages, injectIntl } from 'react-intl'
+
 import ComparisonContext from './ProductComparisonContext'
-import { defineMessages, InjectedIntlProps, injectIntl } from 'react-intl'
 import './global.css'
 
 const CSS_HANDLES = ['pageContainer', 'sortBy', 'removeAllItemsButtonWrapper']
@@ -66,7 +69,7 @@ const ComparisonPage = ({ children, intl, showToast }: Props) => {
   const showMessage = (message: string) => {
     if (showToast) {
       showToast({
-        message: message,
+        message,
       })
     }
   }
@@ -84,7 +87,7 @@ const ComparisonPage = ({ children, intl, showToast }: Props) => {
   }
 
   return isEmpty(comparisonProducts) ? (
-    <div className={'mw3 center'}>
+    <div className="mw3 center">
       <Spinner />
     </div>
   ) : (
@@ -94,7 +97,7 @@ const ComparisonPage = ({ children, intl, showToast }: Props) => {
         pageHeader={
           <PageHeader
             title={intl.formatMessage(messages.title, {
-              productsLength: ` ` + comparisonProducts.length,
+              productsLength: ` ${comparisonProducts.length}`,
             })}
             linkLabel={intl.formatMessage(messages.backToProducts)}
             onLinkClick={onBackButtonClick}

@@ -1,11 +1,14 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
-import React, { useState, useEffect, MouseEvent } from 'react'
+import type { MouseEvent } from 'react'
+import React, { useState, useEffect } from 'react'
 import { pathOr, find, propEq, allPass, isEmpty } from 'ramda'
 import { Checkbox, withToast } from 'vtex.styleguide'
 import { useCssHandles } from 'vtex.css-handles'
-import ComparisonContext from '../../ProductComparisonContext'
 import { useProductSummary } from 'vtex.product-summary-context/ProductSummaryContext'
-import { InjectedIntlProps, injectIntl, defineMessages } from 'react-intl'
+import type { InjectedIntlProps } from 'react-intl'
+import { injectIntl, defineMessages } from 'react-intl'
+
+import ComparisonContext from '../../ProductComparisonContext'
 
 const CSS_HANDLES = ['productSelectorContainer']
 
@@ -29,7 +32,7 @@ const messages = defineMessages({
   comparisonUpperLimit: {
     defaultMessage: '',
     id: 'store/product-comparison.product-selector.upper-limit-exceeded',
-  }
+  },
 })
 
 interface Props extends InjectedIntlProps {
@@ -67,13 +70,14 @@ const ProductSelector = ({ showToast, intl }: Props) => {
             allPass([propEq('productId', productId), propEq('skuId', itemId)])
           )(productsSelected)
         : []
+
     setIsChecked(selectedProducts && !isEmpty(selectedProducts))
   }, [productsSelected, itemId, productId])
 
-  const showMessage = (message: string, show: boolean = true) => {
+  const showMessage = (message: string, show = true) => {
     if (showToast && show) {
       showToast({
-        message: message,
+        message,
       })
     }
   }
@@ -85,7 +89,7 @@ const ProductSelector = ({ showToast, intl }: Props) => {
     } else if (e.target.checked) {
       dispatchComparison({
         args: {
-          product: { productId: productId, skuId: itemId },
+          product: { productId, skuId: itemId },
         },
         type: 'ADD',
       })
@@ -98,7 +102,7 @@ const ProductSelector = ({ showToast, intl }: Props) => {
     } else {
       dispatchComparison({
         args: {
-          product: { productId: productId, skuId: itemId },
+          product: { productId, skuId: itemId },
         },
         type: 'REMOVE',
       })
