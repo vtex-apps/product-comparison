@@ -41,7 +41,7 @@
   "store/product-comparison.main-page.back-to-products": "Volver a la lista de productos",
   "store/product-comparison.main-page.sort-by": "Ordenar por",
   "store/product-comparison.main-page.order-added": "Pedido agregado",
-  "store/product-comparison.main-page.title": "Comparar productos de {productsLength}",
+  "store/product-comparison.main-page.title": "Comparar {productsLength} productos",
   "store/product-comparison.product-summary-row.show-differences": "Mostrar solo las diferencias",
   "admin/editor.comparison-grid.product-specification-groups-to-be-removed.title": "Ocultar grupo de especificaciones de productos",
   "admin/editor.comparison-grid.product-specification-groups-to-be-removed.description": "Nombres de grupos de especificaciones de productos que deben ocultarse en la página de comparación (sepárelos por comas`, `)",
