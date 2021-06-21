@@ -56,7 +56,11 @@ In the theme's `interfaces.json` file, add the following extented interfaces:
 +  },
 +  "search-result-layout.desktop.product-comparison": {
 +    "allowed": ["product-comparison-drawer"]
-+  }
++  },
+  "store.product.product-comparison": {
+    "around": ["comparison-context-wrapper"],
+    "allowed": ["product-comparison-drawer"]
+  }
 +}
 ```
 
@@ -117,6 +121,42 @@ In the theme's `interfaces.json` file, add the following extented interfaces:
 ...
 ```
 
+### Step 4 - Adding the Product Comparison to the product detail Page
+
+1. In the theme's `product.jsonc` file, replace the default `"store.product"` blocks with the `"store.product.product-comparison"` blocks as shown in the example below:
+
+```diff
+
+- "store.product": {
++ "store.product.product-comparison": {
+    ...
+  }
+```
+
+2. add `"product-comparison-drawer"` to the `"store.product.product-comparison"` children as shown in the example below:
+
+```diff
+"store.product.product-comparison": {
+  children:[
+    ...
++    "product-comparison-drawer"
+  ]
+  ...
+}
+```
+
+3. add `"product-comparison-block.selector#pdp"` to the `"store.product.product-comparison"` block as shown in the example below:
+
+```diff
+ "store.product.product-comparison": {
+   ...
+  children:[
+    ...
++    "product-comparison-block.selector#pdp"
+  ]
+  ...
+ }
+ ```
 ### Step 4 - Building the Product Comparison component
 
 In any desired template, such as the `store.search`, add the `product-comparison-drawer` block as shown below:

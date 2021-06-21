@@ -7,6 +7,7 @@ import { useCssHandles } from 'vtex.css-handles'
 import { useProductSummary } from 'vtex.product-summary-context/ProductSummaryContext'
 import type { InjectedIntlProps } from 'react-intl'
 import { injectIntl, defineMessages } from 'react-intl'
+import { useProduct } from 'vtex.product-context'
 
 import ComparisonContext from '../../ProductComparisonContext'
 
@@ -38,11 +39,25 @@ const messages = defineMessages({
 interface Props extends InjectedIntlProps {
   showToast?: (input: ToastInput) => void
 }
-
+const getContextValue = (
+  productContext: unknown,
+  productSummaryContext: unknown
+) => {
+  let contextValue = productSummaryContext !== undefined? productSummaryContext : productContext
+    let productId = pathOr('', ['product', 'productId'], contextValue)
+    let productName = pathOr('', ['product', 'productName'], contextValue)
+    let itemId = pathOr('', ['selectedItem', 'itemId'], contextValue)
+    return { productName, productId, itemId }
+}
 const ProductSelector = ({ showToast, intl }: Props) => {
   const cssHandles = useCssHandles(CSS_HANDLES)
   const [isChecked, setIsChecked] = useState(false)
   const valuesFromContext = useProductSummary()
+  const valuesFromProductContext = useProduct()
+  const {productId, productName, itemId} = getContextValue(
+    valuesFromProductContext,
+    valuesFromContext
+  )
   const {
     useProductComparisonState,
     useProductComparisonDispatch,
@@ -51,9 +66,6 @@ const ProductSelector = ({ showToast, intl }: Props) => {
   const comparisonData = useProductComparisonState()
   const dispatchComparison = useProductComparisonDispatch()
 
-  const productId = pathOr('', ['product', 'productId'], valuesFromContext)
-  const productName = pathOr('', ['product', 'productName'], valuesFromContext)
-  const itemId = pathOr('', ['selectedItem', 'itemId'], valuesFromContext)
 
   const isDrawerCollapsed = pathOr(false, ['isDrawerCollapsed'], comparisonData)
   const productsSelected = pathOr([], ['products'], comparisonData)

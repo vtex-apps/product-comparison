@@ -29,7 +29,8 @@
     "vtex.product-list-context": "0.x",
     "vtex.flex-layout": "0.x",
     "vtex.pixel-manager": "1.x",
-    "vtex.apps-graphql": "2.x"
+    "vtex.apps-graphql": "2.x",
+    "vtex.product-context": "0.x"
   },
   "settingsSchema": {
     "title": "Product comparison",
