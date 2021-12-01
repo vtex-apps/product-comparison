@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Added
+- Italian translations
+- Crowdin configuration file
+
 ## [0.12.0] - 2021-06-28
 - Added comparison component to the product detail page
 ## [0.11.0] - 2021-04-29
