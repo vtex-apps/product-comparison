@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Fixed
+- English translation to reflect plurals.
+
+### Added
+- Arabic translation.
+
 ## [0.13.0] - 2021-12-01
 
 ### Added
@@ -40,7 +46,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Translation for "Show only differences" button
 
 ### Changed
-- Update compare button url to render runtime navigate function 
+- Update compare button url to render runtime navigate function
 - Extract navigate to a function
 
 ## [0.8.0] - 2021-01-13
@@ -54,7 +60,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Changed
 - Limit comparison bucket size and given it as app configuration parameter
-- Enhance product comparison context to add array of items at once 
+- Enhance product comparison context to add array of items at once
 - Show notifications when comparison bucket is full
 
 
@@ -68,7 +74,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
   - `compareProductButtonWrapper`
   - `removeAllWrapper`
   - `hideOrShowText`
-  
+
 ## [0.3.0] - 2020-11-06
 
 ### Added
