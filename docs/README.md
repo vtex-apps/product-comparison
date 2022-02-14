@@ -241,6 +241,10 @@ In any desired template, such as the `store.search`, add the `product-comparison
 1. In the `/store/blocks` folder, create a new file called `product-comparison.json` and add in it the following JSON:
 
 ```json
+"store.custom#product-comparison-list": {
+  "children": ["comparison-page"]
+},
+
 "comparison-page": {
   "children": ["slider-layout-group#comparison-page"]
 },
