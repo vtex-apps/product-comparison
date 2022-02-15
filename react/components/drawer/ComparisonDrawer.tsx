@@ -155,7 +155,7 @@ const ComparisonDrawer = ({ showToast, intl, comparisonPageUrl }: Props) => {
                 <span className={`fw5 black  ${cssHandles.drawerTitleInnerContainer}`}>
                   <span>{intl.formatMessage(messages.compare)} </span>{' '}
                   <span>{comparisonProducts.length}</span>{' '}
-                  <span>{intl.formatMessage(messages.products)}</span>
+                  <span>{intl.formatMessage(messages.products, { productsLength: comparisonProducts.length })}</span>
                 </span>
               </div>
               <div className="flex-grow-1" />
