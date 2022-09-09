@@ -7,6 +7,7 @@ import { ExtensionPoint, useRuntime } from 'vtex.render-runtime'
 import { useCssHandles } from 'vtex.css-handles'
 import type { InjectedIntlProps } from 'react-intl'
 import { injectIntl, defineMessages } from 'react-intl'
+import { usePixel } from 'vtex.pixel-manager'
 
 import ComparisonContext from '../../ProductComparisonContext'
 import './drawer.css'
@@ -23,7 +24,7 @@ const CSS_HANDLES = [
   'drawerTitleOuterContainer',
   'drawerTitleInnerContainer',
   'drawerOpened',
-  'drawerClosed'
+  'drawerClosed',
 ]
 
 const messages = defineMessages({
@@ -73,11 +74,10 @@ interface Props extends InjectedIntlProps {
 const ComparisonDrawer = ({ showToast, intl, comparisonPageUrl }: Props) => {
   const cssHandles = useCssHandles(CSS_HANDLES)
   const { navigate } = useRuntime()
+  const { push }: any = usePixel()
   // const [isCollapsed, setCollapsed] = useState(false)
-  const {
-    useProductComparisonState,
-    useProductComparisonDispatch,
-  } = ComparisonContext
+  const { useProductComparisonState, useProductComparisonDispatch } =
+    ComparisonContext
 
   const comparisonData = useProductComparisonState()
   const dispatchComparison = useProductComparisonDispatch()
@@ -103,6 +103,11 @@ const ComparisonDrawer = ({ showToast, intl, comparisonPageUrl }: Props) => {
       type: 'REMOVE_ALL',
     })
     showMessage(intl.formatMessage(messages.removeAllMessage))
+    push({
+      event: 'compareProducts',
+      products: comparisonProducts,
+      action: 'remove',
+    })
   }
 
   const onExpandCollapse = () => {
@@ -143,7 +148,9 @@ const ComparisonDrawer = ({ showToast, intl, comparisonPageUrl }: Props) => {
     <div />
   ) : (
     <div
-      className={`${cssHandles.drawerContainer} ${isCollapsed ? cssHandles.drawerClosed : cssHandles.drawerOpened} bg-white w-100 bt-ns b--light-gray flex justify-center`}
+      className={`${cssHandles.drawerContainer} ${
+        isCollapsed ? cssHandles.drawerClosed : cssHandles.drawerOpened
+      } bg-white w-100 bt-ns b--light-gray flex justify-center`}
     >
       <div className="mw9 w-100 ">
         <Collapsible
@@ -151,11 +158,19 @@ const ComparisonDrawer = ({ showToast, intl, comparisonPageUrl }: Props) => {
             <div
               className={`${cssHandles.comparisonButtons} flex flex-row ma3`}
             >
-              <div className={`flex items-center-ns mr2 ml2  ${cssHandles.drawerTitleOuterContainer}`}>
-                <span className={`fw5 black  ${cssHandles.drawerTitleInnerContainer}`}>
+              <div
+                className={`flex items-center-ns mr2 ml2  ${cssHandles.drawerTitleOuterContainer}`}
+              >
+                <span
+                  className={`fw5 black  ${cssHandles.drawerTitleInnerContainer}`}
+                >
                   <span>{intl.formatMessage(messages.compare)} </span>{' '}
                   <span>{comparisonProducts.length}</span>{' '}
-                  <span>{intl.formatMessage(messages.products, { productsLength: comparisonProducts.length })}</span>
+                  <span>
+                    {intl.formatMessage(messages.products, {
+                      productsLength: comparisonProducts.length,
+                    })}
+                  </span>
                 </span>
               </div>
               <div className="flex-grow-1" />

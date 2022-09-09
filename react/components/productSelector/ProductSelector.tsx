@@ -8,6 +8,7 @@ import { useProductSummary } from 'vtex.product-summary-context/ProductSummaryCo
 import type { InjectedIntlProps } from 'react-intl'
 import { injectIntl, defineMessages } from 'react-intl'
 import { useProduct } from 'vtex.product-context'
+import { usePixel } from 'vtex.pixel-manager'
 
 import ComparisonContext from '../../ProductComparisonContext'
 
@@ -43,29 +44,28 @@ const getContextValue = (
   productContext: unknown,
   productSummaryContext: unknown
 ) => {
-  let contextValue = productSummaryContext !== undefined? productSummaryContext : productContext
-    let productId = pathOr('', ['product', 'productId'], contextValue)
-    let productName = pathOr('', ['product', 'productName'], contextValue)
-    let itemId = pathOr('', ['selectedItem', 'itemId'], contextValue)
-    return { productName, productId, itemId }
+  let contextValue =
+    productSummaryContext !== undefined ? productSummaryContext : productContext
+  let productId = pathOr('', ['product', 'productId'], contextValue)
+  let productName = pathOr('', ['product', 'productName'], contextValue)
+  let itemId = pathOr('', ['selectedItem', 'itemId'], contextValue)
+  return { productName, productId, itemId }
 }
 const ProductSelector = ({ showToast, intl }: Props) => {
+  const { push }: any = usePixel()
   const cssHandles = useCssHandles(CSS_HANDLES)
   const [isChecked, setIsChecked] = useState(false)
   const valuesFromContext = useProductSummary()
   const valuesFromProductContext = useProduct()
-  const {productId, productName, itemId} = getContextValue(
+  const { productId, productName, itemId } = getContextValue(
     valuesFromProductContext,
     valuesFromContext
   )
-  const {
-    useProductComparisonState,
-    useProductComparisonDispatch,
-  } = ComparisonContext
+  const { useProductComparisonState, useProductComparisonDispatch } =
+    ComparisonContext
 
   const comparisonData = useProductComparisonState()
   const dispatchComparison = useProductComparisonDispatch()
-
 
   const isDrawerCollapsed = pathOr(false, ['isDrawerCollapsed'], comparisonData)
   const productsSelected = pathOr([], ['products'], comparisonData)
@@ -130,6 +130,11 @@ const ProductSelector = ({ showToast, intl }: Props) => {
   const productSelectionOnClicked = (e: MouseEvent) => {
     e.preventDefault()
     e.stopPropagation()
+    push({
+      event: 'compareProducts',
+      products: [valuesFromContext?.product],
+      action: 'add',
+    })
   }
 
   return (
