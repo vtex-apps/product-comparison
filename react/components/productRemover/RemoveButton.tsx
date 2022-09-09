@@ -7,6 +7,7 @@ import { withToast } from 'vtex.styleguide'
 import { IconClose } from 'vtex.store-icons'
 import type { InjectedIntlProps } from 'react-intl'
 import { injectIntl, defineMessages } from 'react-intl'
+import { usePixel } from 'vtex.pixel-manager'
 
 import ComparisonContext from '../../ProductComparisonContext'
 import './remove.css'
@@ -31,11 +32,10 @@ interface Props extends InjectedIntlProps {
 const RemoveButton = ({ showToast, intl }: Props) => {
   const cssHandles = useCssHandles(CSS_HANDLES)
 
-  const {
-    useProductComparisonState,
-    useProductComparisonDispatch,
-  } = ComparisonContext
+  const { useProductComparisonState, useProductComparisonDispatch } =
+    ComparisonContext
 
+  const { push }: any = usePixel()
   const dispatchComparison = useProductComparisonDispatch()
   const valuesFromContext = useProductSummary()
   const productId = pathOr('', ['product', 'productId'], valuesFromContext)
@@ -72,6 +72,11 @@ const RemoveButton = ({ showToast, intl }: Props) => {
       )} "${productName}" ${intl.formatMessage(messages.removed)}`,
       isDrawerCollapsed
     )
+    push({
+      event: 'compareProducts',
+      products: [valuesFromContext.product],
+      action: 'remove',
+    })
   }
 
   return (
