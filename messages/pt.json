@@ -12,7 +12,7 @@
   "admin/editor.comparison-grid.sku-fields-to-be-removed.title": "Ocultar campos do SKU",
   "admin/editor.comparison-grid.sku-fields-to-be-removed.description": "Campos do SKU que precisam ser ocultados na página de comparação (separe-os por vírgula `,`)",
   "admin/editor.comparison-grid-row.title": "Linha da grade de comparação",
-  "admin/editor.comparison-grid-row.description": "Metadados de fila para grade",
+  "admin/editor.comparison-grid-row.description": "Metadados de linha da grade",
   "admin/editor.comparison-grid-row.field.title": "Campo",
   "admin/editor.comparison-grid-row.field.description": "Este é o campo que precisamos adicionar à página de detalhes de comparação",
   "admin/editor.comparison-grid-row.field.fieldType.title": "Tipo de campo",
