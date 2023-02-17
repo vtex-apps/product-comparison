@@ -212,7 +212,7 @@ const ProductComparisonProvider = ({ children }: Props) => {
 
   useEffect(() => {
     const appSettings = JSON.parse(
-      pathOr(`{}`, ['appSettings', 'message'], appSettingsData)
+      pathOr(`{}`, ['publicSettingsForApp', 'message'], appSettingsData)
     )
 
     dispatch({
