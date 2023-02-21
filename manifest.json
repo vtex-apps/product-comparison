@@ -33,6 +33,7 @@
     "vtex.product-context": "0.x"
   },
   "settingsSchema": {
+  "access": "public",
     "title": "Product comparison",
     "type": "object",
     "properties": {
