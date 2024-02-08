@@ -157,7 +157,7 @@ In the theme's `interfaces.json` file, add the following extented interfaces:
   ...
  }
  ```
-### Step 4 - Building the Product Comparison component
+### Step 5 - Building the Product Comparison component
 
 In any desired template, such as the `store.search`, add the `product-comparison-drawer` block as shown below:
 
@@ -236,7 +236,7 @@ In any desired template, such as the `store.search`, add the `product-comparison
 
 > ℹ️ *The code above is a default implementation of the Product Comparison component. If any changes are desired, declare the code above in your theme and perform the needed updates according to the available blocks.*
 
-### Step 5 - Building the Product Comparison page
+### Step 6 - Building the Product Comparison page
 
 1. In the `/store/blocks` folder, create a new file called `product-comparison.json` and add in it the following JSON:
 
