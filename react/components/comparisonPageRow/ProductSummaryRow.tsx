@@ -110,6 +110,12 @@ const ProductSummaryRow = ({
       },
       type: 'SET_SHOW_DIFFERENCES',
     })
+    push({
+      event: 'productComparison',
+      eventType:'showDifferences',
+      'showDifferenceStatus':e.target.checked,
+      products
+    })
   }
 
   return isEmpty(comparisonProducts) ? (
