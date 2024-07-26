@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Added
+
+- In step 6 of the README file was added the `comparison-page` declared as a block within the `store.custom#product-comparison-list`.
+
 ## [0.19.0] - 2024-04-19
 
 ### Added
