@@ -10,7 +10,7 @@
 
 The Product Comparison app compares specifications of pre-selected SKUs, allowing store users to better understand their needs when shopping.
 
-The app exports several blocks, which you can leverage from in order to display a Product Comparison drawer on seach results page and a new Product Comparison page in your store.
+The app exports several blocks, which you can leverage in order to display a Product Comparison drawer on the search results page and a new Product Comparison page in your store.
 
 ![Comparison drawer](https://user-images.githubusercontent.com/2637457/90900569-43a41a00-e3e7-11ea-9aa9-9a12bbec8c5e.png)
 *Product Comparison drawer on the store's search results page*
@@ -47,7 +47,7 @@ Now, you are able to use all the blocks exported by the Product Comparison app. 
 
 ### Step 2 - Adding extended interfaces
 
-In the theme's `interfaces.json` file, add the following extented interfaces:
+In the theme's `interfaces.json` file, add the following extended interfaces:
 
 ```diff
 +{
@@ -94,7 +94,7 @@ In the theme's `interfaces.json` file, add the following extented interfaces:
   ...
 ```
 
-:information_source: *The `store.search.product-comparison` blocks will wraps the `store.search` block with comparison context. The replacement is needed so we can synchronously display the selected products in the Product Comparison drawer.*
+> ℹ️ *The `store.search.product-comparison` blocks will wraps the `store.search` block with comparison context. The replacement is needed so we can synchronously display the selected products in the Product Comparison drawer.*
 
 2. Replace the `search-result-layout.desktop` blocks with the `search-result-layout.desktop.product-comparison` blocks as shown below:
 
@@ -185,7 +185,7 @@ In any desired template, such as the `store.search`, add the `product-comparison
 ...
 ```
 
-> ℹ️ *By adding the `product-comparison-drawer` block as showed above, you will be declaring the following structure behind the scenes:*
+By adding the `product-comparison-drawer` block as shown above, you will be declaring the following structure behind the scenes:
 
 ```json
 "product-comparison-drawer": {
@@ -241,6 +241,10 @@ In any desired template, such as the `store.search`, add the `product-comparison
 1. In the `/store/blocks` folder, create a new file called `product-comparison.json` and add in it the following JSON:
 
 ```json
+"store.custom#product-comparison-list": {
+  "blocks": ["comparison-page"]
+},
+
 "comparison-page": {
   "children": ["slider-layout-group#comparison-page"]
 },
