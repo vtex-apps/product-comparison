@@ -8,13 +8,16 @@
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 <!-- DOCS-IGNORE:end -->
 
-The Product Comparison app compares specifications of pre-selected SKUs, allowing store users to better understand their needs when shopping.
+The Product Comparison app compares specifications of pre-selected SKUs, allowing customers to better understand their needs when shopping.
 
-The app exports several blocks, which you can leverage in order to display a Product Comparison drawer on the search results page and a new Product Comparison page in your store.
+The app exports several blocks, which you can leverage to display a Product Comparison drawer on your store's search results page and a new Product Comparison page.
 
 ![Comparison drawer](https://user-images.githubusercontent.com/2637457/90900569-43a41a00-e3e7-11ea-9aa9-9a12bbec8c5e.png)
+
 *Product Comparison drawer on the store's search results page*
+
 ![image](https://user-images.githubusercontent.com/2637457/90900828-a1386680-e3e7-11ea-96d1-e9ba2022aa7d.png)
+
 *Product Comparison page*
 
 ## Configuration
@@ -29,18 +32,18 @@ In your theme's `manifest.json` file, add the `Product Comparison` app as a depe
  }
 ```
 
-Now, you are able to use all the blocks exported by the Product Comparison app. Check out the full list below:
+Now, you can use all the blocks exported by the Product Comparison app. Check out the full list below:
 
 | Block name   | Description                |
 | :--------:   | :------------------------: |
-| `product-comparison-drawer` | ![https://img.shields.io/badge/-Mandatory-red](https://img.shields.io/badge/-Mandatory-red) Main block responsible for rendering the drawer from the Product Comparison component in which the items will be compared. |
-| `list-context.comparison-product-summary-slider` | Extends the `list-context` block to built the Product Comparison component using the [Slider Layout](https://vtex.io/docs/components/layout-blocks/vtex.slider-layout/.) |
+| `product-comparison-drawer` | ![https://img.shields.io/badge/-Mandatory-red](https://img.shields.io/badge/-Mandatory-red) Main block that renders the drawer from the Product Comparison component in which the items will be compared. |
+| `list-context.comparison-product-summary-slider` | Extends the `list-context` block to build the Product Comparison component using the [Slider Layout](https://vtex.io/docs/components/layout-blocks/vtex.slider-layout/.) |
 | `product-summary.shelf.product-comparison` | Extends the default `product-summary.shelf` block (from the [Product Summary app](https://vtex.io/docs/components/all/vtex.product-summary/)) for the Product Comparison component's features. |
-| `product-comparison-block` | Logical block that, once extended (see blocks listed below), is responsible for rendering the Product Comparison component's features. |
+| `product-comparison-block` | Logical block that, once extended (see blocks listed below), renders the Product Comparison component's features. |
 | `product-comparison-block.selector` | Renders the selector checkbox on the Product Comparison component. |
 | `product-comparison-block.close-button` | Renders the close button on the Product Comparison component. |
 | `product-comparison-block.product-summary-row` | Renders the first row to list and compare products on the Product Comparison component. |
-| `list-context.comparison-row` | Extends the `list-context` block to built a row in the Product Comparison page using the [Slider Layout](https://vtex.io/docs/components/layout-blocks/vtex.slider-layout/.) |
+| `list-context.comparison-row` | Extends the `list-context` block to build a row in the Product Comparison page using the [Slider Layout](https://vtex.io/docs/components/layout-blocks/vtex.slider-layout/.) |
 | `product-comparison-block.grouped-product-specifications` | Renders the section for product specification groups. |
 | `product-comparison-block.product-specifications` | Renders the section for product specifications. |
 | `product-comparison-block.sku-specifications` | Renders the section for SKU specifications. |
@@ -64,9 +67,9 @@ In the theme's `interfaces.json` file, add the following extended interfaces:
 +}
 ```
 
-### Step 3 - Wraping the search blocks with Product Comparison context
+### Step 3 - Wrapping the search blocks with Product Comparison context
 
-1. In the theme's `search.jsonc` file, replace the default `store.search` blocks with the `store.search.product-comparison` blocks as shown in the example below:
+1. In the theme's `search.jsonc` file, replace the default `store.search` blocks with the `store.search.product-comparison` blocks, as shown in the example below:
 
 ```diff
 {
@@ -94,9 +97,9 @@ In the theme's `interfaces.json` file, add the following extended interfaces:
   ...
 ```
 
-> ℹ️ The `store.search.product-comparison` blocks wrap the `store.search` block with comparison context. The replacement is needed so it can synchronously display the selected products in the Product Comparison drawer.
+> ℹ️ The `store.search.product-comparison` blocks wrap the `store.search` block with comparison context. The replacement is needed to synchronously display the selected products in the Product Comparison drawer.
 
-2. Replace the `search-result-layout.desktop` blocks with the `search-result-layout.desktop.product-comparison` blocks as shown below:
+2. Replace the `search-result-layout.desktop` blocks with the `search-result-layout.desktop.product-comparison` blocks, as shown below:
 
 ```diff
 {
@@ -123,7 +126,7 @@ In the theme's `interfaces.json` file, add the following extended interfaces:
 
 ### Step 4 - Adding the Product Comparison to the product detail Page
 
-1. In the theme's `product.jsonc` file, replace the default `"store.product"` blocks with the `"store.product.product-comparison"` blocks as shown in the example below:
+1. In the theme's `product.json` file, replace the default `store.product` blocks with the `store.product.product-comparison` blocks, as shown in the example below:
 
 ```diff
 
@@ -133,7 +136,7 @@ In the theme's `interfaces.json` file, add the following extended interfaces:
   }
 ```
 
-2. add `"product-comparison-drawer"` to the `"store.product.product-comparison"` children as shown in the example below:
+2. Add `product-comparison-drawer` to the `store.product.product-comparison` children, as shown in the example below:
 
 ```diff
 "store.product.product-comparison": {
@@ -145,7 +148,7 @@ In the theme's `interfaces.json` file, add the following extended interfaces:
 }
 ```
 
-3. add `"product-comparison-block.selector#pdp"` to the `"store.product.product-comparison"` block as shown in the example below:
+3. Add `product-comparison-block.selector#pdp` to the `store.product.product-comparison` block, as shown in the example below:
 
 ```diff
  "store.product.product-comparison": {
@@ -159,7 +162,7 @@ In the theme's `interfaces.json` file, add the following extended interfaces:
  ```
 ### Step 5 - Building the Product Comparison component
 
-In any desired template, such as the `store.search`, add the `product-comparison-drawer` block as shown below:
+In any desired template, such as `store.search`, add the `product-comparison-drawer` block, as shown below:
 
 ```json
 - "search-result-layout.desktop#search": {
@@ -185,7 +188,7 @@ In any desired template, such as the `store.search`, add the `product-comparison
 ...
 ```
 
-By adding the `product-comparison-drawer` block as shown above, you will be declaring the following structure behind the scenes:
+By adding the `product-comparison-drawer` block as shown above, you will declare the following structure behind the scenes:
 
 ```json
 "product-comparison-drawer": {
@@ -234,11 +237,11 @@ By adding the `product-comparison-drawer` block as shown above, you will be decl
 }
 ```
 
-> ℹ️ *The code above is a default implementation of the Product Comparison component. If any changes are desired, declare the code above in your theme and perform the needed updates according to the available blocks.*
+> ℹ️ *The code above is a default implementation of the Product Comparison component. To make any changes, declare the code above in your theme and perform the needed updates according to the available blocks.*
 
 ### Step 6 - Building the Product Comparison page
 
-1. In the `/store/blocks` folder, create a new file called `product-comparison.json` and add in it the following JSON:
+1. In the `/store/blocks` folder, create a new file called `product-comparison.json` and include the following JSON:
 
 ```json
 "store.custom#product-comparison-list": {
@@ -337,20 +340,20 @@ By adding the `product-comparison-drawer` block as shown above, you will be decl
 
 | Prop name      | Type          | Description                    | Default value |
 | :------------: | :-----------: | :----------------------------: | :-----------: |
-| `productSpecificationsToHide` | `[string]` | List of product fields that should be hidden in the Product Comparison page. The desired product fields must be separated by comma. | `undefined` |
-| `productSpecificationGroupsToHide` | `[string]` | List of product specification groups that should be hidden on the Product Comparison page. The desired product specification groups must be separated by comma. | `undefined` |
+| `productSpecificationsToHide` | `[string]` | List of product fields that should be hidden in the Product Comparison page. The desired product fields must be separated by a comma. | `undefined` |
+| `productSpecificationGroupsToHide` | `[string]` | List of product specification groups that should be hidden on the Product Comparison page. The desired product specification groups must be separated by a comma. | `undefined` |
 
 #### `product-comparison-block.product-specifications` props
 
 | Prop name      | Type          | Description                    | Default value |
 | :------------: | :-----------: | :----------------------------: | :--------:    |
-| `productSpecificationsToHide` | `[string]` | List of product fields that should be hidden in the Product Comparison page. The desired product fields must be separated by comma. | `undefined` |
+| `productSpecificationsToHide` | `[string]` | List of product fields that should be hidden in the Product Comparison page. The desired product fields must be separated by a comma. | `undefined` |
 
 #### `product-comparison-block.sku-specifications` props
 
 | Prop name      | Type          | Description                    | Default value |
 | :------------: | :-----------: | :----------------------------: | :--------:    |
-| `skuSpecificationsToHide` | `[string]` | List of SKU specification fields that should be hidden on the Product Comparison page. The desired SKU specification fields must be separated by comma. | `undefined` |
+| `skuSpecificationsToHide` | `[string]` | List of SKU specification fields that should be hidden on the Product Comparison page. The desired SKU specification fields must be separated by a comma. | `undefined` |
 
 #### `product-comparison-block.product-summary-row` props
 
@@ -359,20 +362,20 @@ By adding the `product-comparison-drawer` block as shown above, you will be decl
 | `isShowDifferenceDefault` | `boolean` | Set the "show only differences" checkbox to true as the default value on the comparison page. | `false` |
 =======
 
-### Step 6 - Change the comparison bucket size
+### Step 7 - Change the comparison bucket size
 
-This is optional configuration, you can change the maximum number of items in comparison bucket by giving fixed number in app configuration. 
-Default value is 10 items, when you exceed maximum limit you will get a notification.
+This is an optional configuration, so you can set a fixed number in the app configuration to change the maximum number of items in the comparison bucket.
+The default value is 10 items; if you exceed the maximum limit, you will receive a notification.
 
-#### Steps
+#### Instructions
 
-1. Go to `/admin/apps`, you will find `Product Comparison` app under `installed` apps
-2. Click on settings 
-3. Put the maximum comparison bucket size in your application
+1. Go to `/admin/apps`, then find the `Product Comparison` app under `Installed` apps.
+2. Click Settings. 
+3. Enter the maximum comparison bucket size for your application.
 
 ## Customization
 
-In order to apply CSS customizations in this and other blocks, follow the instructions given in the recipe on [Using CSS Handles for store customization](https://vtex.io/docs/recipes/style/using-css-handles-for-store-customization).
+To apply CSS customizations in this and other blocks, follow the instructions in [Using CSS Handles for store customization](https://vtex.io/docs/recipes/style/using-css-handles-for-store-customization).
 
 | CSS Handles                  |
 | :--------------------------: |
@@ -406,6 +409,7 @@ In order to apply CSS customizations in this and other blocks, follow the instru
 | `drawerClosed`               |
 
 <!-- DOCS-IGNORE:start -->
+
 ## Contributors ✨
 
 Thanks goes to these wonderful people:
