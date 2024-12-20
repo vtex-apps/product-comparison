@@ -4,6 +4,7 @@ metadata:
   name: product-comparison
   annotations:
     github.com/project-slug: vtex-apps/product-comparison
+    backstage.io/techdocs-ref: dir:./
 spec:
   system: b2b-suite
   type: frontend-ui
