@@ -5,6 +5,7 @@ metadata:
   annotations:
     github.com/project-slug: vtex-apps/product-comparison
     backstage.io/techdocs-ref: dir:./
+    vtex.com/application-id: DJ0RFI3V
 spec:
   system: b2b-suite
   type: frontend-ui
