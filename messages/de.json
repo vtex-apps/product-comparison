@@ -37,7 +37,7 @@
   "store/product-comparison.drawer.show": "Anzeigen",
   "store/product-comparison.drawer.min-items-message": "Mindestens 2 Produkte zum Vergleichen hinzufügen",
   "store/product-comparison.drawer.max-items-message-1": "Es können bis zu",
-  "store/product-comparison.drawer.max-items-message-2": "Produkte können auf einmal miteinander verglichen werden",
+  "store/product-comparison.drawer.max-items-message-2": "Produkte auf einmal miteinander verglichen werden",
   "store/product-comparison.main-page.back-to-products": "Zurück zur Ergebnisseite",
   "store/product-comparison.main-page.sort-by": "Sortieren nach",
   "store/product-comparison.main-page.order-added": "Sortierung hinzugefügt",
