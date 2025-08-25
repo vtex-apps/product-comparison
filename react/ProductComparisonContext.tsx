@@ -206,8 +206,7 @@ const ProductComparisonProvider = ({ children }: Props) => {
     variables: {
       // eslint-disable-next-line no-undef
       version: process.env.VTEX_APP_VERSION,
-    },
-    ssr: false,
+    }
   })
 
   useEffect(() => {
