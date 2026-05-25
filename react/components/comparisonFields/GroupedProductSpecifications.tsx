@@ -56,6 +56,7 @@ const GroupedProductSpecifications = ({
 
             if (
               groupName !== '' &&
+              groupName !== 'allSpecifications' &&
               !contains(groupName, specificationGroupsToHide) &&
               specifications.length > 0
             ) {
